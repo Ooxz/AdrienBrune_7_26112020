@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./sass/import.css" />
+    <link rel="shortcut icon" type="image/ico" href="./img/favicon.ico"/>
+    <title>Les petits plats</title>
+</head>
+<body>
+   <div class="container">
+     <header class="header">
+         <div class="header__main">
+            <h1 class="sr-only">Mes petits Plats</h1>
+             <img class="header__logo" src="./img/logo.svg" alt="Log Mes petits plats"/>
+         </div>
+     </header>
+     <section class="search">
+         <h2 class="sr-only">Recherche par mots clefs</h2>
+         <div class= "search__input__wrapper">
+             <input type="text" class="search__input" id="search__inputId" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" />
+             <label class="search__hidden" for="search__inputId">Barre de recherche principale</label>
+             <img class="search__icon" src="./img/icons/search.svg" alt="loupe" aria-hidden="true" />
+         </div>
+     </section>
+     <section class="tag">
+         <h2 class="sr-only">Tags selectionnés</h2>
+         <div class="tag__wrapper"></div>
+     </section>
+     <section class="searchedtag" tabindex="-1">
+         <h2 class="sr-only">Recherche par tags</h2>
+         <div class="searchedtag__wrapper">
+             <input type="text" class="searchedtag__input" id="searchedtag__input__ingredients" data-category="ingredients" placeholder="Ingrédients" />
+             <label class="hidden" for="searchedtag__input__ingredients">Barre de recherche secondaire : Ingrédients</label>
+             <button class="searchedtag__icon" type="button" tabindex="-1" data-category="ingredients">
+                <img class="searchedtag__image" src="./img/icons/menu.svg" alt="icon-menu" aria-hidden="true" />
+             </button>     
+             <ul class="searchedtag__grid" aria-expanded="false" data-category="ingredients">
+                <li class="searchedtag__grid__message hidden">Aucune correspondance</li>
+             </ul>       
+         </div>
+         <div class="searchedtag__wrapper">
+            <input type="text" class="searchedtag__input" id="searchedtag__input__appliances" data-category="appliances" placeholder="Appareils" />
+            <label class="hidden" for="searchedtag__input__appliances">Barre de recherche secondaire : Ingrédients</label>
+            <button class="searchedtag__icon" type="button" tabindex="-1" data-category="appliances">
+              <img class="searchedtag__image" src="./img/icons/menu.svg" alt="icon-menu" aria-hidden="true" />
+            </button>
+            <ul class="searchedtag__grid" aria-expanded="false" data-category="appliances">
+              <li class="searchedtag__grid__message hidden">Aucune correspondance</li>
+            </ul>
+          </div>
+         <div class="searchedtag__wrapper">
+            <input type="text" class="searchedtag__input" id="searchedtag__input__ustensils" data-category="ustensils" placeholder="Ustensiles" />
+            <label class="hidden" for="searchedtag__input__ustensils">Barre de recherche secondaire : Ingrédients</label>
+            <button class="searchedtag__icon" type="button" tabindex="-1" data-category="ustensils">
+              <img class="searchedtag__image" src="./img/icons/menu.svg" alt="icon-menu" aria-hidden="true" />
+            </button>
+            <ul class="searchedtag__grid" aria-expanded="false" data-category="ustensils">
+              <li class="searchedtag__grid__message hidden">Aucune correspondance</li>
+            </ul>
+          </div>
+     </section>
+     <section class="recipe__grid">
+        <h2 class="sr-only">Liste des recettes</h2>
+        <p class="recipe__message hidden">Aucune recette ne correspond à votre critère... Vous pouvez chercher « tarte aux pommes », « poisson », etc</p>
+      </section>
+   </div> 
+   <script type="module" src="./JS/main.js"></script>
+</body>
+</html>
