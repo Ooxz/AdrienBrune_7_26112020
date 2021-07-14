@@ -1,0 +1,38 @@
+.searchedtag {
+    display: flex;
+    
+    &__wrapper {
+        display: flex;
+        margin-left: 30px;
+        margin-bottom: 1.5rem;
+}
+    &__input{
+        width: 170px;
+        height: 69px;
+        font-weight: 700;
+        font-size: 18px;
+        padding: 0 22.5px 0 16.2px;
+}
+&__icon{
+    height: auto;
+    width: 1rem;
+    top: 0;
+    right: 1.125rem;
+    margin-right: 10px;
+    transform: translateX(-30px); 
+    z-index: 10;
+    &__image {
+      width: 100%;
+    }
+    &--opened {
+      img {
+        transform: rotateX(180deg);
+      }
+    }
+}
+::placeholder { 
+    color: white;
+    opacity: 1;
+  }
+}
+
