@@ -76,6 +76,56 @@ button:focus, button:hover {
   text-align: center;
 }
 
+.tag {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag__button {
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.625rem 1.25rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.tag__button:focus, .tag__button:hover {
+  -webkit-text-decoration: underline solid white;
+          text-decoration: underline solid white;
+}
+
+.tag__button:focus::after, .tag__button:hover::after {
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+
+.tag__button::after {
+  display: inline-block;
+  height: 1.25rem;
+  width: 1.25rem;
+  content: "";
+  background: url("./img/icons/close.svg") no-repeat 0 0;
+  background-size: 100%;
+  margin-left: 0.75rem;
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  transition: transform 0.6s, -webkit-transform 0.6s;
+}
+
 .searchedtag {
   display: -webkit-box;
   display: -ms-flexbox;
