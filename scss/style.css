@@ -1,13 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
-.header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
 html {
   font-size: 100%;
   -webkit-box-sizing: border-box;
@@ -23,5 +14,111 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
+}
+
+input {
+  border: none;
+  border-radius: 5px;
+}
+
+input:focus, input:hover {
+  outline: none;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  color: inherit;
+  background-color: inherit;
+}
+
+button:focus, button:hover {
+  outline: none;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.search {
+  margin-bottom: 1rem;
+  padding: 0 2rem 0 2rem;
+}
+
+.search__input {
+  width: 100%;
+  height: 3.5rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: black;
+  background-color: #E7E7E7;
+}
+
+.search__logo {
+  float: right;
+  -webkit-transform: translateY(-165%);
+          transform: translateY(-165%);
+  height: 1.5rem;
+  margin-right: 20px;
+}
+
+.searchtag {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 2rem;
+}
+
+.searchtag__input {
+  border: none;
+  height: 69px;
+  width: 170px;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0 22px 0 16px;
+}
+
+.searchtag__icon {
+  -webkit-transform: translateX(-35px);
+          transform: translateX(-35px);
+}
+
+.searchtag__img {
+  width: 100%;
+}
+
+.searchtag ::-webkit-input-placeholder {
+  color: white;
+}
+
+.searchtag :-ms-input-placeholder {
+  color: white;
+}
+
+.searchtag ::-ms-input-placeholder {
+  color: white;
+}
+
+.searchtag ::placeholder {
+  color: white;
+}
+
+#searchtag__ingredients {
+  background-color: #3282F7;
+}
+
+#searchtag__appliances {
+  background-color: #68D9A4;
+}
+
+#searchtag__ustensils {
+  background-color: #ED6454;
 }
 /*# sourceMappingURL=style.css.map */

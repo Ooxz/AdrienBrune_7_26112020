@@ -12,3 +12,23 @@ body {
 	padding: 0;
 	font-family: "Lato", sans-serif;
 }
+
+input {
+    border: none;
+    border-radius: 5px;
+    &:focus,
+    &:hover {
+      outline: none;
+    }
+  }
+  
+  button {
+    border: none;
+    border-radius: 5px;
+    color: inherit;
+    background-color: inherit;
+    &:focus,
+    &:hover {
+      outline: none;
+    }
+  }

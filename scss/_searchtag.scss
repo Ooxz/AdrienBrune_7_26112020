@@ -1,0 +1,35 @@
+.searchtag {
+	display: flex;
+	margin-left: 2rem;
+	&__main{
+
+	}
+	&__input{
+		border: none;
+		height: 69px;
+		width: 170px;
+		font-size: 18px;
+		font-weight: 700;
+		padding: 0 22px 0 16px;
+	}
+	&__icon{
+		transform: translateX(-35px);
+	}
+	&__img{
+		width: 100%;
+	}
+	::placeholder {
+	color: white;
+	}
+}
+
+
+#searchtag__ingredients{
+	background-color: $ingredients-color;
+}
+#searchtag__appliances{
+	background-color: $appliances-color;
+}
+#searchtag__ustensils{
+	background-color: $ustensils-color;
+}
