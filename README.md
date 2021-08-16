@@ -1,10 +1,10 @@
-# OPENCLASSROOMS PROJET 7 
+# OPENCLASSROOMS PROJET 7
 ## Les petits plats
 
-**Créer un algorythme de recherche avec javascript**
+ Créer un algorythme de recherche avec javascript
 
-### LANGUAGES UTILISES :
+ ### Languages utilisés : 
 
-- HTML
-- SCSS
-- VanillaJS
+ -Html
+ -Scss
+ -VanillaJS
