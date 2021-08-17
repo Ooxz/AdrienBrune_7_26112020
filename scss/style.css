@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 html {
   font-size: 100%;
   -webkit-box-sizing: border-box;
@@ -13,12 +12,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Lato", sans-serif;
+  font-family: "Lato", "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
 input {
   border: none;
   border-radius: 5px;
+  font-family: "Lato", "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
 input:focus, input:hover {
@@ -36,6 +36,11 @@ button:focus, button:hover {
   outline: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -45,6 +50,42 @@ button:focus, button:hover {
           justify-content: center;
   margin-top: 2rem;
   margin-bottom: 1rem;
+}
+
+.header__main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #D04F4F;
+}
+
+.header__main:hover, .header__main:focus {
+  outline: none;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-transition: transfrom 2000ms ease-in-out;
+  transition: transfrom 2000ms ease-in-out;
+}
+
+.header__logo {
+  width: 51px;
+  height: 47px;
+}
+
+.header__title {
+  font-family: "DM Sans", "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 2.25rem;
+  margin: 0;
 }
 
 .search {

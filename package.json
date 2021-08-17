@@ -1,0 +1,26 @@
+{
+  "name": "adrienbrune_7_26112020",
+  "version": "1.0.0",
+  "description": "Créer un algorythme de recherche avec javascript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ooxz/AdrienBrune_7_26112020.git"
+  },
+  "author": "Adrien Brune",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ooxz/AdrienBrune_7_26112020/issues"
+  },
+  "homepage": "https://github.com/Ooxz/AdrienBrune_7_26112020#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0"
+  }
+}
