@@ -19,6 +19,7 @@
 		<h1 class="header__title">Les petits plats</h1>
 		</a>
 	</header>
+
 	<section class="search">
 		<div class="search__main">
 			<input type="text" class="search__input" placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette" />
@@ -28,24 +29,28 @@
 	<section class="tags">
 		<div class="tags__main">
 	</section>
-	<section class="searchtag">
-		<div class="searchtag__main">
-<input type="text" class="searchtag__input" id="searchtag__ingredients" placeholder="Ingrédients"/>
-<button type="button" class="searchtag__icon" >
-<img class="searchtag__img"src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
+
+	<section class="dropdown">
+		<div class="dropdown__main">
+<input type="text" class="dropdown__input" id="searchtag__ingredients" data-value="ingredients" placeholder="Ingrédients"/>
+<button type="button" class="dropdown__icon" >
+<img class="dropdown__img"src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
 </button>
+<ul class="dropdown__menu" id="menu-ingredients"></ul>
 		</div>
-		<div class="searchtag__main">
-			<input type="text" class="searchtag__input" id="searchtag__appliances" placeholder="Appareils" />
-			<button type="button" class="searchtag__icon" >
-			<img class="searchtag__img" src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
+		<div class="dropdown__main">
+			<input type="text" class="dropdown__input" id="searchtag__appliances" data-value="appliances" placeholder="Appareils" />
+			<button type="button" class="dropdown__icon" >
+			<img class="dropdown__img" src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
 			</button>
+			<ul class="dropdown__menu" id="menu-appareils"></ul>
 					</div>
-					<div class="searchtag__main">
-						<input type="text" class="searchtag__input" id="searchtag__ustensils" placeholder="Ustensiles" />
-						<button type="button" class="searchtag__icon" >
-						<img class="searchtag__img" src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
+					<div class="dropdown__main">
+						<input type="text" class="dropdown__input" id="searchtag__ustensils" data-value="ustensils" placeholder="Ustensiles" />
+						<button type="button" class="dropdown__icon" >
+						<img class="dropdown__img" src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
 						</button>
+						<ul class="dropdown__menu" id="menu-ustensiles"></ul>
 								</div>
 	</section>
 </div>
