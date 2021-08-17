@@ -94,6 +94,11 @@ button:focus, button:hover {
   width: 100%;
 }
 
+.searchtag--opened {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+}
+
 .searchtag ::-webkit-input-placeholder {
   color: white;
 }
