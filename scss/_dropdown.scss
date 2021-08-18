@@ -1,0 +1,35 @@
+.dropdown {
+	display: flex;
+	margin-left: 2rem;
+	&__input{
+		border: none;
+		height: 4.3rem;
+		width: 10.6rem;
+		font-size: 18px;
+		font-weight: 700;
+		padding: 0 22px 0 16px;
+		&--ingredients {
+			background-color: $color-ingredients;
+		}
+		&--appliances {
+			background-color: $color-appliances;
+		}
+		&--ustensils {
+			background-color: $color-ustensils;
+		}
+	}
+	&__icon{
+		transform: translateX(-35px);
+	}
+	&__img{
+		width: 100%;
+	}
+	&--opened {
+		transform: rotateX(180deg);
+	}
+	::placeholder {
+	color: white;
+	}
+}
+
+
