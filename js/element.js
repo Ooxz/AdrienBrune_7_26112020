@@ -7,14 +7,14 @@ class Element {
     this.classname = classname
   }
 
+  get elt () {
+    return this.createElt()
+  }
+
   createElt () {
     this.name = document.createElement(this.type)
     this.name.classlist.add(this.classname)
     return this.name
-  }
-
-  get elt () {
-    return this.createElt()
   }
 }
 
