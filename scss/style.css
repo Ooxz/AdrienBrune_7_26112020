@@ -168,4 +168,31 @@ a {
   height: 1.5rem;
   margin-right: 20px;
 }
+
+.card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: .3rem;
+  overflow: hidden;
+  max-width: 23.75rem;
+}
+
+.card__anchor {
+  cursor: pointer;
+}
+
+.card:hover, .card:focus {
+  -webkit-box-shadow: 0.2rem 0.2rem 0.8rem rgba(0, 0, 0, 0.35);
+          box-shadow: 0.2rem 0.2rem 0.8rem rgba(0, 0, 0, 0.35);
+}
+
+.card__bg {
+  height: 178px;
+  color: red;
+}
 /*# sourceMappingURL=style.css.map */

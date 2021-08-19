@@ -1,0 +1,18 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	border-radius: .3rem;
+	overflow: hidden;
+	max-width: 23.75rem;
+	&__anchor {
+	  cursor: pointer;
+	}
+	&:hover, &:focus {
+	  box-shadow: .2rem .2rem .8rem rgba(0, 0, 0, 0.35);
+	}
+	&__bg {
+		height: 178px;
+		color: red;
+	  }
+  }
+  

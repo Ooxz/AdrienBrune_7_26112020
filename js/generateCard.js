@@ -7,7 +7,7 @@ function generateCard (param) {
   const section = document.querySelector('.allRecipesCards')
   section.style.display = 'grid'
   section.style.justifyContent = 'space-between'
-  for (let i = 0; i < param.lenght; i++) {
+  for (let i = 0; i < param.length; i++) {
 	  const article = new Element('article', 'article', 'card').elt
 	  section.appendChild(article)
 	  article.id = `article-${param[i].id}`
@@ -38,7 +38,7 @@ function generateCard (param) {
 	  displayIngredients.textContent(param[i].ingredients, ulIngredients)
 	  const description = new Element('description', 'p', 'card__description')
 	  cardContent.appendChild(description)
-	  description.textContent(param[i].description)
+	  description.textContent = `${param[i].description}`
   }
 }
 
