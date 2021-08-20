@@ -1,18 +1,42 @@
+.allRecipesCards {
+	display : flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
 .card {
-	display: flex;
-	flex-direction: column;
-	border-radius: .3rem;
+	border-radius: 0.3rem;
 	overflow: hidden;
 	max-width: 23.75rem;
 	&__anchor {
 	  cursor: pointer;
 	}
 	&:hover, &:focus {
-	  box-shadow: .2rem .2rem .8rem rgba(0, 0, 0, 0.35);
+	  box-shadow: .2rem .2rem .8rem rgba(0, 0, 0, 0.30);
 	}
 	&__bg {
 		height: 178px;
-		color: red;
+		background-color: $color-background;
+	  }
+	  &__recipe {
+		  display: flex;
+		  flex-direction: column;
+		  height: 186px;
+		  overflow: hidden;
+		  padding: 1.2rem;
+		  background-color: $color-background2;
+	  }
+	  &__title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 1.13rem;
+		font-weight: 400;
+		white-space: nowrap;
+		line-height: 1.4rem;
+		&__h3 {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 	  }
   }
   

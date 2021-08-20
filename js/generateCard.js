@@ -5,8 +5,6 @@ import { Element } from './element.js'
 
 function generateCard (param) {
   const section = document.querySelector('.allRecipesCards')
-  section.style.display = 'grid'
-  section.style.justifyContent = 'space-between'
   for (let i = 0; i < param.length; i++) {
 	  const article = new Element('article', 'article', 'card').elt
 	  section.appendChild(article)
