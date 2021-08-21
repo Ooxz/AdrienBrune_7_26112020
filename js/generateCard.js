@@ -6,35 +6,47 @@ import { Element } from './element.js'
 function generateCard (param) {
   const section = document.querySelector('.allRecipesCards')
   for (let i = 0; i < param.length; i++) {
-	  const article = new Element('article', 'article', 'card').elt
+	  const article = new Element('1', 'article', 'card').elt
+	  const anchor = new Element('2', 'a', 'card__anchor').elt
+	  const divBg = new Element('3', 'div', 'card__bg').elt
+	  const divRecipe = new Element('4', 'div', 'card__recipe').elt
+	  const divTitle = new Element('5', 'div', 'card__title').elt
+	  const title = new Element('6', 'h3', 'card__title__h3').elt
+	  const divTime = new Element('7', 'div', 'card__title__time').elt
+	  const iconTime = new Element('8', 'i', 'card__title__clock').elt
+	  const time = new Element('9', 'p', 'card__title__time__clock__number').elt
+	  const cardContent = new Element('10', 'div', 'card__content').elt
+	  const ulIngredients = new Element('11', 'ul', 'card__ingredients').elt
+	  const description = new Element('12', 'p', 'card__description').elt
+    // -------1 article----------------------------------------
 	  section.appendChild(article)
 	  article.id = `article-${param[i].id}`
-	  const anchor = new Element('anchor', 'a', 'card__anchor').elt
+    // -------2 anchor-----------------------------------------
 	  article.appendChild(anchor)
 	  anchor.href = '#'
-	  const divBg = new Element('divBg', 'div', 'card__bg').elt
+    // -------3 divBg------------------------------------------
 	  anchor.appendChild(divBg)
-	  const divRecipe = new Element('divRecipe', 'div', 'card__recipe').elt
+    // -------4 divRecipe--------------------------------------
 	  anchor.appendChild(divRecipe)
-	  const divTitle = new Element('divTitle', 'div', 'card__title').elt
+    // -------5 divTitle---------------------------------------
 	  divRecipe.appendChild(divTitle)
-	  const title = new Element('title', 'h3', 'card__title__h3').elt
+    // -------6 title------------------------------------------
 	  divTitle.appendChild(title)
 	  title.textContent = `${param[i].name}`
-	  const divTime = new Element('divTime', 'div', 'card__title__time').elt
+    // -------7 divTime----------------------------------------
 	  divTitle.appendChild(divTime)
-	  const iconTime = new Element('iconTime', 'i', 'card__title__clock').elt
+    // -------8 IconTime---------------------------------------
 	  divTime.appendChild(iconTime)
 	  iconTime.classList.add('far', 'fa-clock')
-	  const time = new Element('time', 'p', 'card__title__time__clock__number').elt
+    // -------9 Time ------------------------------------------
 	  divTime.appendChild(time)
 	  time.textContent = `${param[i].time} min`
-	  const cardContent = new Element('cardContent', 'div', 'card__content').elt
+    // -------10 cardContent-----------------------------------
 	  divRecipe.appendChild(cardContent)
-	  const ulIngredients = new Element('ulIngredients', 'ul', 'card__ingredients').elt
+    // -------11 ulIngredients---------------------------------
 	  cardContent.appendChild(ulIngredients)
 	  displayIngredients(param[i].ingredients, ulIngredients)
-	  const description = new Element('description', 'p', 'card__description').elt
+    // -------12 description-----------------------------------
 	  cardContent.appendChild(description)
 	  description.textContent = `${param[i].description}`
   }
@@ -42,12 +54,15 @@ function generateCard (param) {
 
 function displayIngredients (ingredients, ulIngredients) {
   for (const ingredient of ingredients) {
-    const liIngredient = new Element('liIngredient', 'li', 'ingredientsList').elt
+    const liIngredient = new Element('1', 'li', 'ingredientsList').elt
+    const ingredientName = new Element('2', 'p', 'ingredientsList__item').elt
+    const quantity = new Element('3', 'p', 'ingredientsList__quantity').elt
+    // ------1 liIngredient-------------------------------------
     ulIngredients.appendChild(liIngredient)
-    const ingredientName = new Element('ingredientName', 'p', 'ingredientsList__item').elt
+    // ------2 ingredientName-----------------------------------
     liIngredient.appendChild(ingredientName)
     ingredientName.innerHTML = `${ingredient.ingredient}`
-    const quantity = new Element('quantity', 'p', 'ingredientsList__quantity').elt
+    // ------3 quantity-----------------------------------------
     liIngredient.appendChild(quantity)
     if (ingredient.quantity != undefined) {
       quantity.innerHTML = ' ' + ':' + ' ' + `${ingredient.quantity}`
