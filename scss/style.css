@@ -1,3 +1,57 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 html {
   font-size: 100%;
   -webkit-box-sizing: border-box;
@@ -10,10 +64,10 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: auto;
   padding: 0;
   font-family: "Lato", "Trebuchet MS", Arial, Helvetica, sans-serif;
-  max-width: 1240px;
+  max-width: 1440px;
 }
 
 input {
@@ -40,6 +94,25 @@ button:focus, button:hover {
 a {
   text-decoration: none;
   color: black;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 1240px;
+  margin: auto;
 }
 
 .header {
@@ -93,7 +166,7 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-left: 2rem;
+  margin-bottom: 1rem;
 }
 
 .dropdown__input {
@@ -149,7 +222,6 @@ a {
 
 .search {
   margin-bottom: 1rem;
-  padding: 0 2rem 0 2rem;
 }
 
 .search__input {
@@ -176,6 +248,7 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin: auto;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -184,15 +257,11 @@ a {
   border-radius: 0.3rem;
   overflow: hidden;
   max-width: 23.75rem;
+  margin-bottom: 2rem;
 }
 
 .card__anchor {
   cursor: pointer;
-}
-
-.card:hover, .card:focus {
-  -webkit-box-shadow: 0.2rem 0.2rem 0.8rem rgba(0, 0, 0, 0.3);
-          box-shadow: 0.2rem 0.2rem 0.8rem rgba(0, 0, 0, 0.3);
 }
 
 .card__bg {
@@ -211,6 +280,7 @@ a {
   height: 186px;
   overflow: hidden;
   padding: 1.2rem;
+  padding-top: 1rem;
   background-color: #E7E7E7;
 }
 
@@ -231,6 +301,74 @@ a {
 }
 
 .card__title__h3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__title__time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-weight: 700;
+}
+
+.card__title__clock {
+  margin-right: 0.5rem;
+}
+
+.card__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1.5rem;
+}
+
+.card__ingredients {
+  font-size: 0.75rem;
+  width: 50%;
+}
+
+.card__description {
+  font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  font-size: 0.75rem;
+  height: 109px;
+  line-height: 0.9rem;
+  width: 50%;
+}
+
+.ingredientsList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  line-height: 0.9rem;
+}
+
+.ingredientsList__item {
+  font-weight: 700;
+}
+
+.ingredientsList__item__quantity {
   overflow: hidden;
   text-overflow: ellipsis;
 }

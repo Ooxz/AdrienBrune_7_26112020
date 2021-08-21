@@ -25,7 +25,7 @@ function generateCard (param) {
 	  divTitle.appendChild(divTime)
 	  const iconTime = new Element('iconTime', 'i', 'card__title__clock').elt
 	  divTime.appendChild(iconTime)
-	  iconTime.classList.add('fa-clock')
+	  iconTime.classList.add('far', 'fa-clock')
 	  const time = new Element('time', 'p', 'card__title__time__clock__number').elt
 	  divTime.appendChild(time)
 	  time.textContent = `${param[i].time} min`
@@ -52,6 +52,11 @@ function displayIngredients (ingredients, ulIngredients) {
     if (ingredient.quantity != undefined) {
       quantity.innerHTML = ' ' + ':' + ' ' + `${ingredient.quantity}`
     }
+    const unit = new Element('units', 'p', 'ingredientsList__units').elt
+    quantity.appendChild(unit)
+    if (ingredient.unit != undefined) {
+      unit.innerHTML = ' ' + `${ingredient.unit}`
+	  }
   }
 }
 

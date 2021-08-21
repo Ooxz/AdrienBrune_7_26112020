@@ -8,10 +8,10 @@ html {
 }
 
 body {
-	margin: 0;
+	margin: auto;
 	padding: 0;
   font-family: $font-main;
-  max-width: 1240px;
+  max-width: 1440px;
 }
 
 input {
@@ -39,3 +39,15 @@ input {
     text-decoration: none;
     color: black;
   }
+
+  li{
+    list-style-type: none;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1240px;
+    margin: auto;
+  }
+
