@@ -68,7 +68,7 @@ function displayIngredients (ingredients, ulIngredients) {
       quantity.innerHTML = ' ' + ':' + ' ' + `${ingredient.quantity}`
     }
     const unit = new Element('units', 'p', 'ingredientsList__units').elt
-    quantity.appendChild(unit)
+    liIngredient.appendChild(unit)
     if (ingredient.unit != undefined) {
       unit.innerHTML = ' ' + `${ingredient.unit}`
 	  }

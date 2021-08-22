@@ -35,23 +35,38 @@
 		<div class="dropdown__main">
 <input type="text" class="dropdown__input dropdown__input--ingredients" id="searchtag__ingredients" placeholder="Ingrédients"/>
 <button type="button" class="dropdown__icon" >
-<img class="dropdown__img"src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
+	<i class="dropdown__img fas fa-chevron-down"></i>
 </button>
-<ul class="dropdown__menu" id="menu-ingredients"></ul>
+<form id="search__Ingredients" class="form" method="GET" onsubmit="return false">
+	<label for="ingredients" class="form__label">Ingredients</label>
+	<input type="search" name="appareil" id="ingredients" class="form__input form__input--ingredients" placeholder="Recherche un ingrédient" />
+	<button class="form__arrow form__arrow--ingredients arrowUp" id="arrowUp__ingredients" aria-label="fermeture du menu"><i class="fas fa-chevron-up"></i></button>
+</form>
+<ul class="dropdown__menu" id="menu__ingredients"></ul>
 		</div>
 		<div class="dropdown__main">
 			<input type="text" class="dropdown__input dropdown__input--appliances" id="searchtag__appliances" placeholder="Appareils" />
 			<button type="button" class="dropdown__icon" >
-			<img class="dropdown__img" src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
+				<i class="dropdown__img fas fa-chevron-down"></i>
 			</button>
-			<ul class="dropdown__menu" id="menu-appareils"></ul>
+			<form id="search__appliances" class="form" method="GET" onsubmit="return false">
+				<label for="appliances" class="form__label">Appareils</label>
+				<input type="search" name="appareil" id="appliances" class="form__input form__input--appliances" placeholder="Recherche un appareil" />
+				<button class="form__arrow form__arrow--appliances arrowUp" id="arrowUp__appliances" aria-label="fermeture du menu"><i class="fas fa-chevron-up"></i></button>
+			</form>
+			<ul class="dropdown__menu" id="menu__appliances"></ul>
 					</div>
 					<div class="dropdown__main">
 						<input type="text" class="dropdown__input dropdown__input--ustensils" id="searchtag__ustensils" placeholder="Ustensiles" />
 						<button type="button" class="dropdown__icon" >
-						<img class="dropdown__img" src="img\icons\menu.svg" alt="icon-menu" aria-hidden="true" />
+							<i class="dropdown__img fas fa-chevron-down"></i>
 						</button>
-						<ul class="dropdown__menu" id="menu-ustensiles"></ul>
+						<form id="search__ustensils" class="form" method="GET" onsubmit="return false">
+							<label for="ustensils" class="form__label">Ustensiles</label>
+							<input type="search" name="ustensils" id="ustensils" class="form__input form__input--ustensils" placeholder="Recherche un ustensile" />
+							<button class="form__arrow form__arrow--ustensils arrowUp" id="arrowUp__ustensils" aria-label="fermeture du menu"><i class="fas fa-chevron-up"></i></button>
+						</form>
+						<ul class="dropdown__menu" id="menu__ustensils"></ul>
 								</div>
 	</section>
 

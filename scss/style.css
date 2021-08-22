@@ -196,12 +196,9 @@ li {
 }
 
 .dropdown__img {
-  width: 100%;
-}
-
-.dropdown--opened {
-  -webkit-transform: rotateX(180deg);
-          transform: rotateX(180deg);
+  color: white;
+  cursor: pointer;
+  font-size: 1.15rem;
 }
 
 .dropdown ::-webkit-input-placeholder {
@@ -322,6 +319,7 @@ li {
 
 .card__title__clock {
   margin-right: 0.5rem;
+  font-weight: 400;
 }
 
 .card__content {
@@ -340,7 +338,7 @@ li {
 
 .card__ingredients {
   font-size: 0.75rem;
-  width: 50%;
+  width: 40%;
 }
 
 .card__description {
@@ -368,7 +366,12 @@ li {
   font-weight: 700;
 }
 
-.ingredientsList__item__quantity {
+.ingredientsList__quantity {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ingredientsList__units {
   overflow: hidden;
   text-overflow: ellipsis;
 }

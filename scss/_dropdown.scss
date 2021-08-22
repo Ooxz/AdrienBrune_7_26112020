@@ -22,10 +22,9 @@
 		transform: translateX(-35px);
 	}
 	&__img{
-		width: 100%;
-	}
-	&--opened {
-		transform: rotateX(180deg);
+		color: white;
+		cursor: pointer;
+		font-size: 1.15rem;
 	}
 	::placeholder {
 	color: white;

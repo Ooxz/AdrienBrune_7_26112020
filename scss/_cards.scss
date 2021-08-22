@@ -46,6 +46,7 @@
 		}
 		&__clock {
 			margin-right: 0.5rem;
+			font-weight: 400;
 		}
 	  }
 	  &__content {
@@ -58,7 +59,7 @@
 	}
 	&__ingredients {
 		font-size: 0.75rem;
-		width: 50%;
+		width: 40%;
 	}
 	&__description {
 		font-family: $font-recipes;
@@ -73,14 +74,20 @@
   .ingredientsList {
 	display: flex;
 	overflow: hidden;
+	// flex-wrap: wrap;
 	white-space: nowrap;
 	font-size: 0.75rem;
 	line-height: 0.9rem;
 	  &__item {
 		font-weight: 700;
+	  }
 		  &__quantity {
 		  overflow: hidden;
 		  text-overflow: ellipsis;
 		}
-	  }
+		&__units {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	  
   }
