@@ -58,7 +58,9 @@ html {
           box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
 }
@@ -68,6 +70,21 @@ body {
   padding: 0;
   font-family: "Lato", "Trebuchet MS", Arial, Helvetica, sans-serif;
   max-width: 1440px;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 1240px;
+  margin: auto;
 }
 
 input {
@@ -100,21 +117,6 @@ li {
   list-style-type: none;
 }
 
-.container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  max-width: 1240px;
-  margin: auto;
-}
-
 .header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -140,7 +142,7 @@ li {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #D04F4F;
+  color: #d04f4f;
 }
 
 .header__main:hover, .header__main:focus {
@@ -179,15 +181,31 @@ li {
 }
 
 .dropdown__input--ingredients {
-  background-color: #3282F7;
+  background-color: #3282f7;
 }
 
 .dropdown__input--appliances {
-  background-color: #68D9A4;
+  background-color: #68d9a4;
 }
 
 .dropdown__input--ustensils {
-  background-color: #ED6454;
+  background-color: #ed6454;
+}
+
+.dropdown__input::-webkit-input-placeholder {
+  color: white;
+}
+
+.dropdown__input:-ms-input-placeholder {
+  color: white;
+}
+
+.dropdown__input::-ms-input-placeholder {
+  color: white;
+}
+
+.dropdown__input::placeholder {
+  color: white;
 }
 
 .dropdown__icon {
@@ -201,20 +219,78 @@ li {
   font-size: 1.15rem;
 }
 
-.dropdown ::-webkit-input-placeholder {
-  color: white;
+.dropdown .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
 }
 
-.dropdown :-ms-input-placeholder {
+.dropdown .form__label {
+  display: none;
+  font-size: 1.15rem;
   color: white;
+  padding: 1rem 1rem 1rem 0;
 }
 
-.dropdown ::-ms-input-placeholder {
-  color: white;
+.dropdown .form__input {
+  font-size: 1.15rem;
+  padding: 0 41.66rem 0 0;
 }
 
-.dropdown ::placeholder {
+.dropdown .form__input--ingredients {
+  background-color: #3282f7;
+}
+
+.dropdown .form__input--appliances {
+  background-color: #68d9a4;
+}
+
+.dropdown .form__input--ustensils {
+  background-color: #ed6454;
+}
+
+.dropdown .form__input::-webkit-input-placeholder {
   color: white;
+  opacity: 50%;
+  width: 14rem;
+}
+
+.dropdown .form__input:-ms-input-placeholder {
+  color: white;
+  opacity: 50%;
+  width: 14rem;
+}
+
+.dropdown .form__input::-ms-input-placeholder {
+  color: white;
+  opacity: 50%;
+  width: 14rem;
+}
+
+.dropdown .form__input::placeholder {
+  color: white;
+  opacity: 50%;
+  width: 14rem;
+}
+
+.dropdown .form__arrow {
+  -webkit-transform: translateX(-30px);
+          transform: translateX(-30px);
+  color: white;
+  cursor: pointer;
+}
+
+.dropdown__menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .search {
@@ -227,7 +303,7 @@ li {
   font-size: 1.1rem;
   font-weight: 400;
   color: black;
-  background-color: #C7BEBE;
+  background-color: #e7e7e7;
 }
 
 .search__logo {
@@ -263,7 +339,7 @@ li {
 
 .card__bg {
   height: 178px;
-  background-color: #C7BEBE;
+  background-color: #c7bebe;
 }
 
 .card__recipe {
@@ -278,7 +354,7 @@ li {
   overflow: hidden;
   padding: 1.2rem;
   padding-top: 1rem;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
 }
 
 .card__title {
