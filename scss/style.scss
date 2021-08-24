@@ -1,8 +1,6 @@
-@import "reset";
-@import "colors";
-@import "typography";
-@import "globals";
-@import "header";
-@import "dropdown";
-@import "main";
-@import "cards";
+@use "base/base";
+@use "components/cards";
+@use "components/dropdown";
+@use "layouts/header";
+@use "layouts/main";
+

@@ -1,3 +1,9 @@
+@use "../abstracts/colors" as *;
+@use "../base/typography" as *;
+@use "../abstracts/reset" as *;
+@use "../base/base" as *;
+
+
 .allRecipesCards {
   display: flex;
   justify-content: space-between;

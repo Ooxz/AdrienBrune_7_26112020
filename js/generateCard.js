@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
-import { Element } from './element.js'
+import { Element } from './Element.class.js'
 
 function generateCard (param) {
   const section = document.querySelector('.allRecipesCards')

@@ -1,3 +1,8 @@
+@use "../abstracts/colors" as *;
+@use "../base/typography" as *;
+@use "../abstracts/reset" as *;
+@use "../base/base" as *;
+
 .header {
   display: flex;
   justify-content: center;

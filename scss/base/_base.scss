@@ -1,3 +1,8 @@
+@use "../abstracts/colors" as *;
+@use "../base/typography" as *;
+@use "../abstracts/reset" as *;
+
+
 html {
   font-size: 100%;
   box-sizing: border-box;
