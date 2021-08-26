@@ -1,6 +1,6 @@
-// @use "../abstracts/colors" as *;
-// @use "../base/typography" as *;
-// @use "../abstracts/reset" as *;
+@use "../abstracts" as *;
+@use "../base/typography" as *;
+@use "../base/reset" as *;
 
 
 html {

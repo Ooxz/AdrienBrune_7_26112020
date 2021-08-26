@@ -4,8 +4,8 @@
   "description": "Créer un algorythme de recherche avec javascript",
   "main": "app.js",
   "scripts": {
-    "dev": "parcel ./src/html/index.html",
-    "build": "parcel build ./src/html/index.html"
+    "dev": "parcel src/html/index.html",
+    "build": "parcel build src/html/index.html"
   },
   "repository": "git+https://github.com/Ooxz/AdrienBrune_7_26112020.git",
   "author": "Adrien Brune",

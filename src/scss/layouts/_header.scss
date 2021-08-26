@@ -1,7 +1,6 @@
-// @use "../abstracts/colors" as *;
-// @use "../base/typography" as *;
-// @use "../abstracts/reset" as *;
-// @use "../base/base" as *;
+@use "../abstracts" as *;
+@use "../base" as *;
+@use "../base/base" as *;
 
 .header {
   display: flex;
@@ -28,6 +27,7 @@
   &__title {
     font-family: $font-title;
     font-size: 2.25rem;
+    font-weight: 700;
     margin: 0;
   }
 }

@@ -1,7 +1,6 @@
-// @use "../abstracts/colors" as *;
-// @use "../base/typography" as *;
-// @use "../abstracts/reset" as *;
-// @use "../base/base" as *;
+@use "../abstracts" as *;
+@use "../base" as *;
+@use "../base/base" as *;
 
 .dropdown {
   display: flex;
