@@ -1,79 +1,44 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-tabs */
-import { Element } from './Element.class.js'
+/* eslint-disable prefer-const */
 
-function dropdownTags (param) {
-  // declare const to list all tags in their respective menu function
-  const allIngredients = listIngredients(param)
-  const allAppliances = listAppliances(param)
-  const allUstensils = listUstensils(param)
-  // get each menu tag elements by Id
-  const tagsIngredientsMenu = document.getElementById('menu__ingredients')
-  const tagsAppliancesMenu = document.getElementById('menu__appliances')
-  const tagsUstensilsMenu = document.getElementById('menu__ustensils')
-  // call function displayItems for each tag
-  displayItems(allIngredients, tagsIngredientsMenu)
-  displayItems(allAppliances, tagsAppliancesMenu)
-  displayItems(allUstensils, tagsUstensilsMenu)
-  console.log(allUstensils)
-}
-// function for ingredients list
-function listIngredients (param) {
-  const allItems = [] // make an array for all items from ingredients
-  for (let i = 0; i < allItems.length; i++) { // loop to set ingredients in the array
-	  const ingredientsMenu = param[i].ingredients // const to make an array of ingredients from recipes
-    const arrayOfIngredients = [] // new array to receive ingredient from ingredient
-    for (const ingredient of ingredientsMenu) { // boucle pour récupérer ingredient dans ingredients
-      const mediaIngredient = ingredient.ingredient // const to get ingredient from ingrdients
-      arrayOfIngredients.push(mediaIngredient) // push the ingredient from ingredients in the arrayOfIngredients
+function openDropdown () {
+  const target = window.event.target
+  let form
+  let open
+  if (target.tagName === 'I') {
+    open = target.parentNode
+  } else {
+    open = target
+  }
+  const openMenu = open.parentNode
+  const openMenuChildren = openMenu.children
+  form = openMenuChildren[1]
+  const id = getId(open)
+  const menu = document.getElementById(id)
+  open.style.display = 'none'
+  form.style.display = 'flex'
+  menu.style.display = 'grid'
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      menu.style.display = 'none'
+      form.style.display = 'none'
+      open.style.display = 'block'
     }
-    arrayOfIngredients.forEach(ingred => allItems.push(ingred)) // for each ingredient in arrayOfIngredients push in allItems
+  })
+}
+
+function getId (element) {
+  if (element.id === 'arrowUp__ingredients' || element.id === 'arrowDown__ingredients') {
+    const id = 'menu__ingredients'
+    return id
   }
-  const eachIngredient = [...new Set(allItems)]// make a new array of each unique ingredients
-  return eachIngredient // return that array of ingredients
-}
-
-// function appliance list
-function listAppliances (param) {
-  const allItems = []
-  for (let i = 0; i < allItems.length; i++) {
-    const appliancesMenu = param[i].appliance
-    allItems.push(appliancesMenu)
-  }console.log(allItems)
-  const eachAppliances = [...new Set(allItems)]
-  return eachAppliances
-}
-
-// function ustensils list
-function listUstensils (param) {
-  const allItems = []
-  for (let i = 0; i < allItems.length; i++) {
-    const ustensilsMenu = param[i].ustensils
-    const arratyOfUstensils = []
-    for (const ustensil of ustensilsMenu) {
-      const mediaUstensils = ustensil
-      arratyOfUstensils.push(mediaUstensils)
-    }
-    arratyOfUstensils.forEach(usten => allItems.push(usten))
+  if (element.id === 'arrowUp__appliances' || element.id === 'arrowDown__appliances') {
+    const id = 'menu__appliances'
+    return id
   }
-  const eachUstensils = [...new Set(allItems)]
-  return eachUstensils
-}
-
-function generateItems (param, ul) {
-  for (let i = 0; i < param.length; i++) {
-    const li = new Element('1', 'li', 'dropdown__menu__items').elt
-    ul.appendChild(li)
-    li.textContent = `${param[i]}`
+  if (element.id === 'arrowUp__ustensils' || element.id === 'arrowDown__ustensils') {
+    const id = 'menu__ustensils'
+    return id
   }
 }
 
-function displayItems (param, ul) {
-  generateItems(param, ul)
-}
-
-export { dropdownTags }
-
-// récupérer tous les ingredients dans un seul ensemble
-// afficher l'ensemble dans la liste (select)
-// ajouter un event listener sur la liste
+export { openDropdown }

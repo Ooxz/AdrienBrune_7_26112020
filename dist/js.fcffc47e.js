@@ -265,6 +265,197 @@ function displayIngredients(ingredients, ulIngredients) {
     _iterator.f();
   }
 }
+},{"./Element.class.js":"../js/Element.class.js"}],"../js/dropdown.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.openDropdown = openDropdown;
+
+/* eslint-disable prefer-const */
+function openDropdown() {
+  var target = window.event.target;
+  var form;
+  var open;
+
+  if (target.tagName === 'I') {
+    open = target.parentNode;
+  } else {
+    open = target;
+  }
+
+  var openMenu = open.parentNode;
+  var openMenuChildren = openMenu.children;
+  form = openMenuChildren[1];
+  var id = getId(open);
+  var menu = document.getElementById(id);
+  open.style.display = 'none';
+  form.style.display = 'flex';
+  menu.style.display = 'grid';
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      menu.style.display = 'none';
+      form.style.display = 'none';
+      open.style.display = 'block';
+    }
+  });
+}
+
+function getId(element) {
+  if (element.id === 'arrowUp__ingredients' || element.id === 'arrowDown__ingredients') {
+    var id = 'menu__ingredients';
+    return id;
+  }
+
+  if (element.id === 'arrowUp__appliances' || element.id === 'arrowDown__appliances') {
+    var _id = 'menu__appliances';
+    return _id;
+  }
+
+  if (element.id === 'arrowUp__ustensils' || element.id === 'arrowDown__ustensils') {
+    var _id2 = 'menu__ustensils';
+    return _id2;
+  }
+}
+},{}],"../js/dropdownElements.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.dropdownTags = dropdownTags;
+
+var _ElementClass = require("./Element.class.js");
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function dropdownTags(param) {
+  // declare const to list all tags in their respective menu function
+  var allIngredients = listIngredients(param);
+  var allAppliances = listAppliances(param);
+  var allUstensils = listUstensils(param); // get each menu tag elements by Id
+
+  var tagsIngredientsMenu = document.getElementById('menu__ingredients');
+  var tagsAppliancesMenu = document.getElementById('menu__appliances');
+  var tagsUstensilsMenu = document.getElementById('menu__ustensils'); // call function displayItems for each tag
+
+  displayItems(allIngredients, tagsIngredientsMenu);
+  displayItems(allAppliances, tagsAppliancesMenu);
+  displayItems(allUstensils, tagsUstensilsMenu);
+} // function for ingredients list
+
+
+function listIngredients(param) {
+  var allItems = []; // make an array for all items from ingredients
+
+  for (var i = 0; i < param.length; i++) {
+    // loop to set ingredients in the array
+    var ingredientsMenu = param[i].ingredients; // const to make an array of ingredients from recipes
+
+    var arrayOfIngredients = []; // new array to receive ingredient from ingredient
+
+    var _iterator = _createForOfIteratorHelper(ingredientsMenu),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var ingredient = _step.value;
+        // boucle pour récupérer ingredient dans ingredients
+        var mediaIngredient = ingredient.ingredient; // const to get ingredient from ingrdients
+
+        arrayOfIngredients.push(mediaIngredient); // push the ingredient from ingredients in the arrayOfIngredients
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    arrayOfIngredients.forEach(function (ingred) {
+      return allItems.push(ingred);
+    }); // for each ingredient in arrayOfIngredients push in allItems
+  } // the ... operator what it does is to convert an array of parameters into an array of items
+
+
+  var eachIngredient = _toConsumableArray(new Set(allItems)); // make a new array of each unique ingredients
+
+
+  return eachIngredient; // return that array of ingredients
+} // function appliance list
+
+
+function listAppliances(param) {
+  var allItems = [];
+
+  for (var i = 0; i < param.length; i++) {
+    var appliancesMenu = param[i].appliance;
+    allItems.push(appliancesMenu);
+  }
+
+  var eachAppliances = _toConsumableArray(new Set(allItems));
+
+  return eachAppliances;
+} // function ustensils list
+
+
+function listUstensils(param) {
+  var allItems = [];
+
+  for (var i = 0; i < param.length; i++) {
+    var ustensilsMenu = param[i].ustensils;
+    var arratyOfUstensils = [];
+
+    var _iterator2 = _createForOfIteratorHelper(ustensilsMenu),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var ustensil = _step2.value;
+        var mediaUstensils = ustensil;
+        arratyOfUstensils.push(mediaUstensils);
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+
+    arratyOfUstensils.forEach(function (usten) {
+      return allItems.push(usten);
+    });
+  }
+
+  var eachUstensils = _toConsumableArray(new Set(allItems));
+
+  return eachUstensils;
+}
+
+function generateItems(param, ul) {
+  for (var i = 0; i < param.length; i++) {
+    var li = new _ElementClass.Element('1', 'li', 'dropdown__menu__items').elt;
+    ul.appendChild(li);
+    li.textContent = "".concat(param[i]);
+  }
+}
+
+function displayItems(param, ul) {
+  generateItems(param, ul);
+} // récupérer tous les ingredients dans un seul ensemble
+// afficher l'ensemble dans la liste (select)
+// ajouter un event listener sur la liste
 },{"./Element.class.js":"../js/Element.class.js"}],"../js/recipes.js":[function(require,module,exports) {
 "use strict";
 
@@ -1643,159 +1834,34 @@ var recipes = [{
   ustensils: ['rouleau à patisserie', 'fouet']
 }];
 exports.recipes = recipes;
-},{}],"../js/dropdown.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.dropdownTags = dropdownTags;
-
-var _ElementClass = require("./Element.class.js");
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function dropdownTags(param) {
-  // declare const to list all tags in their respective menu function
-  var allIngredients = listIngredients(param);
-  var allAppliances = listAppliances(param);
-  var allUstensils = listUstensils(param); // get each menu tag elements by Id
-
-  var tagsIngredientsMenu = document.getElementById('menu__ingredients');
-  var tagsAppliancesMenu = document.getElementById('menu__appliances');
-  var tagsUstensilsMenu = document.getElementById('menu__ustensils'); // call function displayItems for each tag
-
-  displayItems(allIngredients, tagsIngredientsMenu);
-  displayItems(allAppliances, tagsAppliancesMenu);
-  displayItems(allUstensils, tagsUstensilsMenu);
-  console.log(allUstensils);
-} // function for ingredients list
-
-
-function listIngredients(param) {
-  var allItems = []; // make an array for all items from ingredients
-
-  for (var i = 0; i < allItems.length; i++) {
-    // loop to set ingredients in the array
-    var ingredientsMenu = param[i].ingredients; // const to make an array of ingredients from recipes
-
-    var arrayOfIngredients = []; // new array to receive ingredient from ingredient
-
-    var _iterator = _createForOfIteratorHelper(ingredientsMenu),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var ingredient = _step.value;
-        // boucle pour récupérer ingredient dans ingredients
-        var mediaIngredient = ingredient.ingredient; // const to get ingredient from ingrdients
-
-        arrayOfIngredients.push(mediaIngredient); // push the ingredient from ingredients in the arrayOfIngredients
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    arrayOfIngredients.forEach(function (ingred) {
-      return allItems.push(ingred);
-    }); // for each ingredient in arrayOfIngredients push in allItems
-  }
-
-  var eachIngredient = _toConsumableArray(new Set(allItems)); // make a new array of each unique ingredients
-
-
-  return eachIngredient; // return that array of ingredients
-} // function appliance list
-
-
-function listAppliances(param) {
-  var allItems = [];
-
-  for (var i = 0; i < allItems.length; i++) {
-    var appliancesMenu = param[i].appliance;
-    allItems.push(appliancesMenu);
-  }
-
-  console.log(allItems);
-
-  var eachAppliances = _toConsumableArray(new Set(allItems));
-
-  return eachAppliances;
-} // function ustensils list
-
-
-function listUstensils(param) {
-  var allItems = [];
-
-  for (var i = 0; i < allItems.length; i++) {
-    var ustensilsMenu = param[i].ustensils;
-    var arratyOfUstensils = [];
-
-    var _iterator2 = _createForOfIteratorHelper(ustensilsMenu),
-        _step2;
-
-    try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var ustensil = _step2.value;
-        var mediaUstensils = ustensil;
-        arratyOfUstensils.push(mediaUstensils);
-      }
-    } catch (err) {
-      _iterator2.e(err);
-    } finally {
-      _iterator2.f();
-    }
-
-    arratyOfUstensils.forEach(function (usten) {
-      return allItems.push(usten);
-    });
-  }
-
-  var eachUstensils = _toConsumableArray(new Set(allItems));
-
-  return eachUstensils;
-}
-
-function generateItems(param, ul) {
-  for (var i = 0; i < param.length; i++) {
-    var li = new _ElementClass.Element('1', 'li', 'dropdown__menu__items').elt;
-    ul.appendChild(li);
-    li.textContent = "".concat(param[i]);
-  }
-}
-
-function displayItems(param, ul) {
-  generateItems(param, ul);
-} // récupérer tous les ingredients dans un seul ensemble
-// afficher l'ensemble dans la liste (select)
-// ajouter un event listener sur la liste
-},{"./Element.class.js":"../js/Element.class.js"}],"../js/index.js":[function(require,module,exports) {
+},{}],"../js/index.js":[function(require,module,exports) {
 "use strict";
 
 var _generateCard = require("./generateCard.js");
 
-var _recipes = require("./recipes.js");
-
 var _dropdown = require("./dropdown.js");
+
+var _dropdownElements = require("./dropdownElements.js");
+
+var _recipes = require("./recipes.js");
 
 // display cards with recipes
 (0, _generateCard.generateCard)(_recipes.recipes);
-(0, _dropdown.dropdownTags)(_recipes.recipes);
-},{"./generateCard.js":"../js/generateCard.js","./recipes.js":"../js/recipes.js","./dropdown.js":"../js/dropdown.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+(0, _dropdownElements.dropdownTags)(_recipes.recipes); // Ouverture et fermeture des dropdowns ___________________________
+
+var buttonDropdown = document.querySelectorAll('.dropdown__icon');
+buttonDropdown.forEach(function (button) {
+  button.addEventListener('click', function (event) {
+    (0, _dropdown.openDropdown)(event);
+  });
+}); // // click escape to close dropdown
+// const closeIt = document.querySelector('dropdown__menu')
+// document.addEventListener('keydown', function (event) {
+//   if (event.key === 'Escape') {
+//     closeIt.style.display = 'none'
+//   }
+// })
+},{"./generateCard.js":"../js/generateCard.js","./dropdown.js":"../js/dropdown.js","./dropdownElements.js":"../js/dropdownElements.js","./recipes.js":"../js/recipes.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1823,7 +1889,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60407" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62675" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

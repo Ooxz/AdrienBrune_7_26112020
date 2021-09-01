@@ -5,6 +5,9 @@
 .dropdown {
   display: flex;
   margin-bottom: 1rem;
+  &__main{
+    margin-right: 2rem;
+  }
   &__input {
     border: none;
     height: 4.3rem;
@@ -12,6 +15,7 @@
     font-size: 18px;
     font-weight: 700;
     padding: 0 22px 0 16px;
+    color: white;
     &--ingredients {
       background-color: $color-ingredients;
     }
@@ -25,20 +29,22 @@
       color: white;
     }
   }
-  &__icon {
-    transform: translateX(-35px);
+  &__button {
+   margin-left: -5px;
   }
-  &__img {
+  &__icon {
     color: white;
     cursor: pointer;
+    position: fixed;
     font-size: 1.15rem;
+    transform: translate(-35px, 5px);
   }
 
   .form {
-    display: flex;
+    display: none;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     &__label {
       display: none;
       font-size: 1.15rem;
@@ -46,8 +52,15 @@
       padding: 1rem 1rem 1rem 0;
     }
     &__input {
+      display: flex;
+      justify-content: space-between;
       font-size: 1.15rem;
       padding: 0 41.66rem 0 0;
+      color: white;
+      height: 4.3rem;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
       &--ingredients {
         background-color: $color-ingredients;
       }
@@ -64,12 +77,51 @@
       }
     }
     &__arrow {
-      transform: translateX(-30px);
       color: white;
       cursor: pointer;
+      border-radius: 0;
+      border-top-right-radius: 5px;
+      height: 4.3rem;
+      font-size: 1.15rem;
+      &--ingredients {
+        background-color: $color-ingredients;
+      }
+      &--appliances {
+        background-color: $color-appliances;
+      }
+      &--ustensils {
+        background-color: $color-ustensils;
+      }
     }
   }
   &__menu {
-    display: flex;
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    border-radius: 5px;
+    padding: 0 0 10px 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+    // width: 99.7%;
+    &--ingredients {
+      background-color: $color-ingredients;
+      color: white;
+    }
+    &--appliances {
+      background-color: $color-appliances;
+      color: white;
+    } &--ustensils {
+      background-color: $color-ustensils;
+      color: white;
+    }
+    &__items {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 80%;
+      font-size: 1.15rem;
+      font-weight: 400;
+    }
   }
 }

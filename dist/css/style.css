@@ -203,6 +203,9 @@ li {
   display: flex;
   margin-bottom: 1rem;
 }
+.dropdown__main {
+  margin-right: 2rem;
+}
 .dropdown__input {
   border: none;
   height: 4.3rem;
@@ -210,6 +213,7 @@ li {
   font-size: 18px;
   font-weight: 700;
   padding: 0 22px 0 16px;
+  color: white;
 }
 .dropdown__input--ingredients {
   background-color: #3282f7;
@@ -223,19 +227,21 @@ li {
 .dropdown__input::placeholder {
   color: white;
 }
-.dropdown__icon {
-  transform: translateX(-35px);
+.dropdown__button {
+  margin-left: -5px;
 }
-.dropdown__img {
+.dropdown__icon {
   color: white;
   cursor: pointer;
+  position: fixed;
   font-size: 1.15rem;
+  transform: translate(-35px, 5px);
 }
 .dropdown .form {
-  display: flex;
+  display: none;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 }
 .dropdown .form__label {
   display: none;
@@ -244,8 +250,15 @@ li {
   padding: 1rem 1rem 1rem 0;
 }
 .dropdown .form__input {
+  display: flex;
+  justify-content: space-between;
   font-size: 1.15rem;
   padding: 0 41.66rem 0 0;
+  color: white;
+  height: 4.3rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 .dropdown .form__input--ingredients {
   background-color: #3282f7;
@@ -262,12 +275,51 @@ li {
   width: 14rem;
 }
 .dropdown .form__arrow {
-  transform: translateX(-30px);
   color: white;
   cursor: pointer;
+  border-radius: 0;
+  border-top-right-radius: 5px;
+  height: 4.3rem;
+  font-size: 1.15rem;
+}
+.dropdown .form__arrow--ingredients {
+  background-color: #3282f7;
+}
+.dropdown .form__arrow--appliances {
+  background-color: #68d9a4;
+}
+.dropdown .form__arrow--ustensils {
+  background-color: #ed6454;
 }
 .dropdown__menu {
-  display: flex;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  border-radius: 5px;
+  padding: 0 0 10px 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  overflow: hidden;
+}
+.dropdown__menu--ingredients {
+  background-color: #3282f7;
+  color: white;
+}
+.dropdown__menu--appliances {
+  background-color: #68d9a4;
+  color: white;
+}
+.dropdown__menu--ustensils {
+  background-color: #ed6454;
+  color: white;
+}
+.dropdown__menu__items {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+  font-size: 1.15rem;
+  font-weight: 400;
 }
 
 .header {
