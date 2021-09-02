@@ -292,12 +292,13 @@ function openDropdown() {
   var menu = document.getElementById(id);
   open.style.display = 'none';
   form.style.display = 'flex';
-  menu.style.display = 'grid';
+  menu.style.display = 'grid'; // Close dropdown menu with escape
+
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
       menu.style.display = 'none';
       form.style.display = 'none';
-      open.style.display = 'block';
+      open.style.display = 'flex';
     }
   });
 }
@@ -1854,13 +1855,34 @@ buttonDropdown.forEach(function (button) {
   button.addEventListener('click', function (event) {
     (0, _dropdown.openDropdown)(event);
   });
-}); // // click escape to close dropdown
-// const closeIt = document.querySelector('dropdown__menu')
-// document.addEventListener('keydown', function (event) {
-//   if (event.key === 'Escape') {
-//     closeIt.style.display = 'none'
+});
+var close = document.querySelectorAll('.form__arrow');
+close.forEach(function (btn) {
+  return btn.addEventListener('click', function () {
+    document.getElementById('search__Ingredients').style.display = 'none';
+    document.getElementById('search__appliances').style.display = 'none';
+    document.getElementById('search__ustensils').style.display = 'none';
+    document.getElementById('menu__ingredients').style.display = 'none';
+    document.getElementById('menu__appliances').style.display = 'none';
+    document.getElementById('menu__ustensils').style.display = 'none';
+    document.getElementById('arrowDown__ingredients').style.display = 'flex';
+    document.getElementById('arrowDown__appliances').style.display = 'flex';
+    document.getElementById('arrowDown__ustensils').style.display = 'flex';
+  });
+}); // const closeButton = document.querySelectorAll('.dropdown__icon')
+// window.onclick = function (event) {
+//   if (event.target !== closeButton) {
+//     document.getElementById('search__Ingredients').style.display = 'none'
+//     document.getElementById('search__appliances').style.display = 'none'
+//     document.getElementById('search__ustensils').style.display = 'none'
+//     document.getElementById('menu__ingredients').style.display = 'none'
+//     document.getElementById('menu__appliances').style.display = 'none'
+//     document.getElementById('menu__ustensils').style.display = 'none'
+//     document.getElementById('arrowDown__ingredients').style.display = 'flex'
+//     document.getElementById('arrowDown__appliances').style.display = 'flex'
+//     document.getElementById('arrowDown__ustensils').style.display = 'flex'
 //   }
-// })
+// }
 },{"./generateCard.js":"../js/generateCard.js","./dropdown.js":"../js/dropdown.js","./dropdownElements.js":"../js/dropdownElements.js","./recipes.js":"../js/recipes.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1889,7 +1911,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62675" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64445" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

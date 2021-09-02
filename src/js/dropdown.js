@@ -17,11 +17,12 @@ function openDropdown () {
   open.style.display = 'none'
   form.style.display = 'flex'
   menu.style.display = 'grid'
+  // Close dropdown menu with escape
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
       menu.style.display = 'none'
       form.style.display = 'none'
-      open.style.display = 'block'
+      open.style.display = 'flex'
     }
   })
 }

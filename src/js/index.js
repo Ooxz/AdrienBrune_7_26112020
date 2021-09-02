@@ -6,7 +6,6 @@ import { recipes } from './recipes.js'
 // display cards with recipes
 generateCard(recipes)
 dropdownTags(recipes)
-
 // Ouverture et fermeture des dropdowns ___________________________
 const buttonDropdown = document.querySelectorAll('.dropdown__icon')
 buttonDropdown.forEach(button => {
@@ -15,10 +14,30 @@ buttonDropdown.forEach(button => {
   })
 })
 
-// // click escape to close dropdown
-// const closeIt = document.querySelector('dropdown__menu')
-// document.addEventListener('keydown', function (event) {
-//   if (event.key === 'Escape') {
-//     closeIt.style.display = 'none'
+const close = document.querySelectorAll('.form__arrow')
+close.forEach((btn) => btn.addEventListener('click', () => {
+  document.getElementById('search__Ingredients').style.display = 'none'
+  document.getElementById('search__appliances').style.display = 'none'
+  document.getElementById('search__ustensils').style.display = 'none'
+  document.getElementById('menu__ingredients').style.display = 'none'
+  document.getElementById('menu__appliances').style.display = 'none'
+  document.getElementById('menu__ustensils').style.display = 'none'
+  document.getElementById('arrowDown__ingredients').style.display = 'flex'
+  document.getElementById('arrowDown__appliances').style.display = 'flex'
+  document.getElementById('arrowDown__ustensils').style.display = 'flex'
+}))
+
+// const closeButton = document.querySelectorAll('.dropdown__icon')
+// window.onclick = function (event) {
+//   if (event.target !== closeButton) {
+//     document.getElementById('search__Ingredients').style.display = 'none'
+//     document.getElementById('search__appliances').style.display = 'none'
+//     document.getElementById('search__ustensils').style.display = 'none'
+//     document.getElementById('menu__ingredients').style.display = 'none'
+//     document.getElementById('menu__appliances').style.display = 'none'
+//     document.getElementById('menu__ustensils').style.display = 'none'
+//     document.getElementById('arrowDown__ingredients').style.display = 'flex'
+//     document.getElementById('arrowDown__appliances').style.display = 'flex'
+//     document.getElementById('arrowDown__ustensils').style.display = 'flex'
 //   }
-// })
+// }
