@@ -20,20 +20,64 @@ const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
 dropDownMenuItems.forEach(item => {
   item.addEventListener('click', (event) => {
     alert(event.target.textContent)
-
-    const filter = []
-    filtredRecipes.forEach(recipe => {
-      const index = recipe.ingredients.findIndex(elt => elt.ingredient === event.target.textContent)
-      console.log(index)
-      if (index > -1) {
-        filter.push(recipe)
-      }
-    })
-    filtredRecipes = [...filter]
-    generateCard(filtredRecipes)
-    dropdownTags(filtredRecipes)
+    if (document.getElementById('menu__ingredients')) {
+      const filter = []
+      filtredRecipes.forEach(recipe => {
+        const index = recipe.ingredients.findIndex(elt => elt.ingredient === event.target.textContent)
+        if (index > -1) {
+          filter.push(recipe)
+          console.log('ingredients', recipe)
+        }
+      })
+      filtredRecipes = [...filter]
+      generateCard(filtredRecipes)
+      dropdownTags(filtredRecipes)
+    } else if (document.getElementById('menu__appliances')) {
+      const filter = []
+      filtredRecipes.forEach(recipe => {
+        const index = recipe.appliance.includes(elt => elt.appliance === event.target.textContent)
+        if (index > -1) {
+          filter.push(recipe)
+          console.log('appliances', recipe)
+        }
+      })
+      filtredRecipes = [...filter]
+      generateCard(filtredRecipes)
+      dropdownTags(filtredRecipes)
+    } else if (document.getElementById('menu__ustensils')) {
+      const filter = []
+      filtredRecipes.forEach(recipe => {
+        const index = recipe.ustensils.includes(elt => elt.ustensils === event.target.textContent)
+        if (index > -1) {
+          filter.push(recipe)
+          console.log('appliances', recipe)
+        }
+      })
+      filtredRecipes = [...filter]
+      generateCard(filtredRecipes)
+      dropdownTags(filtredRecipes)
+    }
   })
 })
+
+// const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
+// dropDownMenuItems.forEach(item => {
+//   item.addEventListener('click', (event) => {
+//     alert(event.target.textContent)
+
+//     const filter = []
+//     filtredRecipes.forEach(recipe => {
+//       const index = recipe.ingredients.findIndex(elt => elt.ingredient === event.target.textContent)
+//       console.log(index)
+//       if (index > -1) {
+//         filter.push(recipe)
+//       }
+//     })
+//     filtredRecipes = [...filter]
+//     generateCard(filtredRecipes)
+//     dropdownTags(filtredRecipes)
+//   })
+// })
 
 const close = document.querySelectorAll('.form__arrow')
 close.forEach((btn) => btn.addEventListener('click', () => {

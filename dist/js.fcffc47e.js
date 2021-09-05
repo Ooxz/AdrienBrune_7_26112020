@@ -1865,22 +1865,74 @@ var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
 dropDownMenuItems.forEach(function (item) {
   item.addEventListener('click', function (event) {
     alert(event.target.textContent);
-    var filter = [];
-    filtredRecipes.forEach(function (recipe) {
-      var index = recipe.ingredients.findIndex(function (elt) {
-        return elt.ingredient === event.target.textContent;
-      });
-      console.log(index);
 
-      if (index > -1) {
-        filter.push(recipe);
-      }
-    });
-    filtredRecipes = [].concat(filter);
-    (0, _generateCard.generateCard)(filtredRecipes);
-    (0, _dropdownElements.dropdownTags)(filtredRecipes);
+    if (document.getElementById('menu__ingredients')) {
+      var filter = [];
+      filtredRecipes.forEach(function (recipe) {
+        var index = recipe.ingredients.findIndex(function (elt) {
+          return elt.ingredient === event.target.textContent;
+        });
+
+        if (index > -1) {
+          filter.push(recipe);
+          console.log('ingredients', recipe);
+        }
+      });
+      filtredRecipes = [].concat(filter);
+      (0, _generateCard.generateCard)(filtredRecipes);
+      (0, _dropdownElements.dropdownTags)(filtredRecipes);
+    } else if (document.getElementById('menu__appliances')) {
+      var _filter = [];
+      filtredRecipes.forEach(function (recipe) {
+        var index = recipe.appliance.includes(function (elt) {
+          return elt.appliance === event.target.textContent;
+        });
+
+        if (index > -1) {
+          _filter.push(recipe);
+
+          console.log('appliances', recipe);
+        }
+      });
+      filtredRecipes = [].concat(_filter);
+      (0, _generateCard.generateCard)(filtredRecipes);
+      (0, _dropdownElements.dropdownTags)(filtredRecipes);
+    } else if (document.getElementById('menu__ustensils')) {
+      var _filter2 = [];
+      filtredRecipes.forEach(function (recipe) {
+        var index = recipe.ustensils.includes(function (elt) {
+          return elt.ustensils === event.target.textContent;
+        });
+
+        if (index > -1) {
+          _filter2.push(recipe);
+
+          console.log('appliances', recipe);
+        }
+      });
+      filtredRecipes = [].concat(_filter2);
+      (0, _generateCard.generateCard)(filtredRecipes);
+      (0, _dropdownElements.dropdownTags)(filtredRecipes);
+    }
   });
-});
+}); // const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
+// dropDownMenuItems.forEach(item => {
+//   item.addEventListener('click', (event) => {
+//     alert(event.target.textContent)
+//     const filter = []
+//     filtredRecipes.forEach(recipe => {
+//       const index = recipe.ingredients.findIndex(elt => elt.ingredient === event.target.textContent)
+//       console.log(index)
+//       if (index > -1) {
+//         filter.push(recipe)
+//       }
+//     })
+//     filtredRecipes = [...filter]
+//     generateCard(filtredRecipes)
+//     dropdownTags(filtredRecipes)
+//   })
+// })
+
 var close = document.querySelectorAll('.form__arrow');
 close.forEach(function (btn) {
   return btn.addEventListener('click', function () {
@@ -1923,7 +1975,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51625" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58243" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
