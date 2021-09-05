@@ -245,11 +245,11 @@ li {
 }
 .dropdown .form {
   display: none;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   position: relative;
-  z-index: 1000;
+  width: 100%;
+  overflow: hidden;
 }
 .dropdown .form__label {
   display: none;
@@ -261,7 +261,7 @@ li {
   display: flex;
   justify-content: space-between;
   font-size: 1.15rem;
-  padding: 0 41.66rem 0 0;
+  width: 100%;
   color: white;
   height: 4.3rem;
   border-bottom-left-radius: 0;
@@ -280,7 +280,6 @@ li {
 .dropdown .form__input::placeholder {
   color: white;
   opacity: 50%;
-  width: 14rem;
 }
 .dropdown .form__arrow {
   color: white;
@@ -328,11 +327,62 @@ li {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 80%;
   font-size: 1.15rem;
   font-weight: 400;
 }
 
+@media (max-width: 1200px) {
+  .dropdown {
+    justify-content: center;
+  }
+  .dropdown__menu {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
+  }
+
+  .allRecipesCards {
+    justify-content: space-evenly;
+  }
+}
+@media (max-width: 800px) {
+  .dropdown {
+    justify-content: center;
+  }
+  .dropdown__menu {
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 10px;
+  }
+}
+@media (max-width: 759px) {
+  html {
+    padding: 0 2rem 0 2rem;
+  }
+
+  .dropdown {
+    flex-direction: column;
+  }
+  .dropdown__menu {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+  }
+  .dropdown__main {
+    margin-right: 0;
+  }
+  .dropdown__button {
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .allRecipesCards {
+    margin-top: 15rem;
+    padding: 0 2rem 0 0;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}
 .header {
   display: flex;
   justify-content: center;

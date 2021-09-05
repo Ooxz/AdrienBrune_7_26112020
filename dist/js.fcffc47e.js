@@ -180,7 +180,9 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function generateCard(param) {
+  console.log(param);
   var section = document.querySelector('.allRecipesCards');
+  section.innerHTML = '';
 
   for (var i = 0; i < param.length; i++) {
     var article = new _ElementClass.Element('1', 'article', 'card').elt;
@@ -445,6 +447,8 @@ function listUstensils(param) {
 }
 
 function generateItems(param, ul) {
+  ul.innerHTML = '';
+
   for (var i = 0; i < param.length; i++) {
     var li = new _ElementClass.Element('1', 'li', 'dropdown__menu__items').elt;
     ul.appendChild(li);
@@ -1846,14 +1850,35 @@ var _dropdownElements = require("./dropdownElements.js");
 
 var _recipes = require("./recipes.js");
 
-// display cards with recipes
-(0, _generateCard.generateCard)(_recipes.recipes);
-(0, _dropdownElements.dropdownTags)(_recipes.recipes); // Ouverture et fermeture des dropdowns ___________________________
+var filtredRecipes = _recipes.recipes; // display cards with recipes
+
+(0, _generateCard.generateCard)(filtredRecipes);
+(0, _dropdownElements.dropdownTags)(filtredRecipes); // Ouverture et fermeture des dropdowns ___________________________
 
 var buttonDropdown = document.querySelectorAll('.dropdown__icon');
 buttonDropdown.forEach(function (button) {
   button.addEventListener('click', function (event) {
     (0, _dropdown.openDropdown)(event);
+  });
+});
+var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
+dropDownMenuItems.forEach(function (item) {
+  item.addEventListener('click', function (event) {
+    alert(event.target.textContent);
+    var filter = [];
+    filtredRecipes.forEach(function (recipe) {
+      var index = recipe.ingredients.findIndex(function (elt) {
+        return elt.ingredient === event.target.textContent;
+      });
+      console.log(index);
+
+      if (index > -1) {
+        filter.push(recipe);
+      }
+    });
+    filtredRecipes = [].concat(filter);
+    (0, _generateCard.generateCard)(filtredRecipes);
+    (0, _dropdownElements.dropdownTags)(filtredRecipes);
   });
 });
 var close = document.querySelectorAll('.form__arrow');
@@ -1869,20 +1894,7 @@ close.forEach(function (btn) {
     document.getElementById('arrowDown__appliances').style.display = 'flex';
     document.getElementById('arrowDown__ustensils').style.display = 'flex';
   });
-}); // const closeButton = document.querySelectorAll('.dropdown__icon')
-// window.onclick = function (event) {
-//   if (event.target !== closeButton) {
-//     document.getElementById('search__Ingredients').style.display = 'none'
-//     document.getElementById('search__appliances').style.display = 'none'
-//     document.getElementById('search__ustensils').style.display = 'none'
-//     document.getElementById('menu__ingredients').style.display = 'none'
-//     document.getElementById('menu__appliances').style.display = 'none'
-//     document.getElementById('menu__ustensils').style.display = 'none'
-//     document.getElementById('arrowDown__ingredients').style.display = 'flex'
-//     document.getElementById('arrowDown__appliances').style.display = 'flex'
-//     document.getElementById('arrowDown__ustensils').style.display = 'flex'
-//   }
-// }
+});
 },{"./generateCard.js":"../js/generateCard.js","./dropdown.js":"../js/dropdown.js","./dropdownElements.js":"../js/dropdownElements.js","./recipes.js":"../js/recipes.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1911,7 +1923,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64445" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51625" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

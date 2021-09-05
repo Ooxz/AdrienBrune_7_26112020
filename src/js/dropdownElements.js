@@ -61,6 +61,7 @@ function listUstensils (param) {
 }
 
 function generateItems (param, ul) {
+  ul.innerHTML = ''
   for (let i = 0; i < param.length; i++) {
     const li = new Element('1', 'li', 'dropdown__menu__items').elt
     ul.appendChild(li)

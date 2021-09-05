@@ -4,7 +4,9 @@
 import { Element } from './Element.class.js'
 
 function generateCard (param) {
+  console.log(param)
   const section = document.querySelector('.allRecipesCards')
+  section.innerHTML = ''
   for (let i = 0; i < param.length; i++) {
     const article = new Element('1', 'article', 'card').elt
     const anchor = new Element('2', 'a', 'card__anchor').elt
