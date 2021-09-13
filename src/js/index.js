@@ -17,67 +17,7 @@ buttonDropdown.forEach(button => {
 })
 
 const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
-dropDownMenuItems.forEach(item => {
-  item.addEventListener('click', (event) => {
-    alert(event.target.textContent)
-    if (document.getElementById('menu__ingredients')) {
-      const filter = []
-      filtredRecipes.forEach(recipe => {
-        const index = recipe.ingredients.findIndex(elt => elt.ingredient === event.target.textContent)
-        if (index > -1) {
-          filter.push(recipe)
-          console.log('ingredients', recipe)
-        }
-      })
-      filtredRecipes = [...filter]
-      generateCard(filtredRecipes)
-      dropdownTags(filtredRecipes)
-    } else if (document.getElementById('menu__appliances')) {
-      const filter = []
-      filtredRecipes.forEach(recipe => {
-        const index = recipe.appliance.includes(elt => elt.appliance === event.target.textContent)
-        if (index > -1) {
-          filter.push(recipe)
-          console.log('appliances', recipe)
-        }
-      })
-      filtredRecipes = [...filter]
-      generateCard(filtredRecipes)
-      dropdownTags(filtredRecipes)
-    } else if (document.getElementById('menu__ustensils')) {
-      const filter = []
-      filtredRecipes.forEach(recipe => {
-        const index = recipe.ustensils.includes(elt => elt.ustensils === event.target.textContent)
-        if (index > -1) {
-          filter.push(recipe)
-          console.log('appliances', recipe)
-        }
-      })
-      filtredRecipes = [...filter]
-      generateCard(filtredRecipes)
-      dropdownTags(filtredRecipes)
-    }
-  })
-})
-
-// const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
-// dropDownMenuItems.forEach(item => {
-//   item.addEventListener('click', (event) => {
-//     alert(event.target.textContent)
-
-//     const filter = []
-//     filtredRecipes.forEach(recipe => {
-//       const index = recipe.ingredients.findIndex(elt => elt.ingredient === event.target.textContent)
-//       console.log(index)
-//       if (index > -1) {
-//         filter.push(recipe)
-//       }
-//     })
-//     filtredRecipes = [...filter]
-//     generateCard(filtredRecipes)
-//     dropdownTags(filtredRecipes)
-//   })
-// })
+generateListeners(dropDownMenuItems)
 
 const close = document.querySelectorAll('.form__arrow')
 close.forEach((btn) => btn.addEventListener('click', () => {
@@ -91,3 +31,39 @@ close.forEach((btn) => btn.addEventListener('click', () => {
   document.getElementById('arrowDown__appliances').style.display = 'flex'
   document.getElementById('arrowDown__ustensils').style.display = 'flex'
 }))
+
+function generateListeners (dropDownMenuItems) {
+  dropDownMenuItems.forEach(item => {
+    item.addEventListener('click', (event) => {
+      const filter = []
+      if (event.target.parentNode.id === 'menu__ingredients') {
+        filtredRecipes.forEach(recipe => {
+          const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === event.target.textContent.toLowerCase())
+          if (index > -1) {
+            filter.push(recipe)
+          }
+        })
+      } else if (event.target.parentNode.id === 'menu__appliances') {
+        filtredRecipes.forEach(recipe => {
+          if (recipe.appliance.toLowerCase() === event.target.textContent.toLowerCase()) {
+            filter.push(recipe)
+          }
+        })
+      } else if (event.target.parentNode.id === 'menu__ustensils') {
+        filtredRecipes.forEach(recipe => {
+          const index = recipe.ustensils.findIndex(elt => elt === event.target.textContent)
+          if (index > -1) {
+            filter.push(recipe)
+          }
+        })
+      }
+      filtredRecipes = [...filter]
+      generateCard(filtredRecipes)
+      dropdownTags(filtredRecipes)
+      const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
+      generateListeners(dropDownMenuItems)
+    })
+  })
+}
+
+// A faire : diviser generatelistener en 2 une fonction pour le addEventListener et une fonction que pour le filtrage des recettes
