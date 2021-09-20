@@ -1,13 +1,16 @@
+/* eslint-disable no-new */
 import { generateCard } from './generateCard.js'
 import { openDropdown } from './dropdown.js'
 import { dropdownTags } from './dropdownElements.js'
 import { recipes } from './recipes.js'
+import { GenerateSearchedTags } from './searchTags.js'
 
 let filtredRecipes = recipes
 
 // display cards with recipes
 generateCard(filtredRecipes)
 dropdownTags(filtredRecipes)
+new GenerateSearchedTags()
 // Ouverture et fermeture des dropdowns ___________________________
 const buttonDropdown = document.querySelectorAll('.dropdown__icon')
 buttonDropdown.forEach(button => {
@@ -66,4 +69,5 @@ function generateListeners (dropDownMenuItems) {
   })
 }
 
+export { generateListeners }
 // A faire : diviser generatelistener en 2 une fonction pour le addEventListener et une fonction que pour le filtrage des recettes

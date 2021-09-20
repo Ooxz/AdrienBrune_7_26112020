@@ -23,7 +23,7 @@ function listIngredients (param) {
 	  const ingredientsMenu = param[i].ingredients // const to make an array of ingredients from recipes
     const arrayOfIngredients = [] // new array to receive ingredient from ingredient
     for (const ingredient of ingredientsMenu) { // boucle pour récupérer ingredient dans ingredients
-      const mediaIngredient = ingredient.ingredient // const to get ingredient from ingrdients
+      const mediaIngredient = ingredient.ingredient // const to get ingredient from ingredients
       arrayOfIngredients.push(mediaIngredient) // push the ingredient from ingredients in the arrayOfIngredients
     }
     arrayOfIngredients.forEach(ingred => allItems.push(ingred)) // for each ingredient in arrayOfIngredients push in allItems

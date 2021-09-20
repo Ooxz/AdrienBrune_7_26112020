@@ -1,0 +1,36 @@
+@use "../abstracts" as *;
+@use "../base" as *;
+@use "../base/base" as *;
+
+.tags{
+	display: flex;
+	&__ul {
+		display: flex;
+		justify-content: space-between;
+		color: white;
+		font-size: 0.9rem;
+		margin-bottom: 1rem;
+	}
+	&__li {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-radius: 5px;
+		padding: 0.5rem 1rem 0.5rem 1rem;
+		margin-right: 0.5rem;
+		&--ingredients {
+			background-color: $color-ingredients;
+		}
+		&--appliances {
+			background-color: $color-appliances;
+		}
+		&--ustensils {
+			background-color: $color-ustensils;
+		}
+	}
+}
+.fa-times-circle {
+	font-size: 1.2rem;
+	margin-left: 1rem;
+	cursor: pointer;
+}

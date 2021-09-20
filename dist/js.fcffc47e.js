@@ -377,7 +377,7 @@ function listIngredients(param) {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var ingredient = _step.value;
         // boucle pour récupérer ingredient dans ingredients
-        var mediaIngredient = ingredient.ingredient; // const to get ingredient from ingrdients
+        var mediaIngredient = ingredient.ingredient; // const to get ingredient from ingredients
 
         arrayOfIngredients.push(mediaIngredient); // push the ingredient from ingredients in the arrayOfIngredients
       }
@@ -1839,8 +1839,103 @@ var recipes = [{
   ustensils: ['rouleau à patisserie', 'fouet']
 }];
 exports.recipes = recipes;
-},{}],"../js/index.js":[function(require,module,exports) {
+},{}],"../js/searchTags.js":[function(require,module,exports) {
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SearchMain = exports.GenerateSearchedTags = void 0;
+
+var _generateCard = require("./generateCard.js");
+
+var _index = require("./index.js");
+
+var _recipes = require("./recipes.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var filtredRecipes = _recipes.recipes;
+var SearchMain = {
+  selected: {
+    main: []
+  },
+  reset: function reset() {
+    this.selected = {
+      main: []
+    };
+    (0, _generateCard.generateCard)(filtredRecipes);
+  },
+  selectMain: function selectMain(main) {
+    for (var i = 0; i < main.length; i++) {
+      this.selected.main.push(main[i]);
+    }
+
+    (0, _generateCard.generateCard)(filtredRecipes);
+  }
+};
+exports.SearchMain = SearchMain;
+
+var GenerateSearchedTags = /*#__PURE__*/function () {
+  function GenerateSearchedTags() {
+    _classCallCheck(this, GenerateSearchedTags);
+
+    this.tagsIngredients();
+    this.tagsAppliances();
+    this.tagsUstensils();
+    this.deleteTags();
+  }
+
+  _createClass(GenerateSearchedTags, [{
+    key: "tagsIngredients",
+    value: function tagsIngredients() {
+      document.querySelector('#menu__ingredients').addEventListener('click', function (e) {
+        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--ingredients\">\n\t\t\t<li class=\"tags__li tags__li--ingredients\">".concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
+      });
+    }
+  }, {
+    key: "tagsAppliances",
+    value: function tagsAppliances() {
+      document.querySelector('#menu__appliances').addEventListener('click', function (e) {
+        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--appliances\">\n\t\t\t<li class=\"tags__li tags__li--appliances\">".concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
+      });
+    }
+  }, {
+    key: "tagsUstensils",
+    value: function tagsUstensils() {
+      document.querySelector('#menu__ustensils').addEventListener('click', function (e) {
+        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--ustensils\">\n\t\t\t<li class=\"tags__li tags__li--ustensils\">".concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
+      });
+    }
+  }, {
+    key: "deleteTags",
+    value: function deleteTags() {
+      document.addEventListener('click', function (e) {
+        var tagsNode = e.target.classList[2];
+
+        if (tagsNode === 'tags__li__close') {
+          (0, _generateCard.generateCard)(filtredRecipes);
+          e.target.parentNode.remove();
+        }
+      });
+    }
+  }]);
+
+  return GenerateSearchedTags;
+}();
+
+exports.GenerateSearchedTags = GenerateSearchedTags;
+},{"./generateCard.js":"../js/generateCard.js","./index.js":"../js/index.js","./recipes.js":"../js/recipes.js"}],"../js/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateListeners = generateListeners;
 
 var _generateCard = require("./generateCard.js");
 
@@ -1850,10 +1945,14 @@ var _dropdownElements = require("./dropdownElements.js");
 
 var _recipes = require("./recipes.js");
 
+var _searchTags = require("./searchTags.js");
+
+/* eslint-disable no-new */
 var filtredRecipes = _recipes.recipes; // display cards with recipes
 
 (0, _generateCard.generateCard)(filtredRecipes);
-(0, _dropdownElements.dropdownTags)(filtredRecipes); // Ouverture et fermeture des dropdowns ___________________________
+(0, _dropdownElements.dropdownTags)(filtredRecipes);
+new _searchTags.GenerateSearchedTags(); // Ouverture et fermeture des dropdowns ___________________________
 
 var buttonDropdown = document.querySelectorAll('.dropdown__icon');
 buttonDropdown.forEach(function (button) {
@@ -1919,7 +2018,7 @@ function generateListeners(dropDownMenuItems) {
     });
   });
 } // A faire : diviser generatelistener en 2 une fonction pour le addEventListener et une fonction que pour le filtrage des recettes
-},{"./generateCard.js":"../js/generateCard.js","./dropdown.js":"../js/dropdown.js","./dropdownElements.js":"../js/dropdownElements.js","./recipes.js":"../js/recipes.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./generateCard.js":"../js/generateCard.js","./dropdown.js":"../js/dropdown.js","./dropdownElements.js":"../js/dropdownElements.js","./recipes.js":"../js/recipes.js","./searchTags.js":"../js/searchTags.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1947,7 +2046,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49806" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56907" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
