@@ -131,7 +131,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// création de mon constructor
+// class Element création de mon constructor
 var Element = /*#__PURE__*/function () {
   function Element(name, type, classname) {
     _classCallCheck(this, Element);
@@ -179,8 +179,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+/**
+ * @function generateCard
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ */
 function generateCard(param) {
-  console.log(param);
   var section = document.querySelector('.allRecipesCards');
   section.innerHTML = '';
 
@@ -276,6 +280,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.openDropdown = openDropdown;
 
 /* eslint-disable prefer-const */
+
+/**
+ * @function openDropdown
+ * function to open the dropdown menu
+ */
 function openDropdown() {
   var target = window.event.target;
   var form;
@@ -304,6 +313,12 @@ function openDropdown() {
     }
   });
 }
+/**
+ * @function getId
+ * function to get id to open the right menu in openDropdown
+ * @param {parameter} element
+ */
+
 
 function getId(element) {
   if (element.id === 'arrowUp__ingredients' || element.id === 'arrowDown__ingredients') {
@@ -345,6 +360,11 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+/**
+ * @function dropdownTags
+ * function to display items in dropdown
+ * @param {parameter} param
+ */
 function dropdownTags(param) {
   // declare const to list all tags in their respective menu function
   var allIngredients = listIngredients(param);
@@ -358,7 +378,12 @@ function dropdownTags(param) {
   displayItems(allIngredients, tagsIngredientsMenu);
   displayItems(allAppliances, tagsAppliancesMenu);
   displayItems(allUstensils, tagsUstensilsMenu);
-} // function for ingredients list
+}
+/**
+ * @function listIngredients
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ */
 
 
 function listIngredients(param) {
@@ -397,7 +422,12 @@ function listIngredients(param) {
 
 
   return eachIngredient; // return that array of ingredients
-} // function appliance list
+}
+/**
+ * @function listAppliances
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ */
 
 
 function listAppliances(param) {
@@ -411,7 +441,12 @@ function listAppliances(param) {
   var eachAppliances = _toConsumableArray(new Set(allItems));
 
   return eachAppliances;
-} // function ustensils list
+}
+/**
+ * @function listUstensils
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ */
 
 
 function listUstensils(param) {
@@ -445,6 +480,13 @@ function listUstensils(param) {
 
   return eachUstensils;
 }
+/**
+ * @function generateItems
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ * @param {HTMLElement} ul
+ */
+
 
 function generateItems(param, ul) {
   ul.innerHTML = '';
@@ -455,6 +497,13 @@ function generateItems(param, ul) {
     li.textContent = "".concat(param[i]);
   }
 }
+/**
+ * @function displayItems
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ * @param {HTMLElement} ul
+ */
+
 
 function displayItems(param, ul) {
   generateItems(param, ul);
@@ -1845,7 +1894,7 @@ exports.recipes = recipes;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SearchMain = exports.GenerateSearchedTags = void 0;
+exports.GenerateSearchedTags = void 0;
 
 var _generateCard = require("./generateCard.js");
 
@@ -1860,25 +1909,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var filtredRecipes = _recipes.recipes;
-var SearchMain = {
-  selected: {
-    main: []
-  },
-  reset: function reset() {
-    this.selected = {
-      main: []
-    };
-    (0, _generateCard.generateCard)(filtredRecipes);
-  },
-  selectMain: function selectMain(main) {
-    for (var i = 0; i < main.length; i++) {
-      this.selected.main.push(main[i]);
-    }
-
-    (0, _generateCard.generateCard)(filtredRecipes);
-  }
-};
-exports.SearchMain = SearchMain;
 
 var GenerateSearchedTags = /*#__PURE__*/function () {
   function GenerateSearchedTags() {
@@ -1894,21 +1924,21 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
     key: "tagsIngredients",
     value: function tagsIngredients() {
       document.querySelector('#menu__ingredients').addEventListener('click', function (e) {
-        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--ingredients\">\n\t\t\t<li class=\"tags__li tags__li--ingredients\">".concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
+        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--ingredients\">\n\t\t\t<li data-ingredients=\"".concat(e.target.textContent, "\" class=\"tags__li tags__li--ingredients\">").concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
       });
     }
   }, {
     key: "tagsAppliances",
     value: function tagsAppliances() {
       document.querySelector('#menu__appliances').addEventListener('click', function (e) {
-        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--appliances\">\n\t\t\t<li class=\"tags__li tags__li--appliances\">".concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
+        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--appliances\">\n\t\t\t<li data-appliances=\"".concat(e.target.textContent, "\" class=\"tags__li tags__li--appliances\">").concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
       });
     }
   }, {
     key: "tagsUstensils",
     value: function tagsUstensils() {
       document.querySelector('#menu__ustensils').addEventListener('click', function (e) {
-        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--ustensils\">\n\t\t\t<li class=\"tags__li tags__li--ustensils\">".concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
+        document.querySelector('#tags').insertAdjacentHTML('afterbegin', "\n\t\t  <ul class=\"tags__ul tags__ul--ustensils\">\n\t\t\t<li data-ustensils=\"".concat(e.target.textContent, "\" class=\"tags__li tags__li--ustensils\">").concat(e.target.textContent, "\n\t\t\t<i class=\"far fa-times-circle tags__li__close\"></i>\n\t\t\t</li>\n\t\t  </ul>"));
       });
     }
   }, {
@@ -1918,8 +1948,27 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
         var tagsNode = e.target.classList[2];
 
         if (tagsNode === 'tags__li__close') {
+          // on supprime le tag
+          e.target.parentNode.remove(); // on recupere tous les tags qu'il reste
+
+          var tagsElts = document.querySelectorAll('.tags__li');
+          var tagsIngredients = Array.from(tagsElts).filter(function (elt) {
+            return elt.dataset.ingredients;
+          }).map(function (elt) {
+            return elt.dataset.ingredients;
+          });
+          var tagsAppliances = Array.from(tagsElts).filter(function (elt) {
+            return elt.dataset.appliances;
+          }).map(function (elt) {
+            return elt.dataset.appliances;
+          });
+          var tagsUstensils = Array.from(tagsElts).filter(function (elt) {
+            return elt.dataset.ustensils;
+          }).map(function (elt) {
+            return elt.dataset.ustensils;
+          });
+          console.log(tagsIngredients, tagsAppliances, tagsUstensils);
           (0, _generateCard.generateCard)(filtredRecipes);
-          e.target.parentNode.remove();
         }
       });
     }
@@ -1961,7 +2010,8 @@ buttonDropdown.forEach(function (button) {
   });
 });
 var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
-generateListeners(dropDownMenuItems);
+generateListeners(dropDownMenuItems); // function to close the dropdown on click with the uparrow
+
 var close = document.querySelectorAll('.form__arrow');
 close.forEach(function (btn) {
   return btn.addEventListener('click', function () {
@@ -1976,6 +2026,11 @@ close.forEach(function (btn) {
     document.getElementById('arrowDown__ustensils').style.display = 'flex';
   });
 });
+/**
+ * @function generateListeners
+ * fonction permettant de filtrer les recettes au click
+ * @param {parameters} dropDownMenuItems - recettes filtrées
+ */
 
 function generateListeners(dropDownMenuItems) {
   dropDownMenuItems.forEach(function (item) {
@@ -2046,7 +2101,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56907" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49537" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

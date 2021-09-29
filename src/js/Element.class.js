@@ -1,5 +1,5 @@
 
-// création de mon constructor
+// class Element création de mon constructor
 class Element {
   constructor (name, type, classname) {
     this.name = name

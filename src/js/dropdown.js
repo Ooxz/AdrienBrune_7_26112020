@@ -1,5 +1,9 @@
 /* eslint-disable prefer-const */
 
+/**
+ * @function openDropdown
+ * function to open the dropdown menu
+ */
 function openDropdown () {
   const target = window.event.target
   let form
@@ -26,7 +30,11 @@ function openDropdown () {
     }
   })
 }
-
+/**
+ * @function getId
+ * function to get id to open the right menu in openDropdown
+ * @param {parameter} element
+ */
 function getId (element) {
   if (element.id === 'arrowUp__ingredients' || element.id === 'arrowDown__ingredients') {
     const id = 'menu__ingredients'

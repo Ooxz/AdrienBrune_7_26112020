@@ -18,4 +18,4 @@
 ## for parcel :
  - npm run dev
 ## for sass :
-- sass --watch src/scss/style.scss:dist/css/style.css
+- npm run sass

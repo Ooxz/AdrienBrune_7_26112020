@@ -2,9 +2,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 import { Element } from './Element.class.js'
-
+/**
+ * @function generateCard
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ */
 function generateCard (param) {
-  console.log(param)
   const section = document.querySelector('.allRecipesCards')
   section.innerHTML = ''
   for (let i = 0; i < param.length; i++) {

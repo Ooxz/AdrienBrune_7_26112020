@@ -1,7 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 import { Element } from './Element.class.js'
-
+/**
+ * @function dropdownTags
+ * function to display items in dropdown
+ * @param {parameter} param
+ */
 function dropdownTags (param) {
   // declare const to list all tags in their respective menu function
   const allIngredients = listIngredients(param)
@@ -16,7 +20,11 @@ function dropdownTags (param) {
   displayItems(allAppliances, tagsAppliancesMenu)
   displayItems(allUstensils, tagsUstensilsMenu)
 }
-// function for ingredients list
+/**
+ * @function listIngredients
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ */
 function listIngredients (param) {
   const allItems = [] // make an array for all items from ingredients
   for (let i = 0; i < param.length; i++) { // loop to set ingredients in the array
@@ -33,7 +41,11 @@ function listIngredients (param) {
   return eachIngredient // return that array of ingredients
 }
 
-// function appliance list
+/**
+ * @function listAppliances
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ */
 function listAppliances (param) {
   const allItems = []
   for (let i = 0; i < param.length; i++) {
@@ -44,7 +56,11 @@ function listAppliances (param) {
   return eachAppliances
 }
 
-// function ustensils list
+/**
+ * @function listUstensils
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ */
 function listUstensils (param) {
   const allItems = []
   for (let i = 0; i < param.length; i++) {
@@ -60,6 +76,12 @@ function listUstensils (param) {
   return eachUstensils
 }
 
+/**
+ * @function generateItems
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ * @param {HTMLElement} ul
+ */
 function generateItems (param, ul) {
   ul.innerHTML = ''
   for (let i = 0; i < param.length; i++) {
@@ -68,7 +90,12 @@ function generateItems (param, ul) {
     li.textContent = `${param[i]}`
   }
 }
-
+/**
+ * @function displayItems
+ * transforme la string : minuscules, sans accents
+ * @param {paramter} param
+ * @param {HTMLElement} ul
+ */
 function displayItems (param, ul) {
   generateItems(param, ul)
 }

@@ -22,6 +22,7 @@ buttonDropdown.forEach(button => {
 const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
 generateListeners(dropDownMenuItems)
 
+// function to close the dropdown on click with the uparrow
 const close = document.querySelectorAll('.form__arrow')
 close.forEach((btn) => btn.addEventListener('click', () => {
   document.getElementById('search__Ingredients').style.display = 'none'
@@ -34,6 +35,12 @@ close.forEach((btn) => btn.addEventListener('click', () => {
   document.getElementById('arrowDown__appliances').style.display = 'flex'
   document.getElementById('arrowDown__ustensils').style.display = 'flex'
 }))
+
+/**
+ * @function generateListeners
+ * fonction permettant de filtrer les recettes au click
+ * @param {parameters} dropDownMenuItems - recettes filtrées
+ */
 
 function generateListeners (dropDownMenuItems) {
   dropDownMenuItems.forEach(item => {
