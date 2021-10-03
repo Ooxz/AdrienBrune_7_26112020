@@ -5,12 +5,12 @@ import { Element } from './Element.class.js'
 /**
  * @function generateCard
  * transforme la string : minuscules, sans accents
- * @param {paramter} param
+ * @recipe {paramter} recipe
  */
-function generateCard (param) {
+function generateCards (recipe) {
   const section = document.querySelector('.allRecipesCards')
   section.innerHTML = ''
-  for (let i = 0; i < param.length; i++) {
+  for (let i = 0; i < recipe.length; i++) {
     const article = new Element('1', 'article', 'card').elt
     const anchor = new Element('2', 'a', 'card__anchor').elt
     const divBg = new Element('3', 'div', 'card__bg').elt
@@ -25,7 +25,7 @@ function generateCard (param) {
     const description = new Element('12', 'p', 'card__description').elt
     // -------1 article----------------------------------------
     section.appendChild(article)
-    article.id = `article-${param[i].id}`
+    article.id = `article-${recipe[i].id}`
     // -------2 anchor-----------------------------------------
     article.appendChild(anchor)
     anchor.href = '#'
@@ -37,7 +37,7 @@ function generateCard (param) {
     divRecipe.appendChild(divTitle)
     // -------6 title------------------------------------------
     divTitle.appendChild(title)
-    title.textContent = `${param[i].name}`
+    title.textContent = `${recipe[i].name}`
     // -------7 divTime----------------------------------------
     divTitle.appendChild(divTime)
     // -------8 IconTime---------------------------------------
@@ -45,15 +45,15 @@ function generateCard (param) {
     iconTime.classList.add('far', 'fa-clock')
     // -------9 Time ------------------------------------------
     divTime.appendChild(time)
-    time.textContent = `${param[i].time} min`
+    time.textContent = `${recipe[i].time} min`
     // -------10 cardContent-----------------------------------
     divRecipe.appendChild(cardContent)
     // -------11 ulIngredients---------------------------------
     cardContent.appendChild(ulIngredients)
-    displayIngredients(param[i].ingredients, ulIngredients)
+    displayIngredients(recipe[i].ingredients, ulIngredients)
     // -------12 description-----------------------------------
     cardContent.appendChild(description)
-    description.textContent = `${param[i].description}`
+    description.textContent = `${recipe[i].description}`
   }
 }
 
@@ -81,4 +81,4 @@ function displayIngredients (ingredients, ulIngredients) {
   }
 }
 
-export { generateCard }
+export { generateCards }

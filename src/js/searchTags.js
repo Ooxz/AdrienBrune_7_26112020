@@ -1,7 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
-
-import { generateCard } from './generateCard.js'
+import { dropdownTags } from './dropdownElements.js'
+import { openDropdown } from './dropdown.js'
+import { filters, filter } from './functions.js'
+import { generateCards } from './generateCards.js'
 import { generateListeners } from './index.js'
 import { recipes } from './recipes.js'
 
@@ -59,11 +61,22 @@ class GenerateSearchedTags {
         e.target.parentNode.remove()
         // on recupere tous les tags qu'il reste
         const tagsElts = document.querySelectorAll('.tags__li')
-        const tagsIngredients = Array.from(tagsElts).filter(elt => elt.dataset.ingredients).map(elt => elt.dataset.ingredients)
-        const tagsAppliances = Array.from(tagsElts).filter(elt => elt.dataset.appliances).map(elt => elt.dataset.appliances)
-        const tagsUstensils = Array.from(tagsElts).filter(elt => elt.dataset.ustensils).map(elt => elt.dataset.ustensils)
-        console.log(tagsIngredients, tagsAppliances, tagsUstensils)
-        generateCard(filtredRecipes)
+        filters.ingredients = Array.from(tagsElts).filter(elt => elt.dataset.ingredients).map(elt => elt.dataset.ingredients)
+        filters.appliances = Array.from(tagsElts).filter(elt => elt.dataset.appliances).map(elt => elt.dataset.appliances)
+        filters.ustensils = Array.from(tagsElts).filter(elt => elt.dataset.ustensils).map(elt => elt.dataset.ustensils)
+        console.log(filters)
+        const recipes = filter(filtredRecipes, filters)
+        console.log(recipes)
+        generateCards(recipes)
+        dropdownTags(recipes)
+        const buttonDropdown = document.querySelectorAll('.dropdown__icon')
+        buttonDropdown.forEach(button => {
+          button.addEventListener('click', (event) => {
+            openDropdown(event)
+          })
+        })
+        const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
+        generateListeners(dropDownMenuItems)
       }
 	  })
   }

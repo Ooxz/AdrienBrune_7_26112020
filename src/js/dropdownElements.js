@@ -1,34 +1,41 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 import { Element } from './Element.class.js'
+import { SortByFirstLetter } from './normalize.js'
+
+let allIngredients
+let allAppliances
+let allUstensils
 /**
  * @function dropdownTags
  * function to display items in dropdown
- * @param {parameter} param
+ * @recipe {parameter} recipe
  */
-function dropdownTags (param) {
+function dropdownTags (recipe) {
   // declare const to list all tags in their respective menu function
-  const allIngredients = listIngredients(param)
-  const allAppliances = listAppliances(param)
-  const allUstensils = listUstensils(param)
+  allIngredients = listIngredients(recipe)
+  allAppliances = listAppliances(recipe)
+  allUstensils = listUstensils(recipe)
   // get each menu tag elements by Id
   const tagsIngredientsMenu = document.getElementById('menu__ingredients')
   const tagsAppliancesMenu = document.getElementById('menu__appliances')
   const tagsUstensilsMenu = document.getElementById('menu__ustensils')
   // call function displayItems for each tag
+  tagsIngredientsMenu.innerHTML = ''
   displayItems(allIngredients, tagsIngredientsMenu)
+  tagsAppliancesMenu.innerHTML = ''
   displayItems(allAppliances, tagsAppliancesMenu)
+  tagsUstensilsMenu.innerHTML = ''
   displayItems(allUstensils, tagsUstensilsMenu)
 }
 /**
  * @function listIngredients
- * transforme la string : minuscules, sans accents
- * @param {paramter} param
+ * @recipe {paramter} recipe
  */
-function listIngredients (param) {
+function listIngredients (recipe) {
   const allItems = [] // make an array for all items from ingredients
-  for (let i = 0; i < param.length; i++) { // loop to set ingredients in the array
-	  const ingredientsMenu = param[i].ingredients // const to make an array of ingredients from recipes
+  for (let i = 0; i < recipe.length; i++) { // loop to set ingredients in the array
+	  const ingredientsMenu = recipe[i].ingredients // const to make an array of ingredients from recipes
     const arrayOfIngredients = [] // new array to receive ingredient from ingredient
     for (const ingredient of ingredientsMenu) { // boucle pour récupérer ingredient dans ingredients
       const mediaIngredient = ingredient.ingredient // const to get ingredient from ingredients
@@ -36,35 +43,34 @@ function listIngredients (param) {
     }
     arrayOfIngredients.forEach(ingred => allItems.push(ingred)) // for each ingredient in arrayOfIngredients push in allItems
   }
+
   // the ... operator what it does is to convert an array of parameters into an array of items
-  const eachIngredient = [...new Set(allItems)]// make a new array of each unique ingredients
-  return eachIngredient // return that array of ingredients
+  const eachElement = [...new Set(allItems)]// make a new array of each unique ingredients
+  return eachElement // return that array of ingredients
 }
 
 /**
  * @function listAppliances
- * transforme la string : minuscules, sans accents
- * @param {paramter} param
+ * @recipe {paramter} recipe
  */
-function listAppliances (param) {
+function listAppliances (recipe) {
   const allItems = []
-  for (let i = 0; i < param.length; i++) {
-    const appliancesMenu = param[i].appliance
+  for (let i = 0; i < recipe.length; i++) {
+    const appliancesMenu = recipe[i].appliance
     allItems.push(appliancesMenu)
   }
-  const eachAppliances = [...new Set(allItems)]
-  return eachAppliances
+  const eachElement = [...new Set(allItems)]
+  return eachElement
 }
 
 /**
  * @function listUstensils
- * transforme la string : minuscules, sans accents
- * @param {paramter} param
+ * @recipe {paramter} recipe
  */
-function listUstensils (param) {
+function listUstensils (recipe) {
   const allItems = []
-  for (let i = 0; i < param.length; i++) {
-    const ustensilsMenu = param[i].ustensils
+  for (let i = 0; i < recipe.length; i++) {
+    const ustensilsMenu = recipe[i].ustensils
     const arratyOfUstensils = []
     for (const ustensil of ustensilsMenu) {
       const mediaUstensils = ustensil
@@ -72,36 +78,32 @@ function listUstensils (param) {
     }
     arratyOfUstensils.forEach(usten => allItems.push(usten))
   }
-  const eachUstensils = [...new Set(allItems)]
-  return eachUstensils
+  const eachElement = [...new Set(allItems)]
+  return eachElement
 }
 
 /**
  * @function generateItems
- * transforme la string : minuscules, sans accents
- * @param {paramter} param
+ * @param {paramter} recipe
  * @param {HTMLElement} ul
  */
-function generateItems (param, ul) {
-  ul.innerHTML = ''
-  for (let i = 0; i < param.length; i++) {
+function generateItems (recipe, ul) {
+  for (let i = 0; i < recipe.length; i++) {
     const li = new Element('1', 'li', 'dropdown__menu__items').elt
     ul.appendChild(li)
-    li.textContent = `${param[i]}`
+    li.textContent = `${recipe[i]}`
+    li.setAttribute('id', 'li__id')
   }
 }
+
 /**
  * @function displayItems
- * transforme la string : minuscules, sans accents
- * @param {paramter} param
+ * @recipe {paramter} recipe
  * @param {HTMLElement} ul
  */
-function displayItems (param, ul) {
-  generateItems(param, ul)
+function displayItems (recipe, ul) {
+  SortByFirstLetter(recipe)
+  generateItems(recipe, ul)
 }
 
-export { dropdownTags }
-
-// récupérer tous les ingredients dans un seul ensemble
-// afficher l'ensemble dans la liste (select)
-// ajouter un event listener sur la liste
+export { dropdownTags, displayItems, allIngredients, allUstensils, allAppliances }

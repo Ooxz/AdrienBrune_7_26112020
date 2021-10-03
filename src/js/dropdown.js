@@ -1,5 +1,4 @@
-/* eslint-disable prefer-const */
-
+import { typeSearch } from './typingSearch.js'
 /**
  * @function openDropdown
  * function to open the dropdown menu
@@ -21,6 +20,13 @@ function openDropdown () {
   open.style.display = 'none'
   form.style.display = 'flex'
   menu.style.display = 'grid'
+  const formChildren = form.children
+  const typedText = formChildren[1]
+  typedText.focus()
+  typeSearch()
+  typedText.addEventListener('input', (event) => {
+    typeSearch(event)
+  })
   // Close dropdown menu with escape
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
