@@ -2,6 +2,7 @@
 /* eslint-disable no-tabs */
 import { Element } from './Element.class.js'
 import { SortByFirstLetter } from './normalize.js'
+import { filters } from './functions.js'
 
 let allIngredients
 let allAppliances
@@ -39,7 +40,9 @@ function listIngredients (recipe) {
     const arrayOfIngredients = [] // new array to receive ingredient from ingredient
     for (const ingredient of ingredientsMenu) { // boucle pour récupérer ingredient dans ingredients
       const mediaIngredient = ingredient.ingredient // const to get ingredient from ingredients
-      arrayOfIngredients.push(mediaIngredient) // push the ingredient from ingredients in the arrayOfIngredients
+      if (!filters.ingredients.includes(mediaIngredient)) {
+        arrayOfIngredients.push(mediaIngredient) // push the ingredient from ingredients in the arrayOfIngredients
+      }
     }
     arrayOfIngredients.forEach(ingred => allItems.push(ingred)) // for each ingredient in arrayOfIngredients push in allItems
   }
@@ -57,7 +60,9 @@ function listAppliances (recipe) {
   const allItems = []
   for (let i = 0; i < recipe.length; i++) {
     const appliancesMenu = recipe[i].appliance
-    allItems.push(appliancesMenu)
+    if (!filters.appliances.includes(appliancesMenu)) {
+      allItems.push(appliancesMenu)// push the ingredient from ingredients in the arrayOfIngredients
+    }
   }
   const eachElement = [...new Set(allItems)]
   return eachElement
@@ -74,7 +79,9 @@ function listUstensils (recipe) {
     const arratyOfUstensils = []
     for (const ustensil of ustensilsMenu) {
       const mediaUstensils = ustensil
-      arratyOfUstensils.push(mediaUstensils)
+      if (!filters.ustensils.includes(mediaUstensils)) {
+        arratyOfUstensils.push(mediaUstensils)// push the ingredient from ingredients in the arrayOfIngredients
+      }
     }
     arratyOfUstensils.forEach(usten => allItems.push(usten))
   }

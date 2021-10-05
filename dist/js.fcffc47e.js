@@ -304,6 +304,96 @@ function normalize(str) {
   str = str.replace(/[ ']/g, '_').replace(/œ/g, 'oe').replace(/æ/g, 'ae');
   return str;
 }
+},{}],"../js/functions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.filter = filter;
+exports.filters = void 0;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var filters = {
+  mainSearch: '',
+  ingredients: [],
+  appliances: '',
+  ustensils: []
+};
+exports.filters = filters;
+
+function filter(recipes, filters) {
+  var filtredRecipes = _toConsumableArray(recipes);
+
+  if (filters.ingredients.length > 0) {
+    filtredRecipes = _toConsumableArray(filterIngredients(recipes, filters.ingredients));
+  }
+
+  if (filters.appliances.length > 0) {
+    filtredRecipes = _toConsumableArray(filterAppliance(filtredRecipes, filters.appliances[0]));
+  }
+
+  if (filters.ustensils.length > 0) {
+    filtredRecipes = _toConsumableArray(filterUstensils(filtredRecipes, filters.ustensils));
+  }
+
+  return filtredRecipes;
+}
+
+function filterIngredients(recipes, ingredients) {
+  var filtredRecipes = [];
+  recipes.forEach(function (recipe) {
+    ingredients.forEach(function (ingredient) {
+      var index = recipe.ingredients.findIndex(function (elt) {
+        return elt.ingredient.toLowerCase() === ingredient.toLowerCase();
+      });
+
+      if (index > -1) {
+        filtredRecipes.push(recipe);
+      }
+    });
+  });
+  return filtredRecipes;
+}
+
+function filterAppliance(recipes, appliance) {
+  var filtredRecipes = [];
+  recipes.forEach(function (recipe) {
+    var isAppliance = recipe.appliance.toLowerCase() === appliance.toLowerCase();
+
+    if (isAppliance) {
+      filtredRecipes.push(recipe);
+    }
+  });
+  return filtredRecipes;
+}
+
+function filterUstensils(recipes, ustensils) {
+  var filtredRecipes = [];
+  recipes.forEach(function (recipe) {
+    ustensils.forEach(function (ustensil) {
+      var index = recipe.ustensils.findIndex(function (elt) {
+        return elt.toLowerCase() === ustensil.toLowerCase();
+      });
+
+      if (index > -1) {
+        filtredRecipes.push(recipe);
+      }
+    });
+  });
+  return filtredRecipes;
+}
 },{}],"../js/dropdownElements.js":[function(require,module,exports) {
 "use strict";
 
@@ -317,6 +407,8 @@ exports.allAppliances = exports.allUstensils = exports.allIngredients = void 0;
 var _ElementClass = require("./Element.class.js");
 
 var _normalize = require("./normalize.js");
+
+var _functions = require("./functions.js");
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -386,7 +478,9 @@ function listIngredients(recipe) {
         // boucle pour récupérer ingredient dans ingredients
         var mediaIngredient = ingredient.ingredient; // const to get ingredient from ingredients
 
-        arrayOfIngredients.push(mediaIngredient); // push the ingredient from ingredients in the arrayOfIngredients
+        if (!_functions.filters.ingredients.includes(mediaIngredient)) {
+          arrayOfIngredients.push(mediaIngredient); // push the ingredient from ingredients in the arrayOfIngredients
+        }
       }
     } catch (err) {
       _iterator.e(err);
@@ -416,7 +510,10 @@ function listAppliances(recipe) {
 
   for (var i = 0; i < recipe.length; i++) {
     var appliancesMenu = recipe[i].appliance;
-    allItems.push(appliancesMenu);
+
+    if (!_functions.filters.appliances.includes(appliancesMenu)) {
+      allItems.push(appliancesMenu); // push the ingredient from ingredients in the arrayOfIngredients
+    }
   }
 
   var eachElement = _toConsumableArray(new Set(allItems));
@@ -443,7 +540,10 @@ function listUstensils(recipe) {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
         var ustensil = _step2.value;
         var mediaUstensils = ustensil;
-        arratyOfUstensils.push(mediaUstensils);
+
+        if (!_functions.filters.ustensils.includes(mediaUstensils)) {
+          arratyOfUstensils.push(mediaUstensils); // push the ingredient from ingredients in the arrayOfIngredients
+        }
       }
     } catch (err) {
       _iterator2.e(err);
@@ -486,7 +586,7 @@ function displayItems(recipe, ul) {
   (0, _normalize.SortByFirstLetter)(recipe);
   generateItems(recipe, ul);
 }
-},{"./Element.class.js":"../js/Element.class.js","./normalize.js":"../js/normalize.js"}],"../js/typingSearch.js":[function(require,module,exports) {
+},{"./Element.class.js":"../js/Element.class.js","./normalize.js":"../js/normalize.js","./functions.js":"../js/functions.js"}],"../js/typingSearch.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1998,96 +2098,6 @@ var recipes = [{
   ustensils: ['rouleau à patisserie', 'fouet']
 }];
 exports.recipes = recipes;
-},{}],"../js/functions.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.filter = filter;
-exports.filters = void 0;
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var filters = {
-  mainSearch: '',
-  ingredients: [],
-  appliances: '',
-  ustensils: []
-};
-exports.filters = filters;
-
-function filter(recipes, filters) {
-  var filtredRecipes = _toConsumableArray(recipes);
-
-  if (filters.ingredients.length > 0) {
-    filtredRecipes = _toConsumableArray(filterIngredients(recipes, filters.ingredients));
-  }
-
-  if (filters.appliances.length > 0) {
-    filtredRecipes = _toConsumableArray(filterAppliance(filtredRecipes, filters.appliances[0]));
-  }
-
-  if (filters.ustensils.length > 0) {
-    filtredRecipes = _toConsumableArray(filterUstensils(filtredRecipes, filters.ustensils));
-  }
-
-  return filtredRecipes;
-}
-
-function filterIngredients(recipes, ingredients) {
-  var filtredRecipes = [];
-  recipes.forEach(function (recipe) {
-    ingredients.forEach(function (ingredient) {
-      var index = recipe.ingredients.findIndex(function (elt) {
-        return elt.ingredient.toLowerCase() === ingredient.toLowerCase();
-      });
-
-      if (index > -1) {
-        filtredRecipes.push(recipe);
-      }
-    });
-  });
-  return filtredRecipes;
-}
-
-function filterAppliance(recipes, appliance) {
-  var filtredRecipes = [];
-  recipes.forEach(function (recipe) {
-    var isAppliance = recipe.appliance.toLowerCase() === appliance.toLowerCase();
-
-    if (isAppliance) {
-      filtredRecipes.push(recipe);
-    }
-  });
-  return filtredRecipes;
-}
-
-function filterUstensils(recipes, ustensils) {
-  var filtredRecipes = [];
-  recipes.forEach(function (recipe) {
-    ustensils.forEach(function (ustensil) {
-      var index = recipe.ustensils.findIndex(function (elt) {
-        return elt.toLowerCase() === ustensil.toLowerCase();
-      });
-
-      if (index > -1) {
-        filtredRecipes.push(recipe);
-      }
-    });
-  });
-  return filtredRecipes;
-}
 },{}],"../js/searchTags.js":[function(require,module,exports) {
 "use strict";
 
@@ -2203,7 +2213,6 @@ exports.GenerateSearchedTags = GenerateSearchedTags;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteClickedTag = deleteClickedTag;
 exports.generateListeners = generateListeners;
 
 var _generateCards = require("./generateCards.js");
@@ -2212,64 +2221,23 @@ var _dropdown = require("./dropdown.js");
 
 var _dropdownElements = require("./dropdownElements.js");
 
-var _recipes2 = require("./recipes.js");
+var _recipes = require("./recipes.js");
 
 var _searchTags = require("./searchTags.js");
 
-var _functions = require("./functions.js");
-
-var _normalize = require("./normalize.js");
-
 /* eslint-disable no-new */
-var filtredRecipes = _recipes2.recipes; // display cards with recipes
+var filtredRecipes = _recipes.recipes; // display cards with recipes
 
 (0, _generateCards.generateCards)(filtredRecipes);
 (0, _dropdownElements.dropdownTags)(filtredRecipes);
-new _searchTags.GenerateSearchedTags(); // deleteClickedTag(filtredRecipes)
-// Ouverture et fermeture des dropdowns ___________________________
+new _searchTags.GenerateSearchedTags(); // Ouverture et fermeture des dropdowns ___________________________
 
 var buttonDropdown = document.querySelectorAll('.dropdown__icon');
 buttonDropdown.forEach(function (button) {
   button.addEventListener('click', function (event) {
     (0, _dropdown.openDropdown)(event);
-    (0, _normalize.normalize)();
-    deleteClickedTag(filtredRecipes);
   });
 });
-
-function deleteClickedTag(recipe, items) {
-  document.body.addEventListener('click', function (e) {
-    console.log(e.target.nodeName, e.target.id);
-
-    if (e.target.nodeName === 'LI') {
-      var tagsElts = document.querySelectorAll('.tags__li');
-      _functions.filters.ingredients = Array.from(tagsElts).filter(function (elt) {
-        return elt.dataset.ingredients;
-      }).map(function (elt) {
-        return elt.dataset.ingredients;
-      });
-      _functions.filters.appliances = Array.from(tagsElts).filter(function (elt) {
-        return elt.dataset.appliances;
-      }).map(function (elt) {
-        return elt.dataset.appliances;
-      });
-      _functions.filters.ustensils = Array.from(tagsElts).filter(function (elt) {
-        return elt.dataset.ustensils;
-      }).map(function (elt) {
-        return elt.dataset.ustensils;
-      });
-      console.log(_functions.filters);
-
-      var _recipes = (0, _functions.filter)(filtredRecipes, _functions.filters);
-
-      console.log(_recipes);
-      (0, _generateCards.generateCards)(_recipes);
-      (0, _dropdownElements.dropdownTags)(_recipes);
-      document.getElementById(e.target.id).outerHTML = '';
-    }
-  });
-}
-
 var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
 generateListeners(dropDownMenuItems); // function to close the dropdown on click with the uparrow
 
@@ -2331,11 +2299,10 @@ function generateListeners(dropDownMenuItems) {
       (0, _dropdownElements.dropdownTags)(filtredRecipes);
       var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
       generateListeners(dropDownMenuItems);
-      deleteClickedTag();
     });
   });
 }
-},{"./generateCards.js":"../js/generateCards.js","./dropdown.js":"../js/dropdown.js","./dropdownElements.js":"../js/dropdownElements.js","./recipes.js":"../js/recipes.js","./searchTags.js":"../js/searchTags.js","./functions.js":"../js/functions.js","./normalize.js":"../js/normalize.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./generateCards.js":"../js/generateCards.js","./dropdown.js":"../js/dropdown.js","./dropdownElements.js":"../js/dropdownElements.js","./recipes.js":"../js/recipes.js","./searchTags.js":"../js/searchTags.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2363,7 +2330,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62529" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49522" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
