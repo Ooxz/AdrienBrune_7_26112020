@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { typeSearch } from './typingSearch.js'
 /**
  * @function openDropdown

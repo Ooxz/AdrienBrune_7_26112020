@@ -12,11 +12,11 @@ let allUstensils
  * function to display items in dropdown
  * @recipe {parameter} recipe
  */
-function dropdownTags (recipe) {
+function dropdownTags (recipes) {
   // declare const to list all tags in their respective menu function
-  allIngredients = listIngredients(recipe)
-  allAppliances = listAppliances(recipe)
-  allUstensils = listUstensils(recipe)
+  allIngredients = listIngredients(recipes)
+  allAppliances = listAppliances(recipes)
+  allUstensils = listUstensils(recipes)
   // get each menu tag elements by Id
   const tagsIngredientsMenu = document.getElementById('menu__ingredients')
   const tagsAppliancesMenu = document.getElementById('menu__appliances')
@@ -33,10 +33,10 @@ function dropdownTags (recipe) {
  * @function listIngredients
  * @recipe {paramter} recipe
  */
-function listIngredients (recipe) {
+function listIngredients (recipes) {
   const allItems = [] // make an array for all items from ingredients
-  for (let i = 0; i < recipe.length; i++) { // loop to set ingredients in the array
-	  const ingredientsMenu = recipe[i].ingredients // const to make an array of ingredients from recipes
+  for (let i = 0; i < recipes.length; i++) { // loop to set ingredients in the array
+	  const ingredientsMenu = recipes[i].ingredients // const to make an array of ingredients from recipes
     const arrayOfIngredients = [] // new array to receive ingredient from ingredient
     for (const ingredient of ingredientsMenu) { // boucle pour récupérer ingredient dans ingredients
       const mediaIngredient = ingredient.ingredient // const to get ingredient from ingredients
@@ -56,10 +56,10 @@ function listIngredients (recipe) {
  * @function listAppliances
  * @recipe {paramter} recipe
  */
-function listAppliances (recipe) {
+function listAppliances (recipes) {
   const allItems = []
-  for (let i = 0; i < recipe.length; i++) {
-    const appliancesMenu = recipe[i].appliance
+  for (let i = 0; i < recipes.length; i++) {
+    const appliancesMenu = recipes[i].appliance
     if (!filters.appliances.includes(appliancesMenu)) {
       allItems.push(appliancesMenu)// push the ingredient from ingredients in the arrayOfIngredients
     }
@@ -72,10 +72,10 @@ function listAppliances (recipe) {
  * @function listUstensils
  * @recipe {paramter} recipe
  */
-function listUstensils (recipe) {
+function listUstensils (recipes) {
   const allItems = []
-  for (let i = 0; i < recipe.length; i++) {
-    const ustensilsMenu = recipe[i].ustensils
+  for (let i = 0; i < recipes.length; i++) {
+    const ustensilsMenu = recipes[i].ustensils
     const arratyOfUstensils = []
     for (const ustensil of ustensilsMenu) {
       const mediaUstensils = ustensil
@@ -94,11 +94,11 @@ function listUstensils (recipe) {
  * @param {paramter} recipe
  * @param {HTMLElement} ul
  */
-function generateItems (recipe, ul) {
-  for (let i = 0; i < recipe.length; i++) {
+function generateItems (recipes, ul) {
+  for (let i = 0; i < recipes.length; i++) {
     const li = new Element('1', 'li', 'dropdown__menu__items').elt
     ul.appendChild(li)
-    li.textContent = `${recipe[i]}`
+    li.textContent = `${recipes[i]}`
     li.setAttribute('id', 'li__id')
   }
 }
@@ -108,9 +108,9 @@ function generateItems (recipe, ul) {
  * @recipe {paramter} recipe
  * @param {HTMLElement} ul
  */
-function displayItems (recipe, ul) {
-  SortByFirstLetter(recipe)
-  generateItems(recipe, ul)
+function displayItems (recipes, ul) {
+  SortByFirstLetter(recipes)
+  generateItems(recipes, ul)
 }
 
 export { dropdownTags, displayItems, allIngredients, allUstensils, allAppliances }

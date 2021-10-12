@@ -4,7 +4,7 @@ import { dropdownTags } from './dropdownElements.js'
 import { openDropdown } from './dropdown.js'
 import { filters, filter } from './functions.js'
 import { generateCards } from './generateCards.js'
-import { generateListeners } from './index.js'
+import { generateListeners } from './generatelisteners.js'
 import { recipes } from './recipes.js'
 
 const filtredRecipes = recipes

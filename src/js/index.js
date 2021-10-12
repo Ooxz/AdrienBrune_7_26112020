@@ -4,8 +4,9 @@ import { openDropdown } from './dropdown.js'
 import { dropdownTags } from './dropdownElements.js'
 import { recipes } from './recipes.js'
 import { GenerateSearchedTags } from './searchTags.js'
+import { generateListeners } from './generateListeners.js'
 
-let filtredRecipes = recipes
+const filtredRecipes = recipes
 
 // display cards with recipes
 generateCards(filtredRecipes)
@@ -36,45 +37,3 @@ close.forEach((btn) => btn.addEventListener('click', () => {
   document.getElementById('arrowDown__appliances').style.display = 'flex'
   document.getElementById('arrowDown__ustensils').style.display = 'flex'
 }))
-
-/**
- * @function generateListeners
- * fonction permettant de filtrer les recettes au click
- * @param {parameters} dropDownMenuItems - recettes filtrées
- */
-
-function generateListeners (dropDownMenuItems) {
-  dropDownMenuItems.forEach(item => {
-    item.addEventListener('click', (event) => {
-      const filter = []
-      if (event.target.parentNode.id === 'menu__ingredients') {
-        filtredRecipes.forEach(recipe => {
-          const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === event.target.textContent.toLowerCase())
-          if (index > -1) {
-            filter.push(recipe)
-          }
-        })
-      } else if (event.target.parentNode.id === 'menu__appliances') {
-        filtredRecipes.forEach(recipe => {
-          if (recipe.appliance.toLowerCase() === event.target.textContent.toLowerCase()) {
-            filter.push(recipe)
-          }
-        })
-      } else if (event.target.parentNode.id === 'menu__ustensils') {
-        filtredRecipes.forEach(recipe => {
-          const index = recipe.ustensils.findIndex(elt => elt === event.target.textContent)
-          if (index > -1) {
-            filter.push(recipe)
-          }
-        })
-      }
-      filtredRecipes = [...filter]
-      generateCards(filtredRecipes)
-      dropdownTags(filtredRecipes)
-      const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
-      generateListeners(dropDownMenuItems)
-    })
-  })
-}
-
-export { generateListeners }
