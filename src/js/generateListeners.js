@@ -1,10 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
-import { recipes } from './recipes.js'
-import { filters } from './functions.js'
+// import { recipes } from './recipes.js'
+import { filters, filter } from './functions.js'
 import { generateCards } from './generateCards.js'
 import { dropdownTags } from './dropdownElements.js'
-let filtredRecipes = recipes
+// const filtredRecipes = recipes
 
 /**
  * @function generateListeners
@@ -12,39 +12,21 @@ let filtredRecipes = recipes
  * @param {parameters} dropDownMenuItems - recettes filtrées
  */
 
-function generateListeners (dropDownMenuItems) {
+function generateListeners (dropDownMenuItems, filtredRecipes) {
   dropDownMenuItems.forEach(item => {
 	  item.addEventListener('click', (event) => {
-      const filter = []
       if (event.target.parentNode.id === 'menu__ingredients') {
-		  filtredRecipes.forEach(recipe => {
-          const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === event.target.textContent.toLowerCase())
-          filters.ingredients.push(event.target.textContent)
-          if (index > -1) {
-			  filter.push(recipe)
-          }
-		  })
+        filters.ingredients.push(event.target.textContent)
       } else if (event.target.parentNode.id === 'menu__appliances') {
-		  filtredRecipes.forEach(recipe => {
-          if (recipe.appliance.toLowerCase() === event.target.textContent.toLowerCase()) {
-			  filters.appliances = event.target.textContent
-			  filter.push(recipe)
-          }
-		  })
+        filters.appliances = event.target.textContent
       } else if (event.target.parentNode.id === 'menu__ustensils') {
-		  filtredRecipes.forEach(recipe => {
-          const index = recipe.ustensils.findIndex(elt => elt === event.target.textContent)
-          if (index > -1) {
-			  filters.ustensils.push(event.target.textContent)
-			  filter.push(recipe)
-          }
-		  })
+        filters.ustensils.push(event.target.textContent)
       }
-      filtredRecipes = [...filter]
-      generateCards(filtredRecipes)
-      dropdownTags(filtredRecipes)
+      const newRecipes = filter(filtredRecipes, filters)
+      generateCards(newRecipes)
+      dropdownTags(newRecipes)
       const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
-      generateListeners(dropDownMenuItems)
+      generateListeners(dropDownMenuItems, newRecipes)
 	  })
   })
 }

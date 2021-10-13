@@ -8,7 +8,7 @@ export const filters = {
 export function filter (recipes, filters) {
   let filtredRecipes = [...recipes]
   if (filters.ingredients.length > 0) {
-    filtredRecipes = [...filterIngredients(recipes, filters.ingredients)]
+    filtredRecipes = [...filterIngredients(filtredRecipes, filters.ingredients)]
   }
   if (filters.appliances.length > 0) {
     filtredRecipes = [...filterAppliance(filtredRecipes, filters.appliances[0])]
@@ -19,16 +19,18 @@ export function filter (recipes, filters) {
   return filtredRecipes
 }
 function filterIngredients (recipes, ingredients) {
-  const filtredRecipes = []
-  recipes.forEach(recipe => {
-    ingredients.forEach(ingredient => {
+  let filtredRecipes = [...recipes]
+  ingredients.forEach(ingredient => {
+    const newFilter = []
+    filtredRecipes.forEach(recipe => {
       const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === ingredient.toLowerCase())
       if (index > -1) {
-        filtredRecipes.push(recipe)
+        newFilter.push(recipe)
       }
     })
+    filtredRecipes = [...newFilter]
   })
-  return filtredRecipes
+  return [...new Set(filtredRecipes)]
 }
 
 function filterAppliance (recipes, appliance) {
@@ -43,14 +45,16 @@ function filterAppliance (recipes, appliance) {
 }
 
 function filterUstensils (recipes, ustensils) {
-  const filtredRecipes = []
-  recipes.forEach(recipe => {
-    ustensils.forEach(ustensil => {
+  let filtredRecipes = [...recipes]
+  ustensils.forEach(ustensil => {
+    const newFilter = []
+    filtredRecipes.forEach(recipe => {
       const index = recipe.ustensils.findIndex(elt => elt.toLowerCase() === ustensil.toLowerCase())
       if (index > -1) {
-        filtredRecipes.push(recipe)
+        newFilter.push(recipe)
       }
     })
+    filtredRecipes = [...newFilter]
   })
-  return filtredRecipes
+  return [...new Set(filtredRecipes)]
 }

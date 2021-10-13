@@ -5,16 +5,13 @@ import { openDropdown } from './dropdown.js'
 import { filters, filter } from './functions.js'
 import { generateCards } from './generateCards.js'
 import { generateListeners } from './generatelisteners.js'
-import { recipes } from './recipes.js'
-
-const filtredRecipes = recipes
 
 class GenerateSearchedTags {
-  constructor () {
+  constructor (filtredRecipes) {
 	  this.tagsIngredients()
 	  this.tagsAppliances()
 	  this.tagsUstensils()
-	  this.deleteTags()
+	  this.deleteTags(filtredRecipes)
   }
 
   tagsIngredients () {
@@ -53,7 +50,7 @@ class GenerateSearchedTags {
 	  })
   }
 
-  deleteTags () {
+  deleteTags (filtredRecipes) {
 	  document.addEventListener('click', e => {
       const tagsNode = e.target.classList[2]
       if (tagsNode === 'tags__li__close') {
@@ -76,7 +73,7 @@ class GenerateSearchedTags {
           })
         })
         const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
-        generateListeners(dropDownMenuItems)
+        generateListeners(dropDownMenuItems, recipes)
       }
 	  })
   }

@@ -337,7 +337,7 @@ function filter(recipes, filters) {
   var filtredRecipes = _toConsumableArray(recipes);
 
   if (filters.ingredients.length > 0) {
-    filtredRecipes = _toConsumableArray(filterIngredients(recipes, filters.ingredients));
+    filtredRecipes = _toConsumableArray(filterIngredients(filtredRecipes, filters.ingredients));
   }
 
   if (filters.appliances.length > 0) {
@@ -352,19 +352,22 @@ function filter(recipes, filters) {
 }
 
 function filterIngredients(recipes, ingredients) {
-  var filtredRecipes = [];
-  recipes.forEach(function (recipe) {
-    ingredients.forEach(function (ingredient) {
+  var filtredRecipes = _toConsumableArray(recipes);
+
+  ingredients.forEach(function (ingredient) {
+    var newFilter = [];
+    filtredRecipes.forEach(function (recipe) {
       var index = recipe.ingredients.findIndex(function (elt) {
         return elt.ingredient.toLowerCase() === ingredient.toLowerCase();
       });
 
       if (index > -1) {
-        filtredRecipes.push(recipe);
+        newFilter.push(recipe);
       }
     });
+    filtredRecipes = [].concat(newFilter);
   });
-  return filtredRecipes;
+  return _toConsumableArray(new Set(filtredRecipes));
 }
 
 function filterAppliance(recipes, appliance) {
@@ -380,19 +383,22 @@ function filterAppliance(recipes, appliance) {
 }
 
 function filterUstensils(recipes, ustensils) {
-  var filtredRecipes = [];
-  recipes.forEach(function (recipe) {
-    ustensils.forEach(function (ustensil) {
+  var filtredRecipes = _toConsumableArray(recipes);
+
+  ustensils.forEach(function (ustensil) {
+    var newFilter = [];
+    filtredRecipes.forEach(function (recipe) {
       var index = recipe.ustensils.findIndex(function (elt) {
         return elt.toLowerCase() === ustensil.toLowerCase();
       });
 
       if (index > -1) {
-        filtredRecipes.push(recipe);
+        newFilter.push(recipe);
       }
     });
+    filtredRecipes = [].concat(newFilter);
   });
-  return filtredRecipes;
+  return _toConsumableArray(new Set(filtredRecipes));
 }
 },{}],"../js/dropdownElements.js":[function(require,module,exports) {
 "use strict";
@@ -2108,8 +2114,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.generateListeners = generateListeners;
 
-var _recipes = require("./recipes.js");
-
 var _functions = require("./functions.js");
 
 var _generateCards = require("./generateCards.js");
@@ -2119,60 +2123,34 @@ var _dropdownElements = require("./dropdownElements.js");
 /* eslint-disable no-mixed-spaces-and-tabs */
 
 /* eslint-disable no-tabs */
-var filtredRecipes = _recipes.recipes;
+// import { recipes } from './recipes.js'
+// const filtredRecipes = recipes
+
 /**
  * @function generateListeners
  * fonction permettant de filtrer les recettes au click
  * @param {parameters} dropDownMenuItems - recettes filtrées
  */
-
-function generateListeners(dropDownMenuItems) {
+function generateListeners(dropDownMenuItems, filtredRecipes) {
   dropDownMenuItems.forEach(function (item) {
     item.addEventListener('click', function (event) {
-      var filter = [];
-
       if (event.target.parentNode.id === 'menu__ingredients') {
-        filtredRecipes.forEach(function (recipe) {
-          var index = recipe.ingredients.findIndex(function (elt) {
-            return elt.ingredient.toLowerCase() === event.target.textContent.toLowerCase();
-          });
-
-          _functions.filters.ingredients.push(event.target.textContent);
-
-          if (index > -1) {
-            filter.push(recipe);
-          }
-        });
+        _functions.filters.ingredients.push(event.target.textContent);
       } else if (event.target.parentNode.id === 'menu__appliances') {
-        filtredRecipes.forEach(function (recipe) {
-          if (recipe.appliance.toLowerCase() === event.target.textContent.toLowerCase()) {
-            _functions.filters.appliances = event.target.textContent;
-            filter.push(recipe);
-          }
-        });
+        _functions.filters.appliances = event.target.textContent;
       } else if (event.target.parentNode.id === 'menu__ustensils') {
-        filtredRecipes.forEach(function (recipe) {
-          var index = recipe.ustensils.findIndex(function (elt) {
-            return elt === event.target.textContent;
-          });
-
-          if (index > -1) {
-            _functions.filters.ustensils.push(event.target.textContent);
-
-            filter.push(recipe);
-          }
-        });
+        _functions.filters.ustensils.push(event.target.textContent);
       }
 
-      filtredRecipes = [].concat(filter);
-      (0, _generateCards.generateCards)(filtredRecipes);
-      (0, _dropdownElements.dropdownTags)(filtredRecipes);
+      var newRecipes = (0, _functions.filter)(filtredRecipes, _functions.filters);
+      (0, _generateCards.generateCards)(newRecipes);
+      (0, _dropdownElements.dropdownTags)(newRecipes);
       var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
-      generateListeners(dropDownMenuItems);
+      generateListeners(dropDownMenuItems, newRecipes);
     });
   });
 }
-},{"./recipes.js":"../js/recipes.js","./functions.js":"../js/functions.js","./generateCards.js":"../js/generateCards.js","./dropdownElements.js":"../js/dropdownElements.js"}],"../js/searchTags.js":[function(require,module,exports) {
+},{"./functions.js":"../js/functions.js","./generateCards.js":"../js/generateCards.js","./dropdownElements.js":"../js/dropdownElements.js"}],"../js/searchTags.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2190,24 +2168,20 @@ var _generateCards = require("./generateCards.js");
 
 var _generatelisteners = require("./generatelisteners.js");
 
-var _recipes2 = require("./recipes.js");
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var filtredRecipes = _recipes2.recipes;
-
 var GenerateSearchedTags = /*#__PURE__*/function () {
-  function GenerateSearchedTags() {
+  function GenerateSearchedTags(filtredRecipes) {
     _classCallCheck(this, GenerateSearchedTags);
 
     this.tagsIngredients();
     this.tagsAppliances();
     this.tagsUstensils();
-    this.deleteTags();
+    this.deleteTags(filtredRecipes);
   }
 
   _createClass(GenerateSearchedTags, [{
@@ -2233,7 +2207,7 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
     }
   }, {
     key: "deleteTags",
-    value: function deleteTags() {
+    value: function deleteTags(filtredRecipes) {
       document.addEventListener('click', function (e) {
         var tagsNode = e.target.classList[2];
 
@@ -2258,12 +2232,10 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
             return elt.dataset.ustensils;
           });
           console.log(_functions.filters);
-
-          var _recipes = (0, _functions.filter)(filtredRecipes, _functions.filters);
-
-          console.log(_recipes);
-          (0, _generateCards.generateCards)(_recipes);
-          (0, _dropdownElements.dropdownTags)(_recipes);
+          var recipes = (0, _functions.filter)(filtredRecipes, _functions.filters);
+          console.log(recipes);
+          (0, _generateCards.generateCards)(recipes);
+          (0, _dropdownElements.dropdownTags)(recipes);
           var buttonDropdown = document.querySelectorAll('.dropdown__icon');
           buttonDropdown.forEach(function (button) {
             button.addEventListener('click', function (event) {
@@ -2271,7 +2243,7 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
             });
           });
           var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
-          (0, _generatelisteners.generateListeners)(dropDownMenuItems);
+          (0, _generatelisteners.generateListeners)(dropDownMenuItems, recipes);
         }
       });
     }
@@ -2281,15 +2253,13 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
 }();
 
 exports.GenerateSearchedTags = GenerateSearchedTags;
-},{"./dropdownElements.js":"../js/dropdownElements.js","./dropdown.js":"../js/dropdown.js","./functions.js":"../js/functions.js","./generateCards.js":"../js/generateCards.js","./generatelisteners.js":"../js/generatelisteners.js","./recipes.js":"../js/recipes.js"}],"../js/generateListeners.js":[function(require,module,exports) {
+},{"./dropdownElements.js":"../js/dropdownElements.js","./dropdown.js":"../js/dropdown.js","./functions.js":"../js/functions.js","./generateCards.js":"../js/generateCards.js","./generatelisteners.js":"../js/generatelisteners.js"}],"../js/generateListeners.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.generateListeners = generateListeners;
-
-var _recipes = require("./recipes.js");
 
 var _functions = require("./functions.js");
 
@@ -2300,60 +2270,34 @@ var _dropdownElements = require("./dropdownElements.js");
 /* eslint-disable no-mixed-spaces-and-tabs */
 
 /* eslint-disable no-tabs */
-var filtredRecipes = _recipes.recipes;
+// import { recipes } from './recipes.js'
+// const filtredRecipes = recipes
+
 /**
  * @function generateListeners
  * fonction permettant de filtrer les recettes au click
  * @param {parameters} dropDownMenuItems - recettes filtrées
  */
-
-function generateListeners(dropDownMenuItems) {
+function generateListeners(dropDownMenuItems, filtredRecipes) {
   dropDownMenuItems.forEach(function (item) {
     item.addEventListener('click', function (event) {
-      var filter = [];
-
       if (event.target.parentNode.id === 'menu__ingredients') {
-        filtredRecipes.forEach(function (recipe) {
-          var index = recipe.ingredients.findIndex(function (elt) {
-            return elt.ingredient.toLowerCase() === event.target.textContent.toLowerCase();
-          });
-
-          _functions.filters.ingredients.push(event.target.textContent);
-
-          if (index > -1) {
-            filter.push(recipe);
-          }
-        });
+        _functions.filters.ingredients.push(event.target.textContent);
       } else if (event.target.parentNode.id === 'menu__appliances') {
-        filtredRecipes.forEach(function (recipe) {
-          if (recipe.appliance.toLowerCase() === event.target.textContent.toLowerCase()) {
-            _functions.filters.appliances = event.target.textContent;
-            filter.push(recipe);
-          }
-        });
+        _functions.filters.appliances = event.target.textContent;
       } else if (event.target.parentNode.id === 'menu__ustensils') {
-        filtredRecipes.forEach(function (recipe) {
-          var index = recipe.ustensils.findIndex(function (elt) {
-            return elt === event.target.textContent;
-          });
-
-          if (index > -1) {
-            _functions.filters.ustensils.push(event.target.textContent);
-
-            filter.push(recipe);
-          }
-        });
+        _functions.filters.ustensils.push(event.target.textContent);
       }
 
-      filtredRecipes = [].concat(filter);
-      (0, _generateCards.generateCards)(filtredRecipes);
-      (0, _dropdownElements.dropdownTags)(filtredRecipes);
+      var newRecipes = (0, _functions.filter)(filtredRecipes, _functions.filters);
+      (0, _generateCards.generateCards)(newRecipes);
+      (0, _dropdownElements.dropdownTags)(newRecipes);
       var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
-      generateListeners(dropDownMenuItems);
+      generateListeners(dropDownMenuItems, newRecipes);
     });
   });
 }
-},{"./recipes.js":"../js/recipes.js","./functions.js":"../js/functions.js","./generateCards.js":"../js/generateCards.js","./dropdownElements.js":"../js/dropdownElements.js"}],"../js/index.js":[function(require,module,exports) {
+},{"./functions.js":"../js/functions.js","./generateCards.js":"../js/generateCards.js","./dropdownElements.js":"../js/dropdownElements.js"}],"../js/index.js":[function(require,module,exports) {
 "use strict";
 
 var _generateCards = require("./generateCards.js");
@@ -2373,7 +2317,7 @@ var filtredRecipes = _recipes.recipes; // display cards with recipes
 
 (0, _generateCards.generateCards)(filtredRecipes);
 (0, _dropdownElements.dropdownTags)(filtredRecipes);
-new _searchTags.GenerateSearchedTags(); // Ouverture et fermeture des dropdowns ___________________________
+new _searchTags.GenerateSearchedTags(filtredRecipes); // Ouverture et fermeture des dropdowns ___________________________
 
 var buttonDropdown = document.querySelectorAll('.dropdown__icon');
 buttonDropdown.forEach(function (button) {
@@ -2382,7 +2326,7 @@ buttonDropdown.forEach(function (button) {
   });
 });
 var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
-(0, _generateListeners.generateListeners)(dropDownMenuItems); // function to close the dropdown on click with the uparrow
+(0, _generateListeners.generateListeners)(dropDownMenuItems, filtredRecipes); // function to close the dropdown on click with the uparrow
 
 var close = document.querySelectorAll('.form__arrow');
 close.forEach(function (btn) {
@@ -2426,7 +2370,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64188" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64936" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

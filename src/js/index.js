@@ -11,7 +11,7 @@ const filtredRecipes = recipes
 // display cards with recipes
 generateCards(filtredRecipes)
 dropdownTags(filtredRecipes)
-new GenerateSearchedTags()
+new GenerateSearchedTags(filtredRecipes)
 
 // Ouverture et fermeture des dropdowns ___________________________
 const buttonDropdown = document.querySelectorAll('.dropdown__icon')
@@ -22,7 +22,7 @@ buttonDropdown.forEach(button => {
 })
 
 const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
-generateListeners(dropDownMenuItems)
+generateListeners(dropDownMenuItems, filtredRecipes)
 
 // function to close the dropdown on click with the uparrow
 const close = document.querySelectorAll('.form__arrow')
