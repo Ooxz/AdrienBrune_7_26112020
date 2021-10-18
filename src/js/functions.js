@@ -34,14 +34,16 @@ function filterIngredients (recipes, ingredients) {
 }
 
 function filterAppliance (recipes, appliance) {
-  const filtredRecipes = []
-  recipes.forEach(recipe => {
+  let filtredRecipes = [...recipes]
+  const newFilter = []
+  filtredRecipes.forEach(recipe => {
     const isAppliance = recipe.appliance.toLowerCase() === appliance.toLowerCase()
     if (isAppliance) {
-      filtredRecipes.push(recipe)
+      newFilter.push(recipe)
     }
+    filtredRecipes = [...newFilter]
   })
-  return filtredRecipes
+  return [...new Set(filtredRecipes)]
 }
 
 function filterUstensils (recipes, ustensils) {

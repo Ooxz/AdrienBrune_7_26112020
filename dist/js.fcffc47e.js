@@ -371,15 +371,19 @@ function filterIngredients(recipes, ingredients) {
 }
 
 function filterAppliance(recipes, appliance) {
-  var filtredRecipes = [];
-  recipes.forEach(function (recipe) {
+  var filtredRecipes = _toConsumableArray(recipes);
+
+  var newFilter = [];
+  filtredRecipes.forEach(function (recipe) {
     var isAppliance = recipe.appliance.toLowerCase() === appliance.toLowerCase();
 
     if (isAppliance) {
-      filtredRecipes.push(recipe);
+      newFilter.push(recipe);
     }
+
+    filtredRecipes = [].concat(newFilter);
   });
-  return filtredRecipes;
+  return _toConsumableArray(new Set(filtredRecipes));
 }
 
 function filterUstensils(recipes, ustensils) {
@@ -2370,7 +2374,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64936" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60238" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
