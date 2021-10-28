@@ -59,8 +59,9 @@ class GenerateSearchedTags {
         // on recupere tous les tags qu'il reste
         const tagsElts = document.querySelectorAll('.tags__li')
         filters.ingredients = Array.from(tagsElts).filter(elt => elt.dataset.ingredients).map(elt => elt.dataset.ingredients)
-        filters.appliances = Array.from(tagsElts).filter(elt => elt.dataset.appliances).map(elt => elt.dataset.appliances)
         filters.ustensils = Array.from(tagsElts).filter(elt => elt.dataset.ustensils).map(elt => elt.dataset.ustensils)
+        const appliances = Array.from(tagsElts).filter(elt => elt.dataset.appliances).map(elt => elt.dataset.appliances)
+        filters.appliances = appliances.length > 0 ? appliances[0] : ''
         console.log(filters)
         const recipes = filter(filtredRecipes, filters)
         console.log(recipes)

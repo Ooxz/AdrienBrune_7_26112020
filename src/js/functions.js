@@ -11,7 +11,7 @@ export function filter (recipes, filters) {
     filtredRecipes = [...filterIngredients(filtredRecipes, filters.ingredients)]
   }
   if (filters.appliances.length > 0) {
-    filtredRecipes = [...filterAppliance(filtredRecipes, filters.appliances[0])]
+    filtredRecipes = [...filterAppliance(filtredRecipes, filters.appliances)]
   }
   if (filters.ustensils.length > 0) {
     filtredRecipes = [...filterUstensils(filtredRecipes, filters.ustensils)]

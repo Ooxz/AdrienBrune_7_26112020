@@ -5,8 +5,9 @@ import { dropdownTags } from './dropdownElements.js'
 import { recipes } from './recipes.js'
 import { GenerateSearchedTags } from './searchTags.js'
 import { generateListeners } from './generateListeners.js'
+import { mainSearch } from './mainSearch.js'
 
-const filtredRecipes = recipes
+export const filtredRecipes = recipes
 
 // display cards with recipes
 generateCards(filtredRecipes)
@@ -23,6 +24,13 @@ buttonDropdown.forEach(button => {
 
 const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
 generateListeners(dropDownMenuItems, filtredRecipes)
+
+// add_event_listener pour recherche principale
+const mainText = document.getElementById('mainSearch')
+
+mainText.addEventListener('input', (event) => {
+  mainSearch(event)
+})
 
 // function to close the dropdown on click with the uparrow
 const close = document.querySelectorAll('.form__arrow')

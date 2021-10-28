@@ -20,7 +20,7 @@ export function typeSearch () {
   }
 }
 
-function refreshDropdown (items, menu, typedArea) {
+export function refreshDropdown (items, menu, typedArea) {
   if (typedArea.length >= 1) {
     const typedText = normalize(typedArea)
     const selectedWords = showTypedWords(typedText, items)
