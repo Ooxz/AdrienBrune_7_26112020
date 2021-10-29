@@ -2280,13 +2280,11 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
           (0, _generateCards.generateCards)(recipes);
           (0, _dropdownElements.dropdownTags)(recipes);
           var buttonDropdown = document.querySelectorAll('.dropdown__icon');
-
-          for (var i = 0; i < buttonDropdown.length; i++) {
-            buttonDropdown[i].addEventListener('click', function (event) {
+          buttonDropdown.forEach(function (button) {
+            button.addEventListener('click', function (event) {
               (0, _dropdown.openDropdown)(event);
             });
-          }
-
+          });
           var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
           (0, _generatelisteners.generateListeners)(dropDownMenuItems, recipes);
         }
@@ -2362,29 +2360,6 @@ var _generateListeners = require("./generateListeners.js");
 
 var _dropdown = require("./dropdown.js");
 
-// export function mainSearch (recipes) {
-//   const searchInput = document.getElementById('mainSearch')
-//   searchInput.addEventListener('keyup', (e) => {
-//     e.preventDefault()
-//     if (searchInput.value.length > 2) {
-//       filters.mainSearch = normalize(searchInput.value)
-//     } else {
-//       filters.mainSearch = ''
-//     }
-//     const filtredRecipes = filter(recipes, filters) // fonction pour récupérer l'array de tous les tags affichés?
-//     console.log(filtredRecipes)
-//     generateCards(filtredRecipes)
-//     dropdownTags(filtredRecipes)
-//     const buttonDropdown = document.querySelectorAll('.dropdown__icon')
-//     buttonDropdown.forEach(button => {
-//       button.addEventListener('click', (event) => {
-//         openDropdown(event)
-//       })
-//     })
-//     const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
-//     generateListeners(dropDownMenuItems, recipes)
-//   })
-// }
 function mainSearch(recipes) {
   var searchInput = document.getElementById('mainSearch');
   searchInput.addEventListener('keyup', function (e) {
@@ -2402,17 +2377,37 @@ function mainSearch(recipes) {
     (0, _generateCards.generateCards)(filtredRecipes);
     (0, _dropdownElements.dropdownTags)(filtredRecipes);
     var buttonDropdown = document.querySelectorAll('.dropdown__icon');
-
-    for (var i = 0; i < buttonDropdown.length; i++) {
-      buttonDropdown[i].addEventListener('click', function (event) {
+    buttonDropdown.forEach(function (button) {
+      button.addEventListener('click', function (event) {
         (0, _dropdown.openDropdown)(event);
       });
-    }
-
+    });
     var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
     (0, _generateListeners.generateListeners)(dropDownMenuItems, recipes);
   });
-}
+} // export function mainSearch (recipes) {
+//   const searchInput = document.getElementById('mainSearch')
+//   searchInput.addEventListener('keyup', (e) => {
+//     e.preventDefault()
+//     if (searchInput.value.length > 2) {
+//       filters.mainSearch = normalize(searchInput.value)
+//     } else {
+//       filters.mainSearch = ''
+//     }
+//     const filtredRecipes = filter(recipes, filters) // fonction pour récupérer l'array de tous les tags affichés?
+//     console.log(filtredRecipes)
+//     generateCards(filtredRecipes)
+//     dropdownTags(filtredRecipes)
+//     const buttonDropdown = document.querySelectorAll('.dropdown__icon')
+//     for (let i = 0; i < buttonDropdown.length; i++) {
+//       buttonDropdown[i].addEventListener('click', function (event) {
+//         openDropdown(event)
+//       })
+//     }
+//     const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
+//     generateListeners(dropDownMenuItems, recipes)
+//   })
+// }
 },{"./functions.js":"../js/functions.js","./normalize.js":"../js/normalize.js","./generateCards.js":"../js/generateCards.js","./dropdownElements.js":"../js/dropdownElements.js","./generateListeners.js":"../js/generateListeners.js","./dropdown.js":"../js/dropdown.js"}],"../js/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -2495,7 +2490,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52907" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64240" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
