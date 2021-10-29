@@ -217,7 +217,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "59538" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64936" + '/');
+>>>>>>> parent of 3cebdb8 (update filters)
 
   ws.onmessage = function (event) {
     checkedAssets = {};

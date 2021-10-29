@@ -435,19 +435,15 @@ function filterIngredients(recipes, ingredients) {
 }
 
 function filterAppliance(recipes, appliance) {
-  var filtredRecipes = _toConsumableArray(recipes);
-
-  var newFilter = [];
-  filtredRecipes.forEach(function (recipe) {
+  var filtredRecipes = [];
+  recipes.forEach(function (recipe) {
     var isAppliance = recipe.appliance.toLowerCase() === appliance.toLowerCase();
 
     if (isAppliance) {
-      newFilter.push(recipe);
+      filtredRecipes.push(recipe);
     }
-
-    filtredRecipes = [].concat(newFilter);
   });
-  return _toConsumableArray(new Set(filtredRecipes));
+  return filtredRecipes;
 }
 
 function filterUstensils(recipes, ustensils) {
@@ -2591,7 +2587,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "52907" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64936" + '/');
+>>>>>>> parent of 3cebdb8 (update filters)
 
   ws.onmessage = function (event) {
     checkedAssets = {};
