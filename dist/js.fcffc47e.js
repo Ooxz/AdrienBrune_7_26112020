@@ -280,7 +280,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.SortByFirstLetter = SortByFirstLetter;
 exports.normalize = normalize;
 exports.remove = remove;
-exports.concatenation = concatenation;
 
 /* eslint-disable no-mixed-spaces-and-tabs */
 
@@ -314,60 +313,6 @@ function remove(array) {
   });
   return arrayText;
 }
-
-function concatenation(recipe) {
-  var name = normalize(recipe.name);
-  var appliance = normalize(recipe.appliance);
-  var description = normalize(recipe.description);
-  var arrayIngredients = recoveryIngredients(recipe);
-  var ingredients = arrayIngredients.toString();
-  var arrayUstensils = recoveryUstensils(recipe);
-  var ustensils = arrayUstensils.toString();
-  var recipeString = name + ' ' + appliance + ' ' + description + ' ' + ingredients + ' ' + ustensils;
-  return recipeString;
-}
-/**
- * @function recoveryIngredients
- * fonction permettant de récupérer les ingrédients de l'objet recette
- * pour en faire un array
- * @param {Object} recipe
- * @returns {Array} - array de chaque ingrédient de la recette
- */
-
-
-function recoveryIngredients(recipe) {
-  var allIngredients = [];
-  var ingredientsList = recipe.ingredients;
-
-  for (var j = 0; j < ingredientsList.length; j++) {
-    var ingredient = ingredientsList[j].ingredient;
-    var ingredients = normalize(ingredient);
-    allIngredients.push(ingredients);
-  }
-
-  return allIngredients;
-}
-/**
- * @function recoveryUstensils
- * fonction permettant de récupérer les ustensiles de l'objet recette
- * pour en faire un array
- * @param {Object} recipe
- * @returns {Array} - array de chaque ustensile de la recette
- */
-
-
-function recoveryUstensils(recipe) {
-  var allUstensils = [];
-  var ustensilsList = recipe.ustensils;
-
-  for (var k = 0; k < ustensilsList.length; k++) {
-    var ustensil = ustensilsList[k];
-    var ustensils = normalize(ustensil);
-    allUstensils.push(ustensils);
-  }
-
-  return allUstensils;
-}
 },{}],"../js/functions.js":[function(require,module,exports) {
 "use strict";
 
@@ -376,6 +321,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.filter = filter;
 exports.filters = void 0;
+
+var _normalize = require("./normalize.js");
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -410,6 +357,10 @@ function filter(recipes, filters) {
 
   if (filters.ustensils.length > 0) {
     filtredRecipes = _toConsumableArray(filterUstensils(filtredRecipes, filters.ustensils));
+  }
+
+  if (filters.mainSearch.length > 2) {
+    filtredRecipes = _toConsumableArray(filterMainSearch(filtredRecipes, filters.mainSearch));
   }
 
   return filtredRecipes;
@@ -468,7 +419,29 @@ function filterUstensils(recipes, ustensils) {
   });
   return _toConsumableArray(new Set(filtredRecipes));
 }
-},{}],"../js/dropdownElements.js":[function(require,module,exports) {
+
+function filterMainSearch(recipes, searchedExpression) {
+  var filtredRecipes = [];
+  recipes.forEach(function (recipe) {
+    if ((0, _normalize.normalize)(recipe.name).includes(searchedExpression) || (0, _normalize.normalize)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression)) {
+      //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
+      filtredRecipes.push(recipe);
+    }
+  });
+  return _toConsumableArray(new Set(filtredRecipes));
+} // function ingredientsToString (recipe) {
+//   const newString = recipe.ingredients.map(elt => elt.ingredient).join(' ')
+//   return newString
+// }
+
+
+function hasIngredient(recipe, search) {
+  var index = recipe.ingredients.findIndex(function (elt) {
+    return (0, _normalize.normalize)(elt.ingredient).includes(search);
+  });
+  return index >= 0;
+}
+},{"./normalize.js":"../js/normalize.js"}],"../js/dropdownElements.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2307,11 +2280,13 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
           (0, _generateCards.generateCards)(recipes);
           (0, _dropdownElements.dropdownTags)(recipes);
           var buttonDropdown = document.querySelectorAll('.dropdown__icon');
-          buttonDropdown.forEach(function (button) {
-            button.addEventListener('click', function (event) {
+
+          for (var i = 0; i < buttonDropdown.length; i++) {
+            buttonDropdown[i].addEventListener('click', function (event) {
               (0, _dropdown.openDropdown)(event);
             });
-          });
+          }
+
           var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
           (0, _generatelisteners.generateListeners)(dropDownMenuItems, recipes);
         }
@@ -2377,135 +2352,68 @@ exports.mainSearch = mainSearch;
 
 var _functions = require("./functions.js");
 
-var _recipes = require("./recipes.js");
-
 var _normalize = require("./normalize.js");
 
 var _generateCards = require("./generateCards.js");
 
 var _dropdownElements = require("./dropdownElements.js");
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+var _generateListeners = require("./generateListeners.js");
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+var _dropdown = require("./dropdown.js");
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-// recuperer recettes affichées
-function getRecipes() {
-  var selectedRecipes = [];
-  var card = document.querySelectorAll('.card');
-  var allCards = Array.from(card);
-  allCards.forEach(function (card) {
-    var cardId = card.id;
-
-    for (var i = 0; i < _recipes.recipes.length; i++) {
-      var recipeId = "article-".concat(_recipes.recipes[i].id);
-
-      if (cardId === recipeId) {
-        selectedRecipes.push(_recipes.recipes[i]);
-      }
-    }
-  });
-  return selectedRecipes;
-}
-
-function mainSearch(e) {
-  // e.preventDefault
+// export function mainSearch (recipes) {
+//   const searchInput = document.getElementById('mainSearch')
+//   searchInput.addEventListener('keyup', (e) => {
+//     e.preventDefault()
+//     if (searchInput.value.length > 2) {
+//       filters.mainSearch = normalize(searchInput.value)
+//     } else {
+//       filters.mainSearch = ''
+//     }
+//     const filtredRecipes = filter(recipes, filters) // fonction pour récupérer l'array de tous les tags affichés?
+//     console.log(filtredRecipes)
+//     generateCards(filtredRecipes)
+//     dropdownTags(filtredRecipes)
+//     const buttonDropdown = document.querySelectorAll('.dropdown__icon')
+//     buttonDropdown.forEach(button => {
+//       button.addEventListener('click', (event) => {
+//         openDropdown(event)
+//       })
+//     })
+//     const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
+//     generateListeners(dropDownMenuItems, recipes)
+//   })
+// }
+function mainSearch(recipes) {
   var searchInput = document.getElementById('mainSearch');
-  var text = searchInput.values;
-  var tags = (0, _functions.filter)(); // fonction pour récupérer l'array de tous les tags affichés?
-
-  var filtredRecipes; // addeventlistener sur keyup pour suppression
-
   searchInput.addEventListener('keyup', function (e) {
-    var keyCode = e.code;
+    e.preventDefault();
 
-    if (keyCode === 'Backspace' || keyCode === 'Delete') {
-      outcome(tags, _recipes.recipes);
+    if (searchInput.value.length > 2) {
+      _functions.filters.mainSearch = (0, _normalize.normalize)(searchInput.value);
+    } else {
+      _functions.filters.mainSearch = '';
     }
-  }); // si saisie > 3 characters
 
-  if (text.lenght >= 3) {
-    var searchText = (0, _normalize.normalize)(text);
-    var array = searchText.split(' ');
-    var arrayText = (0, _normalize.remove)(array);
-    arrayText.forEach(function (element) {
-      tags.push(element);
-    });
-    tags = _toConsumableArray(new Set(tags));
-    filtredRecipes = getRecipes();
-    outcome(tags, filtredRecipes);
-  } else {
-    outcome(tags, _recipes.recipes);
-  }
+    var filtredRecipes = (0, _functions.filter)(recipes, _functions.filters); // fonction pour récupérer l'array de tous les tags affichés?
+
+    console.log(filtredRecipes);
+    (0, _generateCards.generateCards)(filtredRecipes);
+    (0, _dropdownElements.dropdownTags)(filtredRecipes);
+    var buttonDropdown = document.querySelectorAll('.dropdown__icon');
+
+    for (var i = 0; i < buttonDropdown.length; i++) {
+      buttonDropdown[i].addEventListener('click', function (event) {
+        (0, _dropdown.openDropdown)(event);
+      });
+    }
+
+    var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
+    (0, _generateListeners.generateListeners)(dropDownMenuItems, recipes);
+  });
 }
-
-var mainText = document.getElementById('mainSearch');
-mainText.addEventListener('keyup', function (e) {
-  var keyCode = e.code;
-
-  if (keyCode === 'Escape') {
-    var tags = (0, _functions.filter)(); // fonction pour récupérer l'array de tous les tags affichés?
-
-    outcome(tags, _recipes.recipes);
-  }
-}); // fonction pour trouver recette en fonction du mot saisi + tags
-
-function findRecipes(array, someRecipes) {
-  var allRecipes = document.querySelector('.allRecipesCards');
-  var selectedRecipes = [];
-  var index = 0;
-
-  for (var i = 0; i < someRecipes.length; i++) {
-    var recipe = (0, _normalize.concatenation)(someRecipes[i]);
-    var counter = matchingWords(array, recipe);
-
-    if (counter === array.length) {
-      selectedRecipes.push(someRecipes[i]);
-      index++;
-    }
-  }
-
-  allRecipes.innerHTML = '';
-  (0, _generateCards.generateCards)(selectedRecipes);
-  (0, _dropdownElements.dropdownTags)(selectedRecipes);
-
-  if (index === 0) {
-    allRecipes.style.display = 'flex';
-    allRecipes.style.justifyContent = 'center';
-    allRecipes.innerHTML = '<p class="noresult">Auncune recette ne correspond à votre recherche...</br>Vous pouvez chercher "Tarte aux pommes", "poisson", etc. </br></br>Pour afficher à nouveau toutes les recettes, veuillez cliquer sur le logo en haut de la page.';
-    (0, _dropdownElements.dropdownTags)(_recipes.recipes);
-  }
-} // fonction permettant de vérifier la présence de chaque élément de l'array 'input'
-
-
-function matchingWords(array, recipe) {
-  var counter = 0;
-
-  for (var j = 0; j < array.length; j++) {
-    if (recipe.indexOf(array[j]) !== -1) {
-      counter++;
-    }
-  }
-
-  return counter;
-}
-
-function outcome(tags, recipes) {
-  findRecipes(tags, recipes);
-} // 3 lettres d'écritent on récupère l'entrée du clavier puis on recherche dans les recettes
-// une fois filtrer même principe que d'ajouter les recettes avec les tags
-// limonade tester titre salez tester description
-// appeler filter et modifier avec mainSearch déja présent ou fonction a part pour que ce soir moins lourd aussi dans functions.
-// rappeler  generateCards(recipes)  dropdownTags(recipes) comme dans searchTags
-},{"./functions.js":"../js/functions.js","./recipes.js":"../js/recipes.js","./normalize.js":"../js/normalize.js","./generateCards.js":"../js/generateCards.js","./dropdownElements.js":"../js/dropdownElements.js"}],"../js/index.js":[function(require,module,exports) {
+},{"./functions.js":"../js/functions.js","./normalize.js":"../js/normalize.js","./generateCards.js":"../js/generateCards.js","./dropdownElements.js":"../js/dropdownElements.js","./generateListeners.js":"../js/generateListeners.js","./dropdown.js":"../js/dropdown.js"}],"../js/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2533,7 +2441,8 @@ var filtredRecipes = _recipes.recipes; // display cards with recipes
 exports.filtredRecipes = filtredRecipes;
 (0, _generateCards.generateCards)(filtredRecipes);
 (0, _dropdownElements.dropdownTags)(filtredRecipes);
-new _searchTags.GenerateSearchedTags(filtredRecipes); // Ouverture et fermeture des dropdowns ___________________________
+new _searchTags.GenerateSearchedTags(filtredRecipes);
+(0, _mainSearch.mainSearch)(filtredRecipes); // Ouverture et fermeture des dropdowns ___________________________
 
 var buttonDropdown = document.querySelectorAll('.dropdown__icon');
 buttonDropdown.forEach(function (button) {
@@ -2542,12 +2451,7 @@ buttonDropdown.forEach(function (button) {
   });
 });
 var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
-(0, _generateListeners.generateListeners)(dropDownMenuItems, filtredRecipes); // add_event_listener pour recherche principale
-
-var mainText = document.getElementById('mainSearch');
-mainText.addEventListener('input', function (event) {
-  (0, _mainSearch.mainSearch)(event);
-}); // function to close the dropdown on click with the uparrow
+(0, _generateListeners.generateListeners)(dropDownMenuItems, filtredRecipes); // function to close the dropdown on click with the uparrow
 
 var close = document.querySelectorAll('.form__arrow');
 close.forEach(function (btn) {
@@ -2591,7 +2495,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59538" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52907" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

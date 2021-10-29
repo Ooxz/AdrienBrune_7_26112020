@@ -68,11 +68,11 @@ class GenerateSearchedTags {
         generateCards(recipes)
         dropdownTags(recipes)
         const buttonDropdown = document.querySelectorAll('.dropdown__icon')
-        buttonDropdown.forEach(button => {
-          button.addEventListener('click', (event) => {
+        for (let i = 0; i < buttonDropdown.length; i++) {
+          buttonDropdown[i].addEventListener('click', function (event) {
             openDropdown(event)
           })
-        })
+        }
         const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
         generateListeners(dropDownMenuItems, recipes)
       }

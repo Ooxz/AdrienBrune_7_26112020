@@ -1,3 +1,5 @@
+import { normalize } from './normalize.js'
+
 export const filters = {
   mainSearch: '',
   ingredients: [],
@@ -15,6 +17,9 @@ export function filter (recipes, filters) {
   }
   if (filters.ustensils.length > 0) {
     filtredRecipes = [...filterUstensils(filtredRecipes, filters.ustensils)]
+  }
+  if (filters.mainSearch.length > 2) {
+    filtredRecipes = [...filterMainSearch(filtredRecipes, filters.mainSearch)]
   }
   return filtredRecipes
 }
@@ -59,4 +64,27 @@ function filterUstensils (recipes, ustensils) {
     filtredRecipes = [...newFilter]
   })
   return [...new Set(filtredRecipes)]
+}
+
+function filterMainSearch (recipes, searchedExpression) {
+  const filtredRecipes = []
+  recipes.forEach(recipe => {
+    if (normalize(recipe.name).includes(searchedExpression) ||
+     normalize(recipe.description).includes(searchedExpression) ||
+     hasIngredient(recipe, searchedExpression)) {
+    //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
+      filtredRecipes.push(recipe)
+    }
+  })
+  return [...new Set(filtredRecipes)]
+}
+
+// function ingredientsToString (recipe) {
+//   const newString = recipe.ingredients.map(elt => elt.ingredient).join(' ')
+//   return newString
+// }
+
+function hasIngredient (recipe, search) {
+  const index = recipe.ingredients.findIndex(elt => normalize(elt.ingredient).includes(search))
+  return index >= 0
 }
