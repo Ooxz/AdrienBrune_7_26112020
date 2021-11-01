@@ -71,7 +71,9 @@ function filterMainSearch (recipes, searchedExpression) {
   recipes.forEach(recipe => {
     if (normalize(recipe.name).includes(searchedExpression) ||
      normalize(recipe.description).includes(searchedExpression) ||
-     hasIngredient(recipe, searchedExpression)) {
+     hasIngredient(recipe, searchedExpression) ||
+     hasAppliance(recipe, searchedExpression) ||
+     hasUstensils(recipe, searchedExpression)) {
     //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
       filtredRecipes.push(recipe)
     }
@@ -86,5 +88,15 @@ function filterMainSearch (recipes, searchedExpression) {
 
 function hasIngredient (recipe, search) {
   const index = recipe.ingredients.findIndex(elt => normalize(elt.ingredient).includes(search))
+  return index >= 0
+}
+
+function hasAppliance (recipe, search) {
+  const index = normalize(recipe.appliance).includes(search)
+  return index
+}
+
+function hasUstensils (recipe, search) {
+  const index = recipe.ustensils.findIndex(elt => normalize(elt).includes(search))
   return index >= 0
 }

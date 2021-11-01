@@ -423,7 +423,7 @@ function filterUstensils(recipes, ustensils) {
 function filterMainSearch(recipes, searchedExpression) {
   var filtredRecipes = [];
   recipes.forEach(function (recipe) {
-    if ((0, _normalize.normalize)(recipe.name).includes(searchedExpression) || (0, _normalize.normalize)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression)) {
+    if ((0, _normalize.normalize)(recipe.name).includes(searchedExpression) || (0, _normalize.normalize)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression) || hasAppliance(recipe, searchedExpression) || hasUstensils(recipe, searchedExpression)) {
       //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
       filtredRecipes.push(recipe);
     }
@@ -438,6 +438,18 @@ function filterMainSearch(recipes, searchedExpression) {
 function hasIngredient(recipe, search) {
   var index = recipe.ingredients.findIndex(function (elt) {
     return (0, _normalize.normalize)(elt.ingredient).includes(search);
+  });
+  return index >= 0;
+}
+
+function hasAppliance(recipe, search) {
+  var index = (0, _normalize.normalize)(recipe.appliance).includes(search);
+  return index;
+}
+
+function hasUstensils(recipe, search) {
+  var index = recipe.ustensils.findIndex(function (elt) {
+    return (0, _normalize.normalize)(elt).includes(search);
   });
   return index >= 0;
 }
@@ -2495,7 +2507,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64240" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55863" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
