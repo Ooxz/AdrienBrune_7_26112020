@@ -91,6 +91,14 @@ function hasIngredient (recipe, search) {
   const index = recipe.ingredients.findIndex(elt => normalize(elt.ingredient).includes(search))
   return index >= 0
 }
+// function hasIngredient2 (recipe, search) {
+//   for (let i = 0; i < recipe.ingredients.length; i++) {
+//     if (normalize(recipe.ingredients[i]).includes(search)) {
+//       return true
+//     }
+//   }
+//   return false
+// }
 
 function hasAppliance (recipe, search) {
   const index = normalize(recipe.appliance).includes(search)
@@ -102,20 +110,26 @@ function hasUstensils (recipe, search) {
   return index >= 0
 }
 
+// function hasUstensils2 (recipe, search) {
+//   for (let i = 0; i < recipe.ustensils.length; i++) {
+//     if (normalize(recipe.ustensils[i]).includes(search)) {
+//       return true
+//     }
+//   }
+//   return false
+// }
+
 function filterIngredients (recipes, ingredients) {
   const filtredRecipes = []
   for (const recipe of recipes) {
     const newFilter = []
-    for (let i = 0; i < ingredients.length; i++) {
-      newFilter.push(recipe.ingredients.filter(recIngredient => recIngredient.ingredient.toLowerCase().includes(ingredients[i].toLowerCase())).length > 0)
-    }
-    /* ingredients.forEach(ingredient => {
+    ingredients.forEach(ingredient => {
       newFilter.push(
         recipe.ingredients.filter(recIngredient =>
           recIngredient.ingredient.toLowerCase().includes(ingredient.toLowerCase())
         ).length > 0
       )
-    }) */
+    })
     if (newFilter.every(match => match === true)) {
       filtredRecipes.push(recipe)
       console.log(recipe)
