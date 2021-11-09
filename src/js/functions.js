@@ -106,13 +106,16 @@ function filterIngredients (recipes, ingredients) {
   const filtredRecipes = []
   for (const recipe of recipes) {
     const newFilter = []
-    ingredients.forEach(ingredient => {
+    for (let i = 0; i < ingredients.length; i++) {
+      newFilter.push(recipe.ingredients.filter(recIngredient => recIngredient.ingredient.toLowerCase().includes(ingredients[i].toLowerCase())).length > 0)
+    }
+    /* ingredients.forEach(ingredient => {
       newFilter.push(
         recipe.ingredients.filter(recIngredient =>
           recIngredient.ingredient.toLowerCase().includes(ingredient.toLowerCase())
         ).length > 0
       )
-    })
+    }) */
     if (newFilter.every(match => match === true)) {
       filtredRecipes.push(recipe)
       console.log(recipe)
