@@ -103,21 +103,35 @@ function hasUstensils (recipe, search) {
 }
 
 function filterIngredients (recipes, ingredients) {
-  let filtredRecipes = [...recipes]
+  const filtredRecipes = []
   for (const recipe of recipes) {
     const newFilter = []
     ingredients.forEach(ingredient => {
-      const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === ingredient.toLowerCase())
-      if (index > -1) {
-        newFilter.push(recipe)
-      }
+      newFilter.push(
+        recipe.ingredients.filter(recIngredient =>
+          recIngredient.ingredient.toLowerCase().includes(ingredient.toLowerCase())
+        ).length > 0
+      )
     })
-    filtredRecipes = [...newFilter]
-    console.log(newFilter)
+    if (newFilter.every(match => match === true)) {
+      filtredRecipes.push(recipe)
+      console.log(recipe)
+    }
   }
-
   return [...new Set(filtredRecipes)]
 }
+//     ingredients.forEach(ingredient => {
+//       filtredRecipes.push(recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === ingredient.toLowerCase()))
+//       if (index > -1) {
+//         newFilter.push(recipe)
+//       }
+//     })
+//     filtredRecipes = [...newFilter]
+//     console.log(newFilter)
+//   }
+
+//   return [...new Set(filtredRecipes)]
+// }
 
 function filterAppliance (recipes, appliance) {
   let filtredRecipes = [...recipes]
@@ -143,22 +157,3 @@ function filterUstensils (recipes, ustensils) {
   filtredRecipes = [...newFilter]
   return [...new Set(filtredRecipes)]
 }
-
-// TEST
-
-// TEST WITH every
-
-// function filterIngredients (recipes, ingredients) {
-//   let filtredRecipes = [...recipes]
-//   ingredients.every = function (ingredient) {
-//     const newFilter = []
-//     filtredRecipes.every = function (recipe) {
-//       const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === ingredient.toLowerCase())
-//       if (index > -1) {
-//         newFilter.push(recipe)
-//       }
-//     }
-//     filtredRecipes = [...newFilter]
-//   }
-//   return [...new Set(filtredRecipes)]
-// }
