@@ -69,7 +69,7 @@ export function filter (recipes, filters) {
 
 function filterMainSearch (recipes, searchedExpression) {
   const filtredRecipes = []
-  recipes.forEach(recipe => {
+  for (const recipe of recipes) {
     if (normalize(recipe.name).includes(searchedExpression) ||
      normalize(recipe.description).includes(searchedExpression) ||
      hasIngredient(recipe, searchedExpression) ||
@@ -78,7 +78,7 @@ function filterMainSearch (recipes, searchedExpression) {
     //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
       filtredRecipes.push(recipe)
     }
-  })
+  }
   return [...new Set(filtredRecipes)]
 }
 
