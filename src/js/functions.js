@@ -24,49 +24,6 @@ export function filter (recipes, filters) {
   return filtredRecipes
 }
 
-// function filterIngredients (recipes, ingredients) {
-//   let filtredRecipes = [...recipes]
-//   ingredients.forEach(ingredient => {
-//     const newFilter = []
-//     filtredRecipes.forEach(recipe => {
-//       const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === ingredient.toLowerCase())
-//       if (index > -1) {
-//         newFilter.push(recipe)
-//       }
-//     })
-//     filtredRecipes = [...newFilter]
-//   })
-//   return [...new Set(filtredRecipes)]
-// }
-
-// function filterAppliance (recipes, appliance) {
-//   let filtredRecipes = [...recipes]
-//   const newFilter = []
-//   filtredRecipes.forEach(recipe => {
-//     const isAppliance = recipe.appliance.toLowerCase() === appliance.toLowerCase()
-//     if (isAppliance) {
-//       newFilter.push(recipe)
-//     }
-//     filtredRecipes = [...newFilter]
-//   })
-//   return [...new Set(filtredRecipes)]
-// }
-
-// function filterUstensils (recipes, ustensils) {
-//   let filtredRecipes = [...recipes]
-//   ustensils.forEach(ustensil => {
-//     const newFilter = []
-//     filtredRecipes.forEach(recipe => {
-//       const index = recipe.ustensils.findIndex(elt => elt.toLowerCase() === ustensil.toLowerCase())
-//       if (index > -1) {
-//         newFilter.push(recipe)
-//       }
-//     })
-//     filtredRecipes = [...newFilter]
-//   })
-//   return [...new Set(filtredRecipes)]
-// }
-
 function filterMainSearch (recipes, searchedExpression) {
   const filtredRecipes = []
   for (const recipe of recipes) {
@@ -75,30 +32,20 @@ function filterMainSearch (recipes, searchedExpression) {
      hasIngredient(recipe, searchedExpression) ||
      hasAppliance(recipe, searchedExpression) ||
      hasUstensils(recipe, searchedExpression)) {
-    //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
       filtredRecipes.push(recipe)
     }
   }
   return [...new Set(filtredRecipes)]
 }
 
-// function ingredientsToString (recipe) {
-//   const newString = recipe.ingredients.map(elt => elt.ingredient).join(' ')
-//   return newString
-// }
-
 function hasIngredient (recipe, search) {
-  const index = recipe.ingredients.findIndex(elt => normalize(elt.ingredient).includes(search))
-  return index >= 0
+  for (let i = 0; i < recipe.ingredients.length; i++) {
+    if (normalize(recipe.ingredients[i]).includes(search)) {
+      return true
+    }
+  }
+  return false
 }
-// function hasIngredient (recipe, search) {
-//   for (let i = 0; i < recipe.ingredients.length; i++) {
-//     if (normalize(recipe.ingredients[i]).includes(search)) {
-//       return true
-//     }
-//   }
-//   return false
-// }
 
 function hasAppliance (recipe, search) {
   const index = normalize(recipe.appliance).includes(search)
@@ -106,18 +53,13 @@ function hasAppliance (recipe, search) {
 }
 
 function hasUstensils (recipe, search) {
-  const index = recipe.ustensils.findIndex(elt => normalize(elt).includes(search))
-  return index >= 0
+  for (let i = 0; i < recipe.ustensils.length; i++) {
+    if (normalize(recipe.ustensils[i]).includes(search)) {
+      return true
+    }
+  }
+  return false
 }
-
-// function hasUstensils (recipe, search) {
-//   for (let i = 0; i < recipe.ustensils.length; i++) {
-//     if (normalize(recipe.ustensils[i]).includes(search)) {
-//       return true
-//     }
-//   }
-//   return false
-// }
 
 function filterIngredients (recipes, ingredients) {
   const filtredRecipes = []
@@ -137,18 +79,6 @@ function filterIngredients (recipes, ingredients) {
   }
   return [...new Set(filtredRecipes)]
 }
-//     ingredients.forEach(ingredient => {
-//       filtredRecipes.push(recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === ingredient.toLowerCase()))
-//       if (index > -1) {
-//         newFilter.push(recipe)
-//       }
-//     })
-//     filtredRecipes = [...newFilter]
-//     console.log(newFilter)
-//   }
-
-//   return [...new Set(filtredRecipes)]
-// }
 
 function filterAppliance (recipes, appliance) {
   let filtredRecipes = [...recipes]

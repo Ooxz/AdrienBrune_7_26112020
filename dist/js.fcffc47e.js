@@ -366,107 +366,21 @@ function filter(recipes, filters) {
   }
 
   return filtredRecipes;
-} // function filterIngredients (recipes, ingredients) {
-//   let filtredRecipes = [...recipes]
-//   ingredients.forEach(ingredient => {
-//     const newFilter = []
-//     filtredRecipes.forEach(recipe => {
-//       const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === ingredient.toLowerCase())
-//       if (index > -1) {
-//         newFilter.push(recipe)
-//       }
-//     })
-//     filtredRecipes = [...newFilter]
-//   })
-//   return [...new Set(filtredRecipes)]
-// }
-// function filterAppliance (recipes, appliance) {
-//   let filtredRecipes = [...recipes]
-//   const newFilter = []
-//   filtredRecipes.forEach(recipe => {
-//     const isAppliance = recipe.appliance.toLowerCase() === appliance.toLowerCase()
-//     if (isAppliance) {
-//       newFilter.push(recipe)
-//     }
-//     filtredRecipes = [...newFilter]
-//   })
-//   return [...new Set(filtredRecipes)]
-// }
-// function filterUstensils (recipes, ustensils) {
-//   let filtredRecipes = [...recipes]
-//   ustensils.forEach(ustensil => {
-//     const newFilter = []
-//     filtredRecipes.forEach(recipe => {
-//       const index = recipe.ustensils.findIndex(elt => elt.toLowerCase() === ustensil.toLowerCase())
-//       if (index > -1) {
-//         newFilter.push(recipe)
-//       }
-//     })
-//     filtredRecipes = [...newFilter]
-//   })
-//   return [...new Set(filtredRecipes)]
-// }
-
+}
 
 function filterMainSearch(recipes, searchedExpression) {
   var filtredRecipes = [];
-  recipes.forEach(function (recipe) {
-    if ((0, _normalize.normalize)(recipe.name).includes(searchedExpression) || (0, _normalize.normalize)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression) || hasAppliance(recipe, searchedExpression) || hasUstensils(recipe, searchedExpression)) {
-      //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
-      filtredRecipes.push(recipe);
-    }
-  });
-  return _toConsumableArray(new Set(filtredRecipes));
-} // function ingredientsToString (recipe) {
-//   const newString = recipe.ingredients.map(elt => elt.ingredient).join(' ')
-//   return newString
-// }
-
-
-function hasIngredient(recipe, search) {
-  var index = recipe.ingredients.findIndex(function (elt) {
-    return (0, _normalize.normalize)(elt.ingredient).includes(search);
-  });
-  return index >= 0;
-}
-
-function hasAppliance(recipe, search) {
-  var index = (0, _normalize.normalize)(recipe.appliance).includes(search);
-  return index;
-}
-
-function hasUstensils(recipe, search) {
-  var index = recipe.ustensils.findIndex(function (elt) {
-    return (0, _normalize.normalize)(elt).includes(search);
-  });
-  return index >= 0;
-}
-
-function filterIngredients(recipes, ingredients) {
-  var filtredRecipes = _toConsumableArray(recipes);
 
   var _iterator = _createForOfIteratorHelper(recipes),
       _step;
 
   try {
-    var _loop = function _loop() {
-      var recipe = _step.value;
-      var newFilter = [];
-      ingredients.forEach(function (ingredient) {
-        var index = recipe.ingredients.findIndex(function (elt) {
-          return elt.ingredient.toLowerCase() === ingredient.toLowerCase();
-        });
-
-        if (index > -1) {
-          newFilter.push(recipe);
-        }
-      });
-      filtredRecipes = [].concat(newFilter);
-      console.log(newFilter);
-    };
-
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      _loop();
+      var recipe = _step.value;
+
+      if ((0, _normalize.normalize)(recipe.name).includes(searchedExpression) || (0, _normalize.normalize)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression) || hasAppliance(recipe, searchedExpression) || hasUstensils(recipe, searchedExpression)) {
+        filtredRecipes.push(recipe);
+      }
     }
   } catch (err) {
     _iterator.e(err);
@@ -477,24 +391,57 @@ function filterIngredients(recipes, ingredients) {
   return _toConsumableArray(new Set(filtredRecipes));
 }
 
-function filterAppliance(recipes, appliance) {
-  var filtredRecipes = _toConsumableArray(recipes);
+function hasIngredient(recipe, search) {
+  for (var i = 0; i < recipe.ingredients.length; i++) {
+    if ((0, _normalize.normalize)(recipe.ingredients[i]).includes(search)) {
+      return true;
+    }
+  }
 
-  var newFilter = [];
+  return false;
+}
+
+function hasAppliance(recipe, search) {
+  var index = (0, _normalize.normalize)(recipe.appliance).includes(search);
+  return index;
+}
+
+function hasUstensils(recipe, search) {
+  for (var i = 0; i < recipe.ustensils.length; i++) {
+    if ((0, _normalize.normalize)(recipe.ustensils[i]).includes(search)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function filterIngredients(recipes, ingredients) {
+  var filtredRecipes = [];
 
   var _iterator2 = _createForOfIteratorHelper(recipes),
       _step2;
 
   try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+    var _loop = function _loop() {
       var recipe = _step2.value;
+      var newFilter = [];
+      ingredients.forEach(function (ingredient) {
+        newFilter.push(recipe.ingredients.filter(function (recIngredient) {
+          return recIngredient.ingredient.toLowerCase().includes(ingredient.toLowerCase());
+        }).length > 0);
+      });
 
-      if (recipe.appliance.toLowerCase() === appliance.toLowerCase()) {
-        newFilter.push(recipe);
+      if (newFilter.every(function (match) {
+        return match === true;
+      })) {
+        filtredRecipes.push(recipe);
+        console.log(recipe);
       }
+    };
 
-      filtredRecipes = [].concat(newFilter);
-      console.log(newFilter);
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      _loop();
     }
   } catch (err) {
     _iterator2.e(err);
@@ -505,7 +452,7 @@ function filterAppliance(recipes, appliance) {
   return _toConsumableArray(new Set(filtredRecipes));
 }
 
-function filterUstensils(recipes, ustensils) {
+function filterAppliance(recipes, appliance) {
   var filtredRecipes = _toConsumableArray(recipes);
 
   var newFilter = [];
@@ -517,11 +464,12 @@ function filterUstensils(recipes, ustensils) {
     for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
       var recipe = _step3.value;
 
-      if (ustensils === '' || recipe.ustensils.filter(function (usten) {
-        return usten.includes(ustensils);
-      }).length > 0) {
+      if (recipe.appliance.toLowerCase() === appliance.toLowerCase()) {
         newFilter.push(recipe);
       }
+
+      filtredRecipes = [].concat(newFilter);
+      console.log(newFilter);
     }
   } catch (err) {
     _iterator3.e(err);
@@ -529,24 +477,55 @@ function filterUstensils(recipes, ustensils) {
     _iterator3.f();
   }
 
-  filtredRecipes = [].concat(newFilter);
   return _toConsumableArray(new Set(filtredRecipes));
-} // TEST
-// TEST WITH every
-// function filterIngredients (recipes, ingredients) {
-//   let filtredRecipes = [...recipes]
-//   ingredients.every = function (ingredient) {
-//     const newFilter = []
-//     filtredRecipes.every = function (recipe) {
-//       const index = recipe.ingredients.findIndex(elt => elt.ingredient.toLowerCase() === ingredient.toLowerCase())
-//       if (index > -1) {
-//         newFilter.push(recipe)
-//       }
-//     }
-//     filtredRecipes = [...newFilter]
-//   }
-//   return [...new Set(filtredRecipes)]
-// }
+}
+
+function filterUstensils(recipes, ustensils) {
+  var filtredRecipes = _toConsumableArray(recipes);
+
+  var newFilter = [];
+
+  var _iterator4 = _createForOfIteratorHelper(ustensils),
+      _step4;
+
+  try {
+    var _loop2 = function _loop2() {
+      var ustensil = _step4.value;
+
+      var _iterator5 = _createForOfIteratorHelper(filtredRecipes),
+          _step5;
+
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var recipe = _step5.value;
+
+          if (ustensils === '' || recipe.ustensils.filter(function (usten) {
+            return usten.includes(ustensil);
+          }).length > 0) {
+            newFilter.push(recipe);
+          }
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+
+      filtredRecipes = _toConsumableArray(newFilter);
+      newFilter = [];
+    };
+
+    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+      _loop2();
+    }
+  } catch (err) {
+    _iterator4.e(err);
+  } finally {
+    _iterator4.f();
+  }
+
+  return _toConsumableArray(new Set(filtredRecipes));
+}
 },{"./normalize.js":"../js/normalize.js"}],"../js/dropdownElements.js":[function(require,module,exports) {
 "use strict";
 
@@ -2601,7 +2580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52140" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52438" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
