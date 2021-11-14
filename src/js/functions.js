@@ -91,7 +91,7 @@ function hasIngredient (recipe, search) {
   const index = recipe.ingredients.findIndex(elt => normalize(elt.ingredient).includes(search))
   return index >= 0
 }
-// function hasIngredient2 (recipe, search) {
+// function hasIngredient (recipe, search) {
 //   for (let i = 0; i < recipe.ingredients.length; i++) {
 //     if (normalize(recipe.ingredients[i]).includes(search)) {
 //       return true
@@ -110,7 +110,7 @@ function hasUstensils (recipe, search) {
   return index >= 0
 }
 
-// function hasUstensils2 (recipe, search) {
+// function hasUstensils (recipe, search) {
 //   for (let i = 0; i < recipe.ustensils.length; i++) {
 //     if (normalize(recipe.ustensils[i]).includes(search)) {
 //       return true
@@ -165,12 +165,15 @@ function filterAppliance (recipes, appliance) {
 
 function filterUstensils (recipes, ustensils) {
   let filtredRecipes = [...recipes]
-  const newFilter = []
-  for (const recipe of recipes) {
-    if (ustensils === '' || recipe.ustensils.filter(usten => usten.includes(ustensils)).length > 0) {
-      newFilter.push(recipe)
+  let newFilter = []
+  for (const ustensil of ustensils) {
+    for (const recipe of filtredRecipes) {
+      if (ustensils === '' || recipe.ustensils.filter(usten => usten.includes(ustensil)).length > 0) {
+        newFilter.push(recipe)
+      }
     }
+    filtredRecipes = [...newFilter]
+    newFilter = []
   }
-  filtredRecipes = [...newFilter]
   return [...new Set(filtredRecipes)]
 }
