@@ -74,17 +74,11 @@ function filterMainSearch (recipes, searchedExpression) {
      hasIngredient(recipe, searchedExpression) ||
      hasAppliance(recipe, searchedExpression) ||
      hasUstensils(recipe, searchedExpression)) {
-    //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
       filtredRecipes.push(recipe)
     }
   })
   return [...new Set(filtredRecipes)]
 }
-
-// function ingredientsToString (recipe) {
-//   const newString = recipe.ingredients.map(elt => elt.ingredient).join(' ')
-//   return newString
-// }
 
 function hasIngredient (recipe, search) {
   const index = recipe.ingredients.findIndex(elt => normalize(elt.ingredient).includes(search))

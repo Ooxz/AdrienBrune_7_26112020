@@ -14,7 +14,6 @@ export function SortByFirstLetter (elements) {
 }
 
 export function normalize (str) {
-  // remove accents and diacritics and punctuation (do not remove "-" and "'")
   str = str
 	  .normalize('NFD')
 	  .replace(/[\u0300-\u036f]/g, '')
