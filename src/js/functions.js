@@ -40,7 +40,7 @@ function filterMainSearch (recipes, searchedExpression) {
 
 function hasIngredient (recipe, search) {
   for (let i = 0; i < recipe.ingredients.length; i++) {
-    if (normalize(recipe.ingredients[i]).includes(search)) {
+    if (normalize(recipe.ingredients[i]).ingredient.includes(search)) {
       return true
     }
   }
