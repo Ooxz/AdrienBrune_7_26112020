@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel src/html/index.html",
     "build": "parcel build src/html/index.html",
-    "sass":"sass --watch src/scss/style.scss:dist/css/style.css"
+    "sass": "sass --watch src/scss/style.scss:dist/css/style.css"
   },
   "repository": "git+https://github.com/Ooxz/AdrienBrune_7_26112020.git",
   "author": "Adrien Brune",
@@ -42,6 +42,7 @@
     "chalk": "^4.1.2",
     "color-convert": "^2.0.1",
     "color-name": "^1.1.4",
+    "components": "^0.1.0",
     "concat-map": "^0.0.1",
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.2",
@@ -114,6 +115,7 @@
     "json-schema-traverse": "^0.4.1",
     "json-stable-stringify-without-jsonify": "^1.0.1",
     "json5": "^2.2.0",
+    "layouts": "^3.0.2",
     "levn": "^0.4.1",
     "load-json-file": "^4.0.0",
     "locate-path": "^2.0.0",

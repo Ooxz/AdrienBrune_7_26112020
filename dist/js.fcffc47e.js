@@ -299,7 +299,6 @@ function SortByFirstLetter(elements) {
 }
 
 function normalize(str) {
-  // remove accents and diacritics and punctuation (do not remove "-" and "'")
   str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[@&"()[\]{}<>_$*%§¤€£`+=/\\|~°;:!,?#.]/g, '');
   str = str.toLowerCase();
   str = str.replace(/[ ']/g, '_').replace(/œ/g, 'oe').replace(/æ/g, 'ae');
@@ -424,16 +423,11 @@ function filterMainSearch(recipes, searchedExpression) {
   var filtredRecipes = [];
   recipes.forEach(function (recipe) {
     if ((0, _normalize.normalize)(recipe.name).includes(searchedExpression) || (0, _normalize.normalize)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression) || hasAppliance(recipe, searchedExpression) || hasUstensils(recipe, searchedExpression)) {
-      //  normalize(ingredientsToString(recipe)).includes(searchedExpression)) {
       filtredRecipes.push(recipe);
     }
   });
   return _toConsumableArray(new Set(filtredRecipes));
-} // function ingredientsToString (recipe) {
-//   const newString = recipe.ingredients.map(elt => elt.ingredient).join(' ')
-//   return newString
-// }
-
+}
 
 function hasIngredient(recipe, search) {
   var index = recipe.ingredients.findIndex(function (elt) {
@@ -2502,7 +2496,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63943" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60062" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
