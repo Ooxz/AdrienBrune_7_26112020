@@ -19,6 +19,3 @@
  - npm run dev
 ## for sass :
 - npm run sass
-
-## JSBench: 
-- https://jsben.ch/Fwe2b
