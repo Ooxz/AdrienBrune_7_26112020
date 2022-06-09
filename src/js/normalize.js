@@ -13,12 +13,12 @@ export function SortByFirstLetter (elements) {
   elements.sort(tri)
 }
 
-export function normalize (str) {
+export function normalizeString (str) {
   // remove accents and diacritics and punctuation (do not remove "-" and "'")
   str = str
-	  .normalize('NFD')
-	  .replace(/[\u0300-\u036f]/g, '')
-	  .replace(/[@&"()[\]{}<>_$*%§¤€£`+=/\\|~°;:!,?#.]/g, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[@&"()[\]{}<>_$*%§¤€£`+=/\\|~°;:!,?#.]/g, '')
   str = str.toLowerCase()
   str = str.replace(/[ ']/g, '_').replace(/œ/g, 'oe').replace(/æ/g, 'ae')
   return str

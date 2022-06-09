@@ -1,5 +1,5 @@
 import { filter, filters } from './functions.js'
-import { normalize } from './normalize.js'
+import { normalizeString } from './normalize.js'
 import { generateCards } from './generateCards.js'
 import { dropdownTags } from './dropdownElements.js'
 import { generateListeners } from './generateListeners.js'
@@ -34,7 +34,7 @@ export function mainSearch (recipes) {
   searchInput.addEventListener('keyup', (e) => {
     e.preventDefault()
     if (searchInput.value.length > 2) {
-      filters.mainSearch = normalize(searchInput.value)
+      filters.mainSearch = normalizeString(searchInput.value)
     } else {
       filters.mainSearch = ''
     }

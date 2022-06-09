@@ -1,4 +1,4 @@
-import { normalize } from './normalize.js'
+import { normalizeString } from './normalize.js'
 
 export const filters = {
   mainSearch: '',
@@ -27,8 +27,8 @@ export function filter (recipes, filters) {
 function filterMainSearch (recipes, searchedExpression) {
   const filtredRecipes = []
   for (const recipe of recipes) {
-    if (normalize(recipe.name).includes(searchedExpression) ||
-     normalize(recipe.description).includes(searchedExpression) ||
+    if (normalizeString(recipe.name).includes(searchedExpression) ||
+     normalizeString(recipe.description).includes(searchedExpression) ||
      hasIngredient(recipe, searchedExpression) ||
      hasAppliance(recipe, searchedExpression) ||
      hasUstensils(recipe, searchedExpression)) {
@@ -40,7 +40,7 @@ function filterMainSearch (recipes, searchedExpression) {
 
 function hasIngredient (recipe, search) {
   for (let i = 0; i < recipe.ingredients.length; i++) {
-    if (normalize(recipe.ingredients[i]).includes(search)) {
+    if (normalizeString(recipe.ingredients[i]).includes(search)) {
       return true
     }
   }
@@ -48,13 +48,13 @@ function hasIngredient (recipe, search) {
 }
 
 function hasAppliance (recipe, search) {
-  const index = normalize(recipe.appliance).includes(search)
+  const index = normalizeString(recipe.appliance).includes(search)
   return index
 }
 
 function hasUstensils (recipe, search) {
   for (let i = 0; i < recipe.ustensils.length; i++) {
-    if (normalize(recipe.ustensils[i]).includes(search)) {
+    if (normalizeString(recipe.ustensils[i]).includes(search)) {
       return true
     }
   }

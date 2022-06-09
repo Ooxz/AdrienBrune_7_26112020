@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
-import { normalize } from './normalize.js'
+import { normalizeString } from './normalize.js'
 import { allIngredients, allAppliances, allUstensils, displayItems } from './dropdownElements.js'
 
 export function typeSearch () {
@@ -22,7 +22,7 @@ export function typeSearch () {
 
 export function refreshDropdown (items, menu, typedArea) {
   if (typedArea.length >= 1) {
-    const typedText = normalize(typedArea)
+    const typedText = normalizeString(typedArea)
     const selectedWords = showTypedWords(typedText, items)
     menu.innerHTML = ''
     displayItems(selectedWords, menu)
@@ -35,7 +35,7 @@ export function refreshDropdown (items, menu, typedArea) {
 function showTypedWords (typedArea, items) {
   const selectedWords = []
   for (let i = 0; i < items.length; i++) {
-    const ingredient = normalize(items[i])
+    const ingredient = normalizeString(items[i])
     if (ingredient.search(typedArea) !== -1) {
       selectedWords.push(items[i])
     }

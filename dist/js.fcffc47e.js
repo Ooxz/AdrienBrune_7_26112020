@@ -278,7 +278,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SortByFirstLetter = SortByFirstLetter;
-exports.normalize = normalize;
+exports.normalizeString = normalizeString;
 exports.remove = remove;
 
 /* eslint-disable no-mixed-spaces-and-tabs */
@@ -298,7 +298,7 @@ function SortByFirstLetter(elements) {
   elements.sort(tri);
 }
 
-function normalize(str) {
+function normalizeString(str) {
   // remove accents and diacritics and punctuation (do not remove "-" and "'")
   str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[@&"()[\]{}<>_$*%§¤€£`+=/\\|~°;:!,?#.]/g, '');
   str = str.toLowerCase();
@@ -378,7 +378,7 @@ function filterMainSearch(recipes, searchedExpression) {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var recipe = _step.value;
 
-      if ((0, _normalize.normalize)(recipe.name).includes(searchedExpression) || (0, _normalize.normalize)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression) || hasAppliance(recipe, searchedExpression) || hasUstensils(recipe, searchedExpression)) {
+      if ((0, _normalize.normalizeString)(recipe.name).includes(searchedExpression) || (0, _normalize.normalizeString)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression) || hasAppliance(recipe, searchedExpression) || hasUstensils(recipe, searchedExpression)) {
         filtredRecipes.push(recipe);
       }
     }
@@ -393,7 +393,7 @@ function filterMainSearch(recipes, searchedExpression) {
 
 function hasIngredient(recipe, search) {
   for (var i = 0; i < recipe.ingredients.length; i++) {
-    if ((0, _normalize.normalize)(recipe.ingredients[i]).ingredient.includes(search)) {
+    if ((0, _normalize.normalizeString)(recipe.ingredients[i]).includes(search)) {
       return true;
     }
   }
@@ -402,13 +402,13 @@ function hasIngredient(recipe, search) {
 }
 
 function hasAppliance(recipe, search) {
-  var index = (0, _normalize.normalize)(recipe.appliance).includes(search);
+  var index = (0, _normalize.normalizeString)(recipe.appliance).includes(search);
   return index;
 }
 
 function hasUstensils(recipe, search) {
   for (var i = 0; i < recipe.ustensils.length; i++) {
-    if ((0, _normalize.normalize)(recipe.ustensils[i]).includes(search)) {
+    if ((0, _normalize.normalizeString)(recipe.ustensils[i]).includes(search)) {
       return true;
     }
   }
@@ -758,7 +758,7 @@ function typeSearch() {
 
 function refreshDropdown(items, menu, typedArea) {
   if (typedArea.length >= 1) {
-    var typedText = (0, _normalize.normalize)(typedArea);
+    var typedText = (0, _normalize.normalizeString)(typedArea);
     var selectedWords = showTypedWords(typedText, items);
     menu.innerHTML = '';
     (0, _dropdownElements.displayItems)(selectedWords, menu);
@@ -772,7 +772,7 @@ function showTypedWords(typedArea, items) {
   var selectedWords = [];
 
   for (var i = 0; i < items.length; i++) {
-    var ingredient = (0, _normalize.normalize)(items[i]);
+    var ingredient = (0, _normalize.normalizeString)(items[i]);
 
     if (ingredient.search(typedArea) !== -1) {
       selectedWords.push(items[i]);
@@ -2476,7 +2476,7 @@ function mainSearch(recipes) {
     e.preventDefault();
 
     if (searchInput.value.length > 2) {
-      _functions.filters.mainSearch = (0, _normalize.normalize)(searchInput.value);
+      _functions.filters.mainSearch = (0, _normalize.normalizeString)(searchInput.value);
     } else {
       _functions.filters.mainSearch = '';
     }
@@ -2580,7 +2580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52114" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55435" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
