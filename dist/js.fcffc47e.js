@@ -393,7 +393,7 @@ function filterMainSearch(recipes, searchedExpression) {
 
 function hasIngredient(recipe, search) {
   for (var i = 0; i < recipe.ingredients.length; i++) {
-    if ((0, _normalize.normalize)(recipe.ingredients[i]).includes(search)) {
+    if ((0, _normalize.normalize)(recipe.ingredients[i]).ingredient.includes(search)) {
       return true;
     }
   }
@@ -2580,7 +2580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52438" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52114" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
