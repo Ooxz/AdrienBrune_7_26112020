@@ -299,7 +299,6 @@ function SortByFirstLetter(elements) {
 }
 
 function normalizeString(str) {
-  // remove accents and diacritics and punctuation (do not remove "-" and "'")
   str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[@&"()[\]{}<>_$*%§¤€£`+=/\\|~°;:!,?#.]/g, '');
   str = str.toLowerCase();
   str = str.replace(/[ ']/g, '_').replace(/œ/g, 'oe').replace(/æ/g, 'ae');
@@ -378,7 +377,7 @@ function filterMainSearch(recipes, searchedExpression) {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var recipe = _step.value;
 
-      if ((0, _normalize.normalizeString)(recipe.name).includes(searchedExpression) || (0, _normalize.normalizeString)(recipe.description).includes(searchedExpression) || hasIngredient(recipe, searchedExpression) || hasAppliance(recipe, searchedExpression) || hasUstensils(recipe, searchedExpression)) {
+      if ((0, _normalize.normalizeString)(recipe.name).includes(searchedExpression) || (0, _normalize.normalizeString)(recipe.description).includes(searchedExpression)) {
         filtredRecipes.push(recipe);
       }
     }
@@ -389,31 +388,6 @@ function filterMainSearch(recipes, searchedExpression) {
   }
 
   return _toConsumableArray(new Set(filtredRecipes));
-}
-
-function hasIngredient(recipe, search) {
-  for (var i = 0; i < recipe.ingredients.length; i++) {
-    if ((0, _normalize.normalizeString)(recipe.ingredients[i]).includes(search)) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-function hasAppliance(recipe, search) {
-  var index = (0, _normalize.normalizeString)(recipe.appliance).includes(search);
-  return index;
-}
-
-function hasUstensils(recipe, search) {
-  for (var i = 0; i < recipe.ustensils.length; i++) {
-    if ((0, _normalize.normalizeString)(recipe.ustensils[i]).includes(search)) {
-      return true;
-    }
-  }
-
-  return false;
 }
 
 function filterIngredients(recipes, ingredients) {
@@ -2580,7 +2554,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57055" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60046" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

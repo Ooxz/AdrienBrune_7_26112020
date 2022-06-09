@@ -28,37 +28,12 @@ function filterMainSearch (recipes, searchedExpression) {
   const filtredRecipes = []
   for (const recipe of recipes) {
     if (normalizeString(recipe.name).includes(searchedExpression) ||
-     normalizeString(recipe.description).includes(searchedExpression) ||
-     hasIngredient(recipe, searchedExpression) ||
-     hasAppliance(recipe, searchedExpression) ||
-     hasUstensils(recipe, searchedExpression)) {
+     normalizeString(recipe.description).includes(searchedExpression)
+    ) {
       filtredRecipes.push(recipe)
     }
   }
   return [...new Set(filtredRecipes)]
-}
-
-function hasIngredient (recipe, search) {
-  for (let i = 0; i < recipe.ingredients.length; i++) {
-    if (normalizeString(recipe.ingredients[i]).includes(search)) {
-      return true
-    }
-  }
-  return false
-}
-
-function hasAppliance (recipe, search) {
-  const index = normalizeString(recipe.appliance).includes(search)
-  return index
-}
-
-function hasUstensils (recipe, search) {
-  for (let i = 0; i < recipe.ustensils.length; i++) {
-    if (normalizeString(recipe.ustensils[i]).includes(search)) {
-      return true
-    }
-  }
-  return false
 }
 
 function filterIngredients (recipes, ingredients) {

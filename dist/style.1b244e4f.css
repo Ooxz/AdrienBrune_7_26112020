@@ -303,6 +303,7 @@ li {
 }
 .dropdown__menu {
   display: none;
+  pointer-events: none;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   border-radius: 5px;
@@ -324,6 +325,7 @@ li {
   color: white;
 }
 .dropdown__menu__items {
+  pointer-events: auto;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
