@@ -278,7 +278,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SortByFirstLetter = SortByFirstLetter;
-exports.normalize = normalize;
+exports.normalizeString = normalizeString;
 exports.remove = remove;
 
 /* eslint-disable no-mixed-spaces-and-tabs */
@@ -298,7 +298,7 @@ function SortByFirstLetter(elements) {
   elements.sort(tri);
 }
 
-function normalize(str) {
+function normalizeString(str) {
   str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[@&"()[\]{}<>_$*%§¤€£`+=/\\|~°;:!,?#.]/g, '');
   str = str.toLowerCase();
   str = str.replace(/[ ']/g, '_').replace(/œ/g, 'oe').replace(/æ/g, 'ae');
@@ -679,7 +679,7 @@ function typeSearch() {
 
 function refreshDropdown(items, menu, typedArea) {
   if (typedArea.length >= 1) {
-    var typedText = (0, _normalize.normalize)(typedArea);
+    var typedText = (0, _normalize.normalizeString)(typedArea);
     var selectedWords = showTypedWords(typedText, items);
     menu.innerHTML = '';
     (0, _dropdownElements.displayItems)(selectedWords, menu);
@@ -693,7 +693,7 @@ function showTypedWords(typedArea, items) {
   var selectedWords = [];
 
   for (var i = 0; i < items.length; i++) {
-    var ingredient = (0, _normalize.normalize)(items[i]);
+    var ingredient = (0, _normalize.normalizeString)(items[i]);
 
     if (ingredient.search(typedArea) !== -1) {
       selectedWords.push(items[i]);
@@ -2286,11 +2286,13 @@ var GenerateSearchedTags = /*#__PURE__*/function () {
           (0, _generateCards.generateCards)(recipes);
           (0, _dropdownElements.dropdownTags)(recipes);
           var buttonDropdown = document.querySelectorAll('.dropdown__icon');
-          buttonDropdown.forEach(function (button) {
-            button.addEventListener('click', function (event) {
+
+          for (var i = 0; i < buttonDropdown.length; i++) {
+            buttonDropdown[i].addEventListener('click', function (event) {
               (0, _dropdown.openDropdown)(event);
             });
-          });
+          }
+
           var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
           (0, _generatelisteners.generateListeners)(dropDownMenuItems, recipes);
         }
@@ -2366,32 +2368,7 @@ var _generateListeners = require("./generateListeners.js");
 
 var _dropdown = require("./dropdown.js");
 
-function mainSearch(recipes) {
-  var searchInput = document.getElementById('mainSearch');
-  searchInput.addEventListener('keyup', function (e) {
-    e.preventDefault();
-
-    if (searchInput.value.length > 2) {
-      _functions.filters.mainSearch = (0, _normalize.normalize)(searchInput.value);
-    } else {
-      _functions.filters.mainSearch = '';
-    }
-
-    var filtredRecipes = (0, _functions.filter)(recipes, _functions.filters); // fonction pour récupérer l'array de tous les tags affichés?
-
-    console.log(filtredRecipes);
-    (0, _generateCards.generateCards)(filtredRecipes);
-    (0, _dropdownElements.dropdownTags)(filtredRecipes);
-    var buttonDropdown = document.querySelectorAll('.dropdown__icon');
-    buttonDropdown.forEach(function (button) {
-      button.addEventListener('click', function (event) {
-        (0, _dropdown.openDropdown)(event);
-      });
-    });
-    var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
-    (0, _generateListeners.generateListeners)(dropDownMenuItems, recipes);
-  });
-} // export function mainSearch (recipes) {
+// export function mainSearch (recipes) {
 //   const searchInput = document.getElementById('mainSearch')
 //   searchInput.addEventListener('keyup', (e) => {
 //     e.preventDefault()
@@ -2405,15 +2382,43 @@ function mainSearch(recipes) {
 //     generateCards(filtredRecipes)
 //     dropdownTags(filtredRecipes)
 //     const buttonDropdown = document.querySelectorAll('.dropdown__icon')
-//     for (let i = 0; i < buttonDropdown.length; i++) {
-//       buttonDropdown[i].addEventListener('click', function (event) {
+//     buttonDropdown.forEach(button => {
+//       button.addEventListener('click', (event) => {
 //         openDropdown(event)
 //       })
-//     }
+//     })
 //     const dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items')
 //     generateListeners(dropDownMenuItems, recipes)
 //   })
 // }
+function mainSearch(recipes) {
+  var searchInput = document.getElementById('mainSearch');
+  searchInput.addEventListener('keyup', function (e) {
+    e.preventDefault();
+
+    if (searchInput.value.length > 2) {
+      _functions.filters.mainSearch = (0, _normalize.normalizeString)(searchInput.value);
+    } else {
+      _functions.filters.mainSearch = '';
+    }
+
+    var filtredRecipes = (0, _functions.filter)(recipes, _functions.filters); // fonction pour récupérer l'array de tous les tags affichés?
+
+    console.log(filtredRecipes);
+    (0, _generateCards.generateCards)(filtredRecipes);
+    (0, _dropdownElements.dropdownTags)(filtredRecipes);
+    var buttonDropdown = document.querySelectorAll('.dropdown__icon');
+
+    for (var i = 0; i < buttonDropdown.length; i++) {
+      buttonDropdown[i].addEventListener('click', function (event) {
+        (0, _dropdown.openDropdown)(event);
+      });
+    }
+
+    var dropDownMenuItems = document.querySelectorAll('.dropdown__menu__items');
+    (0, _generateListeners.generateListeners)(dropDownMenuItems, recipes);
+  });
+}
 },{"./functions.js":"../js/functions.js","./normalize.js":"../js/normalize.js","./generateCards.js":"../js/generateCards.js","./dropdownElements.js":"../js/dropdownElements.js","./generateListeners.js":"../js/generateListeners.js","./dropdown.js":"../js/dropdown.js"}],"../js/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -2496,7 +2501,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61149" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61970" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
