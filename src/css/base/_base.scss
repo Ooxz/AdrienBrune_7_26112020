@@ -1,0 +1,60 @@
+@import "../abstracts";
+@import "../base/typography";
+@import "../base/reset";
+
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: auto;
+  padding: 0;
+  font-family: $font-main;
+  max-width: 1440px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1240px;
+  margin: auto;
+}
+
+input {
+  border: none;
+  border-radius: 5px;
+  font-family: $font-main;
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  color: inherit;
+  background-color: inherit;
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+li {
+  list-style-type: none;
+}
